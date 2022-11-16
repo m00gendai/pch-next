@@ -8,7 +8,8 @@ export default function Resultate({getFolders, getFiles, getPaths, getLinks}){
     })
 
     return(
-        <>
+        <main>
+            <section>
         <h1>Resultate</h1>
         {
             sortedFolders.map((folder, index) => {
@@ -27,7 +28,7 @@ export default function Resultate({getFolders, getFiles, getPaths, getLinks}){
                                                 return getLinks.map(link =>{
                                                     if(file.name == link.metadata.name){
                                                         const name = file.name.replaceAll("_", " ").replaceAll("-", " ").replace(".pdf", "")
-                                                        return <Link href={link.link} className={s.result}>{name}</Link>
+                                                        return <Link href={link.link} className={s.result}><span className={s.text}>{name}</span></Link>
                                                     }
                                                 })
                                             } 
@@ -43,7 +44,8 @@ export default function Resultate({getFolders, getFiles, getPaths, getLinks}){
                 }
             })
         }
-        </>
+        </section>
+        </main>
     )
 }
 
