@@ -3,34 +3,46 @@ import s from "../styles/Resultate.module.css"
 
 export default function Resultate({getFolders, getFiles, getPaths, getLinks}){
 
+    const sortedFolders = getFolders.sort((a,b) =>{
+        return a<b ? 1 : a>b ? -1 : 0
+    })
+
     return(
         <>
         <h1>Resultate</h1>
         {
-            getFolders.map(folder => {
-                return (
-                    <>
-                    <strong>{folder.name}<br/></strong>
-                    <div className={s.resultContainer}>
-                    {getFiles.map(file=>{
-                        if(file.path_display.substring(0, file.path_display.lastIndexOf("/")) == folder.path_display){
-                          return getLinks.map(link =>{
-                            if(file.name == link.metadata.name){
-                                return <Link href={link.link} className={s.result}>{file.name}</Link>
-                            }
-                        })
-                           
-                               // return <Link href={str}>{file.name}</Link>
-                            
-                            
-                        } 
-                    })}
-                    </div>
-                    </>
-                )
+            sortedFolders.map((folder, index) => {
+                if(index > 0){
+                    return (
+                        <>
+                        {
+                            folder.name.match(/[0-9]{4}/)
+                            ?
+                            <details className={s.spoiler}>
+                                <summary className={s.summary}>{folder.name}</summary>
+                                <div className={s.resultContainer}>
+                                    {
+                                        getFiles.map(file=>{
+                                            if(file.path_display.substring(0, file.path_display.lastIndexOf("/")) == folder.path_display){
+                                                return getLinks.map(link =>{
+                                                    if(file.name == link.metadata.name){
+                                                        const name = file.name.replaceAll("_", " ").replaceAll("-", " ").replace(".pdf", "")
+                                                        return <Link href={link.link} className={s.result}>{name}</Link>
+                                                    }
+                                                })
+                                            } 
+                                        })
+                                    }
+                                </div>
+                            </details>
+                            :
+                            <h2 className={s.h2}>{folder.name}</h2> 
+                        }
+                        </>
+                    )
+                }
             })
         }
-        
         </>
     )
 }

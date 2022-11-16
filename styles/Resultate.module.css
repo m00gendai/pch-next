@@ -1,11 +1,35 @@
+.h2{
+    position: relative;
+    width: 100%;
+    background: lime;
+    color: white;
+    margin: 0 1rem 0 1rem 0;
+}
+
+.spoiler{
+    position: relative;
+    width: 100%;
+    margin: 0 0 1rem 0;
+}
+
+.summary{
+    text-indent: 2rem;
+}
+
 .resultContainer{
     position: relative;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 1rem;
+}
+
+.result {
+    width: 100%;
+    background: red;
+    aspect-ratio: 2/1;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-}.result {
-    width: 100%;
-    background: red;
+    text-align: center;
 }
