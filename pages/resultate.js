@@ -35,13 +35,13 @@ export default function Resultate(
     const fileArray = files.flat(3)
 
     return(
-        <main>
-            <section>
-                <h1>Resultate</h1>
+        <main className="main">
+            <section className="section">
+                <h1 className="title">Resultate</h1>
                 {
                 shootings.map((shooting, index) =>{
                     return (
-                        <div key={`container_${index}`}>
+                        <div className={s.container} key={`container_${index}`}>
                         <h2 className={s.h2} key={`shooting_${index}`}>{shooting.name}</h2>
                         {
                         years.map(year =>{
