@@ -1,97 +1,152 @@
 import Link from "next/link"
 import s from "../styles/Resultate.module.css"
 
-export default function Resultate({getFolders, getFiles, getPaths, getLinks}){
+export default function Resultate(
+    {   
+        sourceDirectoryList, 
+        getSubDirectoryList, 
+        getSubDirectoryFiles, 
+        getLinks
+    }
+){
 
-    const sortedFolders = getFolders.sort((a,b) =>{
-        return a<b ? 1 : a>b ? -1 : 0
+    const linksFlat = getLinks.flat(3)
+    const linkList = linksFlat.map(link =>{
+        return {id: link.id, url: link.url.data.temporary_url}
     })
+
+    const shootings = sourceDirectoryList.data.map(name =>{
+        return {id: name.id, name: name.name}
+    })
+
+    const years = getSubDirectoryList.map(entry =>{
+        return entry.data.map(data =>{
+            return {id: data.id, name: data.name, parent: data.parent_id}
+        })
+    })
+
+    const files = getSubDirectoryFiles.map(directory =>{
+        return directory.map(entry =>{
+            return entry.data.map(data =>{
+                return {id: data.id, name: data.name, parent: data.parent_id}
+            })
+        })
+    })
+    const fileArray = files.flat(3)
 
     return(
         <main>
             <section>
-        <h1>Resultate</h1>
-        {
-            sortedFolders.map((folder, index) => {
-                if(index > 0){
+                <h1>Resultate</h1>
+                {
+                shootings.map((shooting, index) =>{
                     return (
                         <>
+                        <h2 className={s.h2} key={`shooting_${index}`}>{shooting.name}</h2>
                         {
-                            folder.name.match(/[0-9]{4}/)
-                            ?
-                            <details className={s.spoiler}>
-                                <summary className={s.summary}>{folder.name}</summary>
-                                <div className={s.resultContainer}>
-                                    {
-                                        getFiles.map(file=>{
-                                            if(file.path_display.substring(0, file.path_display.lastIndexOf("/")) == folder.path_display){
-                                                return getLinks.map(link =>{
-                                                    if(file.name == link.metadata.name){
-                                                        const name = file.name.replaceAll("_", " ").replaceAll("-", " ").replace(".pdf", "")
-                                                        return <Link href={link.link} className={s.result}><span className={s.text}>{name}</span></Link>
-                                                    }
-                                                })
-                                            } 
-                                        })
-                                    }
-                                </div>
-                            </details>
-                            :
-                            <h2 className={s.h2}>{folder.name}</h2> 
+                        years.map(year =>{
+                            return year.map((data, index)=>{
+                                if(data.parent == shooting.id){
+                                    return (
+                                        <details className={s.spoiler} key={`year_${index}`}>
+                                            <summary className={s.summary} key={`summary_${index}`}>{data.name}</summary>
+                                            <div className={s.resultContainer}>
+                                            {
+                                            fileArray.map(file =>{
+                                                if(file.parent == data.id){
+                                                    return linkList.map(link =>{
+                                                        if(link.id == file.id){
+                                                            const name = file.name.replaceAll("_", " ").replaceAll("-", " ").replace(".pdf", "")
+                                                            return <Link href={link.url} className={s.result}><span className={s.text}>{name}</span></Link>
+                                                        }
+                                                    })
+                                                }
+                                            })
+                                            }
+                                            </div>
+                                        </details>
+                                    )
+                                }
+                            })
+                        })
                         }
                         </>
                     )
+                })
                 }
-            })
-        }
-        </section>
+            </section>
         </main>
     )
 }
 
 export async function getServerSideProps() {
-    const data = await fetch("https://api.dropboxapi.com/2/files/list_folder", {
-        method : "POST",
+
+    // Gets folders in /Resultate
+    const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/15/files", {
+        method: "GET",
         headers: {
-            Authorization : `Bearer ${process.env.DROPBOX}`,
-            'Content-Type' : "application/json; charset=utf-8"
-        },
-        body: JSON.stringify({path: "/Resultate", recursive: true})
-    })
-    
-    const res = await data.json()
-
-    const getFolders = res.entries.filter((item, index)=>{
-        if(item[".tag"] == "folder"){
-            return item
+            Authorization: `Bearer ${process.env.KDRIVE}`,
+            "Content-Type" : "application/json"
         }
     })
+    const sourceDirectoryList = await getSourceDirectoryList.json()
 
-    const getFiles = res.entries.filter((item, index) =>{
-        if(item[".tag"] == "file"){
-            return item
-        }
-    })
-
-    const getPaths = getFiles.map(file=>{
-        return file.path_display
-    })
-   
-    const getLinks = await Promise.all(getPaths.map(async (getPath) => {
-        const data = await fetch("https://api.dropboxapi.com/2/files/get_temporary_link", {
-            method : "POST",
+    // Gets all subfolders in /Resultate/{folder}
+    const getSubDirectoryList = await Promise.all(sourceDirectoryList.data.map(async (directory) =>{
+        const fetchSub = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${directory.id}/files`, {
+            method: "GET",
             headers: {
-                Authorization : `Bearer ${process.env.DROPBOX}`,
-                'Content-Type' : "application/json; charset=utf-8"
-            },
-            body: JSON.stringify({path: getPath})
+                Authorization: `Bearer ${process.env.KDRIVE}`,
+                "Content-Type" : "application/json"
+            }
         })
-
-        const res = await data.json()
-        return res
+       return fetchSub.json()
     }))
 
-    
-    return { props: { getFolders, getFiles, getPaths, getLinks } }
+    // Gets all files in /Resultate/{folder}/{subfolder}
+    const getSubDirectoryEntries = getSubDirectoryList.map(entry =>{
+        return entry.data
+    })
+
+    const getSubDirectoryFiles = await Promise.all(getSubDirectoryEntries.map(async (entry) =>{
+        return Promise.all(entry.map(async file =>{
+            const fetchSub = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${file.id}/files`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${process.env.KDRIVE}`,
+                    "Content-Type" : "application/json"
+                }
+            })
+            const res = await fetchSub.json()
+            return res
+        }))
+    }))
+
+    // Gets temporary urls for each file ID in /Resultate/{folder}/{subfolder}
+
+    const getLinks = await Promise.all(getSubDirectoryFiles.map(async (entry) =>{
+        return Promise.all(entry.map(async file =>{
+            return Promise.all(file.data.map(async dat =>{
+                const fetchSub = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${dat.id}/temporary_url`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${process.env.KDRIVE}`,
+                    "Content-Type" : "application/json"
+                }
+            })
+            const res = await fetchSub.json()
+            return {id: dat.id, url: res}
+            }))
+        }))
+    }))
+        
+    return { 
+        props: {
+            sourceDirectoryList, 
+            getSubDirectoryList, 
+            getSubDirectoryFiles, 
+            getLinks 
+        } 
+    }
 }
 
