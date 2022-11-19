@@ -54,10 +54,10 @@ export default function Resultate(
                                             {
                                             fileArray.map(file =>{
                                                 if(file.parent == data.id){
-                                                    return linkList.map(link =>{
+                                                    return linkList.map((link, index) =>{
                                                         if(link.id == file.id){
                                                             const name = file.name.replaceAll("_", " ").replaceAll("-", " ").replace(".pdf", "")
-                                                            return <Link href={link.url} className={s.result}><span className={s.text}>{name}</span></Link>
+                                                            return <Link href={link.url} className={s.result} key={`link_${index}`}><span className={s.text}>{name}</span></Link>
                                                         }
                                                     })
                                                 }
