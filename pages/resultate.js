@@ -41,23 +41,23 @@ export default function Resultate(
                 {
                 shootings.map((shooting, index) =>{
                     return (
-                        <>
+                        <div key={`container_${index}`}>
                         <h2 className={s.h2} key={`shooting_${index}`}>{shooting.name}</h2>
                         {
                         years.map(year =>{
-                            return year.map((data, index)=>{
+                            return year.map((data,indexYear)=>{
                                 if(data.parent == shooting.id){
                                     return (
-                                        <details className={s.spoiler} key={`year_${index}`}>
+                                        <details className={s.spoiler} key={`year_${indexYear}`}>
                                             <summary className={s.summary} key={`summary_${index}`}>{data.name}</summary>
-                                            <div className={s.resultContainer}>
+                                            <div className={s.resultContainer} key={`container_${index}`}>
                                             {
                                             fileArray.map(file =>{
                                                 if(file.parent == data.id){
-                                                    return linkList.map((link, index) =>{
+                                                    return linkList.map(link =>{
                                                         if(link.id == file.id){
                                                             const name = file.name.replaceAll("_", " ").replaceAll("-", " ").replace(".pdf", "")
-                                                            return <Link href={link.url} className={s.result} key={`link_${index}`}><span className={s.text}>{name}</span></Link>
+                                                            return <Link href={link.url} className={s.result} key={`link_${index}`}><span className={s.text} key={`span_${index}`}>{name}</span></Link>
                                                         }
                                                     })
                                                 }
@@ -70,7 +70,7 @@ export default function Resultate(
                             })
                         })
                         }
-                        </>
+                        </div>
                     )
                 })
                 }
