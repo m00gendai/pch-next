@@ -9,7 +9,7 @@ export default function Navbar(){
                 <Link className={s.link} href="/anlaesse">Anlässe</Link>
                 <Link className={s.link} href="/resultate">Resultate</Link>
                 <Link className={s.link} href="/">Schiessen</Link>
-                <Link className={s.link} href="/">Verein</Link>
+                <Link className={s.link} href="/verein">Verein</Link>
                 <Link className={s.link} href="/">Links</Link>
             </div>
         </nav>
