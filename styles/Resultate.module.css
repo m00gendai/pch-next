@@ -3,15 +3,6 @@
     width: 100%;
 }
 
-.h2{
-    position: relative;
-    width: 100%;
-    background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
-    color: white;
-    margin: 0 1rem 0 1rem 0;
-    text-indent: 1rem;
-}
-
 .spoiler{
     position: relative;
     width: 100%;

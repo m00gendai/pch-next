@@ -42,7 +42,7 @@ export default function Resultate(
                 shootings.map((shooting, index) =>{
                     return (
                         <div className={s.container} key={`container_${index}`}>
-                        <h2 className={s.h2} key={`shooting_${index}`}>{shooting.name}</h2>
+                        <h2 key={`shooting_${index}`}>{shooting.name}</h2>
                         {
                         years.map(year =>{
                             return year.map((data,indexYear)=>{
