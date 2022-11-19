@@ -19,10 +19,22 @@ export default function Resultate(
         return {id: name.id, name: name.name}
     })
 
+    const shootingsSorted = shootings.sort((a,b) =>{
+        const x = a.name
+        const y = b.name
+        return x > y ? 1 : x < y ? -1 : 0
+    })
+
     const years = getSubDirectoryList.map(entry =>{
         return entry.data.map(data =>{
             return {id: data.id, name: data.name, parent: data.parent_id}
         })
+    })
+
+    const yearsSorted = years.flat(2).sort((a,b) =>{
+        const x = a.name
+        const y = b.name
+        return x < y ? 1 : x > y ? -1 : 0
     })
 
     const files = getSubDirectoryFiles.map(directory =>{
@@ -39,21 +51,22 @@ export default function Resultate(
             <section className="section">
                 <h1>Resultate</h1>
                 {
-                shootings.map((shooting, index) =>{
+                shootingsSorted.map((shooting, index) =>{
                     return (
                         <div className={s.container} key={`container_${index}`}>
-                        <h2 key={`shooting_${index}`}>{shooting.name}</h2>
+                        <details className={s.details} key={`shooting_${index}`}>
+                        <summary className={s.titleSpoiler}>{shooting.name}</summary>
+                        <div className={s.yearContainer}>
                         {
-                        years.map(year =>{
-                            return year.map((data,indexYear)=>{
-                                if(data.parent == shooting.id){
+                        yearsSorted.map((year, indexYear) =>{
+                                if(year.parent == shooting.id){
                                     return (
                                         <details className={s.spoiler} key={`year_${indexYear}`}>
-                                            <summary className={s.summary} key={`summary_${index}`}>{data.name}</summary>
+                                            <summary className={s.summary} key={`summary_${index}`}>{year.name}</summary>
                                             <div className={s.resultContainer} key={`container_${index}`}>
                                             {
                                             fileArray.map(file =>{
-                                                if(file.parent == data.id){
+                                                if(file.parent == year.id){
                                                     return linkList.map(link =>{
                                                         if(link.id == file.id){
                                                             const name = file.name.replaceAll("_", " ").replaceAll("-", " ").replace(".pdf", "")
@@ -67,9 +80,11 @@ export default function Resultate(
                                         </details>
                                     )
                                 }
-                            })
+                            
                         })
                         }
+                        </div>
+                        </details>
                         </div>
                     )
                 })
