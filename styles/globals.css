@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'UnifrakturCook';
+  src: url('/UnifrakturCook-Bold.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
 html,
 body {
   padding: 0;
@@ -21,7 +28,7 @@ main{
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
 }
 
@@ -45,12 +52,8 @@ section{
   font-style: italic;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
