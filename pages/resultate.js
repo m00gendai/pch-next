@@ -37,7 +37,7 @@ export default function Resultate(
     return(
         <main className="main">
             <section className="section">
-                <h1 className="title">Resultate</h1>
+                <h1>Resultate</h1>
                 {
                 shootings.map((shooting, index) =>{
                     return (

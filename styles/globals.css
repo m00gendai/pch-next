@@ -42,7 +42,13 @@ section{
   flex-wrap: wrap;
 }
 
-.title{
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+h1{
   position: relative;
   width: 100%;
   font-variant: small-caps;
@@ -50,12 +56,6 @@ section{
   text-indent: 1rem;
   border-bottom: 2px solid #0cc549;
   font-style: italic;
-}
-
-.footer{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 }
 
 h2 {
