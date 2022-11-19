@@ -35,6 +35,16 @@ section{
   flex-wrap: wrap;
 }
 
+.title{
+  position: relative;
+  width: 100%;
+  font-variant: small-caps;
+  font-size: 3rem;
+  text-indent: 1rem;
+  border-bottom: 2px solid #0cc549;
+  font-style: italic;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
