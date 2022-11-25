@@ -1,11 +1,21 @@
 .title {
   position: relative;
   width: 100%;
-  font-size: 4rem;
   text-align: center;
   border-bottom: 2px solid #0cc549;
   font-variant: small-caps;
   margin: 1rem 0 2rem 0;
+}
+
+@media screen and (orientation: portrait){
+  .title{
+      font-size: 10vw;
+  }
+}
+@media screen and (orientation: landscape) {
+  .title {
+    font-size: 10vh;
+  }
 }
 
 .linkContainer{
