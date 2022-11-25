@@ -43,7 +43,7 @@ export default function SKES({ subDirectoryList, getSubDirectoryFiles, getLinks 
                                         if(file.parent == year.id){
                                             return links.map(link =>{
                                                 if(link.id == file.id){
-                                                    return <Link className={s.link} href={link.url}><span className={s.text}>{file.name}</span></Link>
+                                                    return <Link className={s.link} key={link.url} href={link.url}><span className={s.text}>{file.name}</span></Link>
                                                 }
                                             })
                                         }
