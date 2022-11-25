@@ -9,6 +9,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 1rem;
 }
 
 .container p {
