@@ -2,7 +2,7 @@ import Navbar from "../components/navbar"
 import Navbar_Mobile from "../components/navbar_mobile"
 import '../styles/globals.css'
 import { useState } from "react"
-import {useMediaQuery, useMediaQueries} from '@react-hook/media-query'
+import { useMediaQuery } from '@react-hook/media-query'
 
 function MyApp({ Component, pageProps }) {
 
