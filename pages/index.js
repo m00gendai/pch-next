@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import Link from "next/link"
 import s from '../styles/Home.module.css'
+import { useMediaQuery } from '@react-hook/media-query'
 
 export default function Home() {
+
+  const isMobile = useMediaQuery('only screen and (orientation: portrait)')
 
   return (
     <main className="main">
@@ -15,6 +18,11 @@ export default function Home() {
         <h1 className={s.title}>
           Pistolenclub Hallau
         </h1>
+        {isMobile?
+        <Link className={s.skes} href="/schiessen/schwabenkrieg-erinnerungsschiessen"><span className={s.skesText}>Schwabenkrieg-Erinnerungsschiessen 2023</span></Link>
+        :
+        null
+        }
         <div className={s.linkContainer}>
           <Link className={s.link} href="/anlaesse"><span className={s.text}>Anlässe</span></Link>
           <Link className={s.link} href="/resultate"><span className={s.text}>Resultate</span></Link>
@@ -22,7 +30,11 @@ export default function Home() {
           <Link className={s.link} href="/mitmachen"><span className={s.text}>Mitmachen</span></Link>
           <Link className={s.link} href="/jahresprogramm"><span className={s.text}>Jahres-programm</span></Link>
         </div>
-        <Link className={s.skes} href="/schiessen/schwabenkrieg-erinnerungsschiessen"><span className={s.skesText}>Schwabenkrieg-Erinnerungsschiessen 2023</span></Link>     
+         {isMobile?
+        null
+        :
+        <Link className={s.skes} href="/schiessen/schwabenkrieg-erinnerungsschiessen"><span className={s.skesText}>Schwabenkrieg-Erinnerungsschiessen 2023</span></Link>
+        }
       </section>
       <footer className="footer">
       </footer>
