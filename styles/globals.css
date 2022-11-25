@@ -52,10 +52,22 @@ h1{
   position: relative;
   width: 100%;
   font-variant: small-caps;
-  font-size: 3rem;
   text-indent: 1rem;
   border-bottom: 2px solid #0cc549;
   font-style: italic;
+  word-wrap: break-word;
+}
+
+@media screen and (orientation: portrait) {
+  h1 {
+    font-size: 7.5vw;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  h1 {
+    font-size: 7.5vh;
+  }
 }
 
 h2 {
