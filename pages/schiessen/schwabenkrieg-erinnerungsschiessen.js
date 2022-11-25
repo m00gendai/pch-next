@@ -26,7 +26,7 @@ export default function SKES({ subDirectoryList, getSubDirectoryFiles, getLinks 
     return(
         <main className="main">
             <section className="section">
-                <h1>Schwabenkrieg-Erinnerungsschiessen</h1>
+                <h1>Schwaben<wbr/>krieg-Erinnerungs<wbr/>schiessen</h1>
                 <div className={s.introContainer}>
                     <p>
                         Zur Erinnerung an den Kampf in Hallau am 04. April 1499 findet alljährlich das Schwabenkrieg-Erinnerungsschiessen statt. 
