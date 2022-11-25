@@ -10,17 +10,16 @@ export default function Navbar_Mobile(){
     const [visible, setVisible] = useState(false) // checks if submenu is visible
 
     function handleSubMenuTrigger(e){
-        console.log(e.type)
         if(e.type == "mouseenter"){
             setOverTrigger(true)
         } else if(e.type == "mouseleave"){
             setOverTrigger(false)
-        } else {
+        } else { // for click events
             setVisible(!visible)
         }
     }
 
-    useEffect(()=>{
+    useEffect(()=>{ // this needs to be a useEffect because if its handled in the handleSubMenuTrigger() it doesn't work reliably
         if(overTrigger){
             setVisible(true)
         }
@@ -32,37 +31,38 @@ export default function Navbar_Mobile(){
     return(
         <nav className ={s.nav}>
             <div className={s.menu} onClick={(e)=>handleSubMenuTrigger(e)}>
-                {visible?
-                <CloseIcon sx={{
-                    color: "white",
-                    fontSize: "5vh"
-                }}/>
-            :
-                <MenuIcon sx={{
-                    color: "white",
-                    fontSize: "5vh"
-                }}/>
-            }
+                {
+                visible ?
+                    <CloseIcon sx={{
+                        color: "white",
+                        fontSize: "5vh"
+                    }}/>
+                :
+                    <MenuIcon sx={{
+                        color: "white",
+                        fontSize: "5vh"
+                    }}/>
+                }
             </div>
-            {visible?
-            <div className={s.linkContainer}>
-                <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/">Home</Link>
-                <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/anlaesse">Anlässe</Link>
-                <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/resultate">Resultate</Link>
+            {
+            visible ?
+                <div className={s.linkContainer}>
+                    <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/">Home</Link>
+                    <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/anlaesse">Anlässe</Link>
+                    <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/resultate">Resultate</Link>
                     <div className={s.link} >Schiessen</div>
-
                     <div className={s.subLinkContainer} >
                         <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/schiessen/schwabenkrieg-erinnerungsschiessen">Schwabenkrieg-Erinnerungsschiessen</Link>
                         <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/schiessen/obligatorisches">Obligatorisches</Link>
                         <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/schiessen/feldschiessen">Feldschiessen</Link>
                         <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/schiessen/hilfsmittel">Zugelassene Hilfsmittel und Pistolen</Link>
                     </div>
-
-
-                <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/verein">Verein</Link>
-                <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/">Links</Link>
-            </div>
-            : null}
+                    <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/verein">Verein</Link>
+                    <Link className={s.link} onClick={(e)=>handleSubMenuTrigger(e)} href="/">Links</Link>
+                </div>
+            : 
+                null
+            }
         </nav>
     )
 }
