@@ -7,7 +7,7 @@ export default function Anlaesse(){
             <section className="section">
                 <h1>Anlässe</h1>
                 <h2>Kalender</h2>
-                    <iframe className={s.calendar} src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FBrussels&showTitle=0&showNav=1&showCalendars=0&showTz=0&src=NmFsa2FmYjZnN2JqOWJnaWw0MzFjdmlzMjBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23F6BF26" ></iframe>
+                    <iframe className={s.calendar} src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23ffffff&ctz=Europe%2FBrussels&showTitle=0&showNav=1&showCalendars=0&showTz=0&src=NmFsa2FmYjZnN2JqOWJnaWw0MzFjdmlzMjBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23F6BF26" width="800" height="600" ></iframe>
                 <h2>Besonderes</h2>
                     <ul className={s.ul}>
                         <li>
