@@ -2,6 +2,7 @@ import Navbar from "../components/navbar"
 import Navbar_Mobile from "../components/navbar_mobile"
 import '../styles/globals.css'
 import { useState } from "react"
+import {useMediaQuery, useMediaQueries} from '@react-hook/media-query'
 
 function MyApp({ Component, pageProps }) {
 
@@ -19,9 +20,14 @@ function MyApp({ Component, pageProps }) {
     })
   }
 
+  const isMobile = useMediaQuery('only screen and (orientation: portrait)')
+
   return(
     <>
     {innerWidth >= 765 ?
+      isMobile ?
+      <Navbar_Mobile />
+      :
     <Navbar />
     :
     <Navbar_Mobile />}
