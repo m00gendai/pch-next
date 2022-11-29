@@ -59,7 +59,7 @@ export async function getServerSideProps() {
     const date = new Date()
     const currentYear = date.getFullYear()
 
-    const directoryPath = path.join("./public/Resultate")
+    const directoryPath = path.join("/Resultate")
     const dir = [] // this holds all individual result folders
     const current = [] // This holds all files within the current year folder of the individual result folders
 
