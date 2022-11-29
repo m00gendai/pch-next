@@ -59,7 +59,7 @@ export async function getServerSideProps() {
     const date = new Date()
     const currentYear = date.getFullYear()
 
-    const directoryPath = path.join(__dirname, "../../../public/Resultate")
+    const directoryPath = path.join(__dirname, "../../../public/resultate")
     const dir = [] // this holds all individual result folders
     const current = [] // This holds all files within the current year folder of the individual result folders
 
@@ -76,7 +76,7 @@ export async function getServerSideProps() {
         if(fs.existsSync(`${directoryPath}/${item.name}/${currentYear.toString()}`)){ // this might not even be necessary
             const g = fs.readdirSync(`${directoryPath}/${item.name}/${currentYear.toString()}`) // this checks if there are any files within the /Resultate/{folder}/{currentYear} directory
             g.forEach(file=>{ // if so, push name, parent (the /Resultate/{folder} directory name) and the file url to current array
-                current.push({name: file, parent: item.name, url: `../Resultate/${item.name}/${currentYear.toString()}/${file}`})
+                current.push({name: file, parent: item.name, url: `../resultate/${item.name}/${currentYear.toString()}/${file}`})
             })
         }
     })
