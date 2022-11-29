@@ -20,5 +20,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "use-web3forms": "^1.2.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "^12.2.7"
   }
 }

@@ -38,3 +38,5 @@ next-env.d.ts
 
 #folders
 /public/Resultate
+# Local Netlify folder
+.netlify
