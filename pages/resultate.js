@@ -1,94 +1,54 @@
 import Link from "next/link"
 import s from "../styles/Resultate.module.css"
+import fs from "fs"
+import path from "path"
 
 export default function Resultate(
-    {   
-        sourceDirectoryList, 
-        getSubDirectoryList, 
-        getSubDirectoryFiles, 
-        getLinks
-    }
-){
+        {   
+            dir,
+            current
+        }
+    ){
 
-    const linksFlat = getLinks.flat(3)
-    const linkList = linksFlat.map(link =>{
-        return {id: link.id, url: link.url.data.temporary_url}
-    })
-
-    const shootings = sourceDirectoryList.data.map(name =>{
-        return {id: name.id, name: name.name}
-    })
-
-    const shootingsSorted = shootings.sort((a,b) =>{
-        const x = a.name
-        const y = b.name
-        return x > y ? 1 : x < y ? -1 : 0
-    })
-
-    const years = getSubDirectoryList.map(entry =>{
-        return entry.data.map(data =>{
-            return {id: data.id, name: data.name, parent: data.parent_id}
-        })
-    })
-
-    const yearsSorted = years.flat(2).sort((a,b) =>{
-        const x = a.name
-        const y = b.name
+    const sortedDir = dir.sort((a,b) =>{ // sorts /Resultate/{folder} by creation date to have the newest on top
+        const x = a.date
+        const y = a.date
         return x < y ? 1 : x > y ? -1 : 0
     })
-
-    const files = getSubDirectoryFiles.map(directory =>{
-        return directory.map(entry =>{
-            return entry.data.map(data =>{
-                return {id: data.id, name: data.name, parent: data.parent_id}
-            })
-        })
-    })
-    const fileArray = files.flat(3)
-
+   
     return(
         <main className="main">
             <section className="section">
                 <h1>Resultate</h1>
                 {
-                shootingsSorted.map((shooting, index) =>{
-                    return (
-                        <div className={s.container} key={`container_${index}`}>
-                        <details className={s.details} key={`shooting_${index}`}>
-                        <summary className={s.titleSpoiler}>{shooting.name}</summary>
-                        <div className={s.yearContainer}>
-                        {
-                        yearsSorted.map((year, indexYear) =>{
-                                if(year.parent == shooting.id){
-                                    return (
-                                        <details className={s.spoiler} key={`year_${indexYear}`}>
-                                            <summary className={s.summary} key={`summary_${index}`}>{year.name}</summary>
-                                            <div className={s.resultContainer} key={`container_${index}`}>
-                                            {
-                                            fileArray.map(file =>{
-                                                if(file.parent == year.id){
-                                                    return linkList.map(link =>{
-                                                        if(link.id == file.id){
-                                                            const name = file.name.replaceAll("_", " ").replaceAll("-", " ").replace(".pdf", "")
-                                                            return <Link href={link.url} className={s.result} key={`link_${index}`}><span className={s.text} key={`span_${index}`}>{name}</span></Link>
-                                                        }
-                                                    })
-                                                }
-                                            })
-                                            }
-                                            </div>
-                                        </details>
-                                    )
+                    sortedDir.map(item=>{
+                        return (
+                            <div className={s.container} key={`resultContainer_${item.name}`}>
+                                <h2 key={`resultTitle_${item.name}`}>{item.name}</h2>
+                                <div className={s.linkContainer} key={`linkContainer_${item}`}>
+                                {
+                                    current.map(entry =>{
+                                        if(entry.parent == item.name){ // if the parent of the file matches the /Resultate/{folder} name
+                                            const filename = entry.name.replaceAll("_", " ").replace(".pdf", "")
+                                            return (
+                                                <Link href={entry.url} target="_blank" className={s.link} key={`resultFile_${entry.name}`}>
+                                                    <span className={s.text} key={`resultFileName_${entry.name}`}>{filename}</span>
+                                                </Link>
+                                            )
+                                        }
+                                    })
                                 }
-                            
-                        })
-                        }
-                        </div>
-                        </details>
-                        </div>
-                    )
-                })
+                                </div>
+                            </div>
+                        ) 
+                    })
                 }
+                <hr />
+                <div className={s.archiv}>
+                    <span class={s.archivText}>
+                        Archiv
+                    </span>
+                </div>
             </section>
         </main>
     )
@@ -96,71 +56,35 @@ export default function Resultate(
 
 export async function getServerSideProps() {
 
-    // Gets folders in /Resultate
-    const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/15/files", {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${process.env.KDRIVE}`,
-            "Content-Type" : "application/json"
+    const date = new Date()
+    const currentYear = date.getFullYear()
+
+    const directoryPath = path.join(__dirname, "../../../public/Resultate")
+    const dir = [] // this holds all individual result folders
+    const current = [] // This holds all files within the current year folder of the individual result folders
+
+    const f = fs.readdirSync(directoryPath) // reads all directories in /Resultate
+
+    f.forEach(file =>{
+        if(fs.existsSync(`${directoryPath}/${file}/${currentYear.toString()}`)){ // checks whether a directory with the current year exists within the folder in /Resultate/{folder}
+            const birth = fs.statSync(`${directoryPath}/${file}`) // gets creation date of the /Resultate/{folder} directory
+            dir.push({name: file, date: JSON.stringify(birth.birthtime)}) // pushes directory name and creation date to dir array
+        }
+    })                
+    
+    dir.forEach(item =>{
+        if(fs.existsSync(`${directoryPath}/${item.name}/${currentYear.toString()}`)){ // this might not even be necessary
+            const g = fs.readdirSync(`${directoryPath}/${item.name}/${currentYear.toString()}`) // this checks if there are any files within the /Resultate/{folder}/{currentYear} directory
+            g.forEach(file=>{ // if so, push name, parent (the /Resultate/{folder} directory name) and the file url to current array
+                current.push({name: file, parent: item.name, url: `../Resultate/${item.name}/${currentYear.toString()}/${file}`})
+            })
         }
     })
-    const sourceDirectoryList = await getSourceDirectoryList.json()
 
-    // Gets all subfolders in /Resultate/{folder}
-    const getSubDirectoryList = await Promise.all(sourceDirectoryList.data.map(async (directory) =>{
-        const fetchSub = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${directory.id}/files`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${process.env.KDRIVE}`,
-                "Content-Type" : "application/json"
-            }
-        })
-       return fetchSub.json()
-    }))
-
-    // Gets all files in /Resultate/{folder}/{subfolder}
-    const getSubDirectoryEntries = getSubDirectoryList.map(entry =>{
-        return entry.data
-    })
-
-    const getSubDirectoryFiles = await Promise.all(getSubDirectoryEntries.map(async (entry) =>{
-        return Promise.all(entry.map(async file =>{
-            const fetchSub = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${file.id}/files`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${process.env.KDRIVE}`,
-                    "Content-Type" : "application/json"
-                }
-            })
-            const res = await fetchSub.json()
-            return res
-        }))
-    }))
-
-    // Gets temporary urls for each file ID in /Resultate/{folder}/{subfolder}
-
-    const getLinks = await Promise.all(getSubDirectoryFiles.map(async (entry) =>{
-        return Promise.all(entry.map(async file =>{
-            return Promise.all(file.data.map(async dat =>{
-                const fetchSub = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${dat.id}/temporary_url`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${process.env.KDRIVE}`,
-                    "Content-Type" : "application/json"
-                }
-            })
-            const res = await fetchSub.json()
-            return {id: dat.id, url: res}
-            }))
-        }))
-    }))
-        
     return { 
         props: {
-            sourceDirectoryList, 
-            getSubDirectoryList, 
-            getSubDirectoryFiles, 
-            getLinks 
+            dir,
+            current
         } 
     }
 }
