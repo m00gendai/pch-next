@@ -24,13 +24,11 @@ function MyApp({ Component, pageProps }) {
 
   return(
     <>
-    {innerWidth >= 765 ?
-      isMobile ?
-      <Navbar_Mobile />
+    {isMobile ?
+        <Navbar_Mobile />
       :
-    <Navbar />
-    :
-    <Navbar_Mobile />}
+        <Navbar />
+    }
     <Component {...pageProps} />
     </>
   ) 
