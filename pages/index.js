@@ -12,7 +12,7 @@ export default function Home() {
       <Head>
         <title>Pistolenclub Hallau</title>
         <meta name="description" content="Pistolenclub Hallau" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/pch-logo.png" />
       </Head>
       <section className="section">
         <h1 className={s.title}>
