@@ -1,27 +1,32 @@
 import Link from "next/link"
 import s from "../../styles/SKES.module.css"
 
-export default function SKES({ subDirectoryList, getSubDirectoryFiles, getLinks }){
-
-   function handleSubmit(e){
-    e.preventDefault()
-   }
-
-    const years = subDirectoryList.data.map(entry =>{
-        return {year: entry.name, id: entry.id}
-    })
-
-    const fileNames = getSubDirectoryFiles.map(entry =>{
-        return entry.data.map(item=>{
-            return {name: item.name, id: item.id, parent: item.parent_id}
-        })
-    })
-
-    const fileNamesFlat = fileNames.flat(1)
-    const links = getLinks.flat(1)
+export default function SKES(
+    { 
+        sourceDirectoryList,
+        links 
+    }
+){
 
     const date = new Date()
     const currentYear = date.getFullYear()
+
+    const results = sourceDirectoryList.data
+
+    const currentYearDirs = results.filter(result =>{ // This filters for all directories of the current year
+        return result.name == currentYear.toString()
+    })
+
+    const currentYearDirIds = currentYearDirs.map(item=>{ // this extracts the parent_id of the current year directories
+        return item.parent_id
+    })
+
+    function getFile(id){
+        const url = links.data.filter(link=>{
+            return link.id == id        
+        })
+        window.open(url[0].temporary_url, "_blank")
+    }
 
     return(
         <main className="main">
@@ -34,22 +39,20 @@ export default function SKES({ subDirectoryList, getSubDirectoryFiles, getLinks 
                         Schützen von nah und fern eine Möglichkeit zum friedlichen Wettkampf bieten.
                     </p>
                 </div>
-                <h2>{`Resultate ${currentYear}`}</h2>
+                {/* if there is no current year folder, amend the title accoringly */}
+                <h2>{`Resultate ${currentYear}${currentYearDirs.length == 0 ? " noch nicht vorhanden" : ""}`}</h2>
                     <div className={s.resultContainer}>
                         {
-                            years.map(year =>{
-                                if(year.year.toString() == currentYear.toString()){
-                                    return fileNamesFlat.map(file =>{
-                                        if(file.parent == year.id){
-                                            return links.map(link =>{
-                                                if(link.id == file.id){
-                                                    return <Link className={s.link} key={link.url} href={link.url}><span className={s.text}>{file.name}</span></Link>
-                                                }
-                                            })
+                            results.map(result=>{
+                                if(result.type == "dir" && result.name == currentYear.toString()){
+                                    return results.map(result2 =>{
+                                        if(result2.type == "file" && result2.parent_id == result.id){
+                                            const name = result2.name.replaceAll("_", " ").replace(".pdf", "")
+                                            return <div key={`SKESresult_${result2.id}`} className={s.link} onClick={()=>getFile(result2.id)}>{name}</div>
                                         }
                                     })
                                 }
-                            })
+                            }) 
                         }
                     </div>
                 <h2>{`Schiesszeiten ${currentYear}`}</h2>
@@ -85,19 +88,27 @@ export default function SKES({ subDirectoryList, getSubDirectoryFiles, getLinks 
                     </div>
                 <h2>Anmeldung Gruppen</h2>
                 <div className={s.container}>
-                <p>Anmeldungen sind bis zur im Schiessplan angegebenen Zeit an <u><em><a href="mailto:mrweber@gmx.ch">Marcel Weber</a></em></u> zu richten.<br />
+                <p>Anmeldungen sind bis zur im Schiessplan angegebenen Zeit an <u><em><Link href="mailto:mrweber@gmx.ch">Marcel Weber</Link></em></u> zu richten.
+                <br />
+                <br />
                 Je fünf Schützen eines Vereines bilden eine Gruppe.<br />
-                Sollten mehr als vier Einzelschützen eines Vereines geschossen haben, werden automatisch Gruppen gebildet.<br />
-                Bitte in den Anmeldungen mindestens Name/Vorname sowie Lizenznummer und ggf. Gruppenname(n) erwähnen.<br />
+                Sollten mehr als vier Einzelschützen eines Vereines geschossen haben, werden automatisch Gruppen gebildet.
+                <br />
+                <br />
+                Bitte in den Anmeldungen mindestens Name/Vorname sowie Lizenznummer und ggf. Gruppenname(n) erwähnen.
+                <br />
+                <br />
                 Sollte eine Gruppe unvollständig sein, wird diese mit eventuellen Einzelschützen aufgefüllt.</p>
                 </div>
                 <h2>Informationen</h2>
                     <div className={s.container}>
                         <p>
                             <strong>Standblattausgabe</strong><br/>
-                            30 Minuten vor Schiessbeginn bis 30 Minuten vor Schiessende.<br/>
-                            
-                            Gleichzeitig findet in der näheren Umgebung noch das Schaffhasuser Pistolenschiessen 25/50m der PS Randen Schaffhausen statt.
+                            30 Minuten vor Schiessbeginn bis 30 Minuten vor Schiessende.
+                            <br/>
+                            <br />
+                            <strong>Weitere Schiessen</strong><br />
+                            Gleichzeitig findet in der näheren Umgebung noch das <u><em><Link href="https://www.psranden.ch/schaffhauser-pistolenschiessen/" target="_blank">Schaffhauser Pistolenschiessen 25/50m der PS Randen Schaffhausen</Link></em></u> statt.
                         </p>
                     </div>
             </section>
@@ -109,51 +120,45 @@ export async function getServerSideProps(){
 
 // SKES folder ID = 35
 
-// Gets all subfolders in /Resultate/{folder}
-    const getSubDirectoryList = await fetch(`https://api.infomaniak.com/2/drive/608492/files/35/files`, {
+// Gets all folders and files in the /Resultate directory recursively, sorted by last modified
+    const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/search?directory_id=35&depth=unlimited&per_page=1000&order_by=last_modified_at", {
         method: "GET",
         headers: {
             Authorization: `Bearer ${process.env.KDRIVE}`,
             "Content-Type" : "application/json"
-        }
+        },
+
     })
-    const subDirectoryList = await getSubDirectoryList.json()
+    const sourceDirectoryList = await getSourceDirectoryList.json()
 
+    const files = sourceDirectoryList.data.filter(item=>{ // filters for files only
+        return item.type == "file"
+    })
 
-    const getSubDirectoryFiles = await Promise.all(subDirectoryList.data.map(async (entry) =>{
-            const fetchSub = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${entry.id}/files`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${process.env.KDRIVE}`,
-                    "Content-Type" : "application/json"
-                }
-            })
-            const res = await fetchSub.json()
-            return res
-    }))
+    const fileIds = files.map(file =>{ // gets the file ids
+        return file.id
+    })
 
-    // Gets temporary urls for each file ID in /Resultate/{folder}/{subfolder}
-
-    const getLinks = await Promise.all(getSubDirectoryFiles.map(async (entry) =>{
-        return Promise.all(entry.data.map(async file =>{
-                const fetchSub = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${file.id}/temporary_url`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${process.env.KDRIVE}`,
-                    "Content-Type" : "application/json"
-                }
-            })
-            const res = await fetchSub.json()
-            return {id: file.id, url: res.data.temporary_url}
-            }))
-        }))
+    // Gets temporary urls for all file ids
+    const getLinks = await fetch("https://api.infomaniak.com/2/drive/608492/files/temporary_urls", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${process.env.KDRIVE}`,
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(
+            {
+                "ids": fileIds
+            }
+        ),
+    })
+    const links = await getLinks.json()
     
         
     return { 
         props: {
-            subDirectoryList,
-            getSubDirectoryFiles,
-            getLinks
+            sourceDirectoryList,
+            links
         } 
     }
 }
