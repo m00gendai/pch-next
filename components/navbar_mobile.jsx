@@ -32,6 +32,12 @@ export default function Navbar_Mobile(){
 
     return(
         <nav className ={s.nav}>
+            {
+            visible ?
+                null
+            :
+                <Link className={s.homeLink} href="/"></Link>
+            }   
             <div className={s.menu} onClick={(e)=>handleSubMenuTrigger(e)}>
                 {
                 visible ?

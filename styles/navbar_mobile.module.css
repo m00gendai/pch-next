@@ -12,6 +12,19 @@
     flex-wrap: wrap;
 }
 
+.homeLink {
+    background-image: url("/pch-logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0% 0%;
+    position: absolute;
+    top: 50%;
+    left:5vh;
+    transform: translateY(-50%);
+    height: 80%;
+    aspect-ratio: 1/1;
+}
+
 .menu{
     position: absolute;
     top: 2.5vh;
