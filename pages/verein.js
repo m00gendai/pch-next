@@ -19,12 +19,12 @@ export default function Verein(){
                         </p>
                     </div>
                     <div className={s.linkContainer}>
-                        <Link href="/" className={s.link}>
+                        <Link href="/mitmachen" className={s.link}>
                             <span className={s.text}>
                                 Mitmachen!
                             </span>
                         </Link>
-                        <Link href="/" className={s.link}>
+                        <Link href="/Statuten_PC-Hallau.pdf" target="_blank" className={s.link}>
                             <span className={s.text}>
                                 Vereinsstatuten
                             </span>
