@@ -40,7 +40,7 @@ export default function Resultate(
                     </p>
                 </div>
                 {
-                    currentYearDirs.length == 0 
+                    currentYearDirs.length == 0 // if there are no folders with the current year at all, render placeholder
                     ?
                     <h2>{`${currentYear} ist noch nichts gelaufen...`}</h2>
                     :
