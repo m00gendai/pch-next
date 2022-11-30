@@ -26,7 +26,11 @@ export default function Home() {
         <div className={s.linkContainer}>
           <Link className={s.link} href="/anlaesse"><span className={s.text}>Anlässe</span></Link>
           <Link className={s.link} href="/resultate"><span className={s.text}>Resultate</span></Link>
+          {isMobile?
+          null
+          :
           <div className={s.logo}></div>
+          }
           <Link className={s.link} href="/mitmachen"><span className={s.text}>Mitmachen</span></Link>
           <Link className={s.link} href="/anlaesse"><span className={s.text}>Jahres-programm</span></Link>
         </div>
