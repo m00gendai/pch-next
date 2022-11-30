@@ -45,30 +45,30 @@ export default function Resultate(
                         /* If directory AND the directory name is not a number AND there is a subdirectory with the name of the current 
                             year present (see parent_id filtering above) */
                             return (
-                                <>
-                                <h2>{result.name}</h2> {/* only displayed if there is something for the current year */}
-                                <div className={s.linkContainer}>
-                                {
-                                    results.map(result2 =>{
-                                        if(result2.type == "dir" && result2.name == currentYear.toString() && result2.parent_id == result.id){
-                                            return results.map(result3 =>{
-                                                if(result3.type == "file" && result3.parent_id == result2.id){
-                                                    const name = result3.name.replaceAll("_", " ").replace(".pdf", "")
-                                                    return <div className={s.link} onClick={()=>getFile(result3.id)}>{name}</div>
-                                                }
-                                            })
-                                        }
-                                    })
-                                }
+                                <div className={s.container} key={`fragment_${result.id}`}>
+                                    <h2 key={`resultTitle_${result.name}`}>{result.name}</h2> {/* only displayed if there is something for the current year */}
+                                    <div key={`linkContainer_${result.name}`} className={s.linkContainer}>
+                                    {
+                                        results.map(result2 =>{
+                                            if(result2.type == "dir" && result2.name == currentYear.toString() && result2.parent_id == result.id){
+                                                return results.map(result3 =>{
+                                                    if(result3.type == "file" && result3.parent_id == result2.id){
+                                                        const name = result3.name.replaceAll("_", " ").replace(".pdf", "")
+                                                        return <div key={`result_${result3.id}`} className={s.link} onClick={()=>getFile(result3.id)}>{name}</div>
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
+                                    </div>
                                 </div>
-                                </>
                             )
                         }
                     })
                 }
                 <hr />
                 <Link className={s.archiv} href={`https://kdrive.infomaniak.com/app/share/608492/e3b365ba-9347-441c-ac26-ad9a9d6c72c5`} target={"_blank"}>
-                    <span class={s.archivText}>
+                    <span className={s.archivText}>
                         Archiv
                     </span>
                 </Link>
