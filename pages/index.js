@@ -28,7 +28,7 @@ export default function Home() {
           <Link className={s.link} href="/resultate"><span className={s.text}>Resultate</span></Link>
           <div className={s.logo}></div>
           <Link className={s.link} href="/mitmachen"><span className={s.text}>Mitmachen</span></Link>
-          <Link className={s.link} href="/jahresprogramm"><span className={s.text}>Jahres-programm</span></Link>
+          <Link className={s.link} href="/anlaesse"><span className={s.text}>Jahres-programm</span></Link>
         </div>
          {isMobile?
         null
@@ -36,8 +36,6 @@ export default function Home() {
         <Link className={s.skes} href="/schiessen/schwabenkrieg-erinnerungsschiessen"><span className={s.skesText}>Schwabenkrieg-Erinnerungsschiessen 2023</span></Link>
         }
       </section>
-      <footer className="footer">
-      </footer>
     </main>
   )
 }
