@@ -40,6 +40,10 @@ export default function Resultate(
                     </p>
                 </div>
                 {
+                    currentYearDirs.length == 0 
+                    ?
+                    <h2>{`${currentYear} ist noch nichts gelaufen...`}</h2>
+                    :
                     results.map(result =>{
                         if(result.type == "dir" && isNaN(parseInt(result.name)) && currentYearDirIds.includes(result.id)){ 
                         /* If directory AND the directory name is not a number AND there is a subdirectory with the name of the current 
