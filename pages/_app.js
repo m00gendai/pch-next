@@ -6,20 +6,6 @@ import { useMediaQuery } from '@react-hook/media-query'
 
 function MyApp({ Component, pageProps }) {
 
-  const [innerWidth, setInnerWidth] = useState(getWindowSize())
-
-  function getWindowSize() {
-    if(typeof window != "undefined"){
-      return window.innerWidth
-    }
-  }
-
-  if(typeof window != "undefined"){
-    window.addEventListener("resize", function(){
-      setInnerWidth(getWindowSize())
-    })
-  }
-
   const isMobile = useMediaQuery('only screen and (orientation: portrait)')
 
   return(
