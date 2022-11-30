@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Head from "next/head"
 import s from "../styles/Resultate.module.css"
 
 export default function Resultate(
@@ -30,6 +31,11 @@ export default function Resultate(
 
     return(
         <main className="main">
+            <Head>
+                <title>PCH Resultate</title>
+                <meta name="description" content="Pistolenclub Hallau Resultate" />
+                <link rel="icon" href="/pch-logo.png" />
+            </Head>
             <section className="section">
                 <h1>Resultate</h1>
                 <div className={s.introContainer}>
