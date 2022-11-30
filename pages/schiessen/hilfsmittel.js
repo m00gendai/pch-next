@@ -1,11 +1,16 @@
 import Link from "next/link"
-import Image from "next/image"
+import Head from "next/head"
 import s from "../../styles/Hilfsmittel.module.css"
 
 export default function Hilfsmittel(){
 
     return (
         <main className="main">
+            <Head>
+                <title>PCH Hilfsmittel</title>
+                <meta name="description" content="Pistolenclub Hallau Zugelassene Hilfsmittel und Pistolen" />
+                <link rel="icon" href="/pch-logo.png" />
+            </Head>
             <section className="section">
                 <h1>Zugelassene Pistolen und Hilfsmittel</h1>
                 <h2>Generelles</h2>

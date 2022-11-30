@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import Head from "next/head"
 import s from "../../styles/Feldschiessen.module.css"
 
 export default function FS(){
@@ -9,6 +10,11 @@ export default function FS(){
 
     return (
         <main className="main">
+            <Head>
+                <title>PCH Feldschiessen</title>
+                <meta name="description" content="Pistolenclub Hallau Feldschiessen" />
+                <link rel="icon" href="/pch-logo.png" />
+            </Head>
             <section className="section">
                 <h1>Feldschiessen</h1>
                 <div className={s.introContainer}>

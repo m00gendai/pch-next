@@ -1,9 +1,15 @@
 import Link from "next/link"
+import Head from "next/head"
 import s from "../styles/Mitmachen.module.css"
 
 export default function Verein(){
     return(
         <main className="main">
+            <Head>
+                <title>Mach mit beim PCH</title>
+                <meta name="description" content="Pistolenclub Hallau Mitmachen" />
+                <link rel="icon" href="/pch-logo.png" />
+            </Head>
             <section className="section">
                 <h1>Mitmachen</h1>
                     <div className={s.introContainer}>

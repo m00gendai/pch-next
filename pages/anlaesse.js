@@ -1,9 +1,15 @@
 import Link from "next/link"
+import Head from "next/head"
 import s from "../styles/Anlaesse.module.css" 
 
 export default function Anlaesse(){
     return (
         <main className="main">
+            <Head>
+                <title>PCH Anlässe</title>
+                <meta name="description" content="Pistolenclub Hallau Anlässe" />
+                <link rel="icon" href="/pch-logo.png" />
+            </Head>
             <section className="section">
                 <h1>Anlässe</h1>
                 <h2>Kalender</h2>

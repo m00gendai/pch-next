@@ -1,10 +1,16 @@
 import Link from "next/link"
+import Head from "next/head"
 import s from "../styles/Verein.module.css"
 import { vorstand } from "../lib/vorstand"
 
 export default function Verein(){
     return(
         <main className="main">
+            <Head>
+                <title>PCH Verein</title>
+                <meta name="description" content="Pistolenclub Hallau Verein" />
+                <link rel="icon" href="/pch-logo.png" />
+            </Head>
             <section className="section">
                 <h1>Verein</h1>
                 <h2>Über uns</h2>

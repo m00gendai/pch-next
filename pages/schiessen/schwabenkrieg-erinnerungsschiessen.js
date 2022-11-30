@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Head from "next/head"
 import s from "../../styles/SKES.module.css"
 
 export default function SKES(
@@ -30,6 +31,11 @@ export default function SKES(
 
     return(
         <main className="main">
+            <Head>
+                <title>PCH SKES</title>
+                <meta name="description" content="Pistolenclub Hallau Schwabenkrieg-Erinnerungsschiessen SKES" />
+                <link rel="icon" href="/pch-logo.png" />
+            </Head>
             <section className="section">
                 <h1>Schwaben<wbr/>krieg-Erinnerungs<wbr/>schiessen</h1>
                 <div className={s.introContainer}>
