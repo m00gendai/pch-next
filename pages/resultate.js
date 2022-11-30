@@ -1,54 +1,77 @@
 import Link from "next/link"
 import s from "../styles/Resultate.module.css"
-import fs from "fs"
-import path from "path"
 
 export default function Resultate(
-        {   
-            dir,
-            current
-        }
-    ){
+    {   
+        sourceDirectoryList, 
+        links
+    }
+){
 
-    const sortedDir = dir.sort((a,b) =>{ // sorts /Resultate/{folder} by creation date to have the newest on top
-        const x = a.date
-        const y = a.date
-        return x < y ? 1 : x > y ? -1 : 0
+    const date = new Date()
+    const currentYear = date.getFullYear()
+
+    const results = sourceDirectoryList.data
+
+    const currentYearDirs = results.filter(result =>{ // This filters for all directories of the current year
+        return result.name == currentYear.toString()
     })
-   
+
+    const currentYearDirIds = currentYearDirs.map(item=>{ // this extracts the parent_id of the current year directories
+        return item.parent_id
+    })
+
+    function getFile(id){
+        const url = links.data.filter(link=>{
+            return link.id == id        
+        })
+        window.open(url[0].temporary_url, "_blank")
+    }
+
     return(
         <main className="main">
             <section className="section">
                 <h1>Resultate</h1>
+                <div className={s.introContainer}>
+                    <p>
+                        Hier sind alle Resultate der auswärtigen Schiessen für das aktuelle Jahr <span>{`${currentYear}`}</span> aufgelistet.
+                        Ältere Resultate vergangener Jahre finden sich im Archiv am Ende der Seite.
+                        Die Resultate sind nach aktualität geordnet.
+                    </p>
+                </div>
                 {
-                    sortedDir.map(item=>{
-                        return (
-                            <div className={s.container} key={`resultContainer_${item.name}`}>
-                                <h2 key={`resultTitle_${item.name}`}>{item.name}</h2>
-                                <div className={s.linkContainer} key={`linkContainer_${item}`}>
+                    results.map(result =>{
+                        if(result.type == "dir" && isNaN(parseInt(result.name)) && currentYearDirIds.includes(result.id)){ 
+                        /* If directory AND the directory name is not a number AND there is a subdirectory with the name of the current 
+                            year present (see parent_id filtering above) */
+                            return (
+                                <>
+                                <h2>{result.name}</h2> {/* only displayed if there is something for the current year */}
+                                <div className={s.linkContainer}>
                                 {
-                                    current.map(entry =>{
-                                        if(entry.parent == item.name){ // if the parent of the file matches the /Resultate/{folder} name
-                                            const filename = entry.name.replaceAll("_", " ").replace(".pdf", "")
-                                            return (
-                                                <Link href={entry.url} target="_blank" className={s.link} key={`resultFile_${entry.name}`}>
-                                                    <span className={s.text} key={`resultFileName_${entry.name}`}>{filename}</span>
-                                                </Link>
-                                            )
+                                    results.map(result2 =>{
+                                        if(result2.type == "dir" && result2.name == currentYear.toString() && result2.parent_id == result.id){
+                                            return results.map(result3 =>{
+                                                if(result3.type == "file" && result3.parent_id == result2.id){
+                                                    const name = result3.name.replaceAll("_", " ").replace(".pdf", "")
+                                                    return <div className={s.link} onClick={()=>getFile(result3.id)}>{name}</div>
+                                                }
+                                            })
                                         }
                                     })
                                 }
                                 </div>
-                            </div>
-                        ) 
+                                </>
+                            )
+                        }
                     })
                 }
                 <hr />
-                <div className={s.archiv}>
+                <Link className={s.archiv} href={`https://kdrive.infomaniak.com/app/share/608492/e3b365ba-9347-441c-ac26-ad9a9d6c72c5`} target={"_blank"}>
                     <span class={s.archivText}>
                         Archiv
                     </span>
-                </div>
+                </Link>
             </section>
         </main>
     )
@@ -56,36 +79,44 @@ export default function Resultate(
 
 export async function getServerSideProps() {
 
-    const date = new Date()
-    const currentYear = date.getFullYear()
+    // Gets all folders and files in the /Resultate directory recursively, sorted by last modified
+    const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/search?directory_id=15&depth=unlimited&per_page=1000&order_by=last_modified_at", {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${process.env.KDRIVE}`,
+            "Content-Type" : "application/json"
+        },
 
-    const directoryPath = path.join("/Resultate")
-    const dir = [] // this holds all individual result folders
-    const current = [] // This holds all files within the current year folder of the individual result folders
-
-    const f = fs.readdirSync(directoryPath) // reads all directories in /Resultate
-
-    f.forEach(file =>{
-        if(fs.existsSync(`${directoryPath}/${file}/${currentYear.toString()}`)){ // checks whether a directory with the current year exists within the folder in /Resultate/{folder}
-            const birth = fs.statSync(`${directoryPath}/${file}`) // gets creation date of the /Resultate/{folder} directory
-            dir.push({name: file, date: JSON.stringify(birth.birthtime)}) // pushes directory name and creation date to dir array
-        }
-    })                
-    
-    dir.forEach(item =>{
-        if(fs.existsSync(`${directoryPath}/${item.name}/${currentYear.toString()}`)){ // this might not even be necessary
-            const g = fs.readdirSync(`${directoryPath}/${item.name}/${currentYear.toString()}`) // this checks if there are any files within the /Resultate/{folder}/{currentYear} directory
-            g.forEach(file=>{ // if so, push name, parent (the /Resultate/{folder} directory name) and the file url to current array
-                current.push({name: file, parent: item.name, url: `../Resultate/${item.name}/${currentYear.toString()}/${file}`})
-            })
-        }
     })
+    const sourceDirectoryList = await getSourceDirectoryList.json()
+
+    const files = sourceDirectoryList.data.filter(item=>{ // filters for files only
+        return item.type == "file"
+    })
+
+    const fileIds = files.map(file =>{ // gets the file ids
+        return file.id
+    })
+
+    // Gets temporary urls for all file ids
+    const getLinks = await fetch("https://api.infomaniak.com/2/drive/608492/files/temporary_urls", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${process.env.KDRIVE}`,
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(
+            {
+                "ids": fileIds
+            }
+        ),
+    })
+    const links = await getLinks.json()
 
     return { 
         props: {
-            dir,
-            current
+            sourceDirectoryList, 
+            links
         } 
     }
 }
-
