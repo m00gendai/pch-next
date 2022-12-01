@@ -126,7 +126,8 @@ export async function getServerSideProps() {
     return { 
         props: {
             sourceDirectoryList, 
-            links
+            links, 
+            revalidate: 1
         } 
     }
 }
