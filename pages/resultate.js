@@ -91,7 +91,7 @@ export default function Resultate(
     )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
     // Gets all folders and files in the /Resultate directory recursively, sorted by last modified
     const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/search?directory_id=15&depth=unlimited&per_page=1000", {
@@ -131,7 +131,7 @@ export async function getServerSideProps() {
         props: {
             sourceDirectoryList, 
             links, 
-            revalidate: 1
+            revalidate: 10
         } 
     }
 }
