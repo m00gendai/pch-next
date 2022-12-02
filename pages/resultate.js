@@ -130,8 +130,8 @@ export async function getStaticProps() {
     return { 
         props: {
             sourceDirectoryList, 
-            links, 
+            links
+        } , 
             revalidate: 10
-        } 
     }
 }
