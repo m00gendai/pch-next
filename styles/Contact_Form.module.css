@@ -1,0 +1,56 @@
+.container{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.form{
+    position: relative;
+    width: 100%;
+}
+
+.field{
+    position: relative;
+    width: 100%;
+}
+
+.row2{
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-gap: 1rem;
+    margin: 1rem 0 1rem 0;
+}
+
+@media screen and (orientation: landscape){
+    .row2{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .row2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.row1 {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-colums: 1fr;
+    margin: 1rem 0 1rem 0;
+}
+
+.message{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
