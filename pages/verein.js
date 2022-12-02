@@ -1,9 +1,51 @@
 import Link from "next/link"
 import Head from "next/head"
+import { useState } from "react"
 import s from "../styles/Verein.module.css"
 import { vorstand } from "../lib/vorstand"
 
+/*
+  Code for the contact form shamelessly stolen, taken, mugged, thieved, looted, pilfered, appropriated, robbed, raided, burgled,
+  embezzled and snatched from 
+  https://medium.com/nerd-for-tech/coding-a-contact-form-with-next-js-and-nodemailer-d3a8dc6cd645 
+*/
+
 export default function Verein(){
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [message, setMessage] = useState('')
+    const [submitted, setSubmitted] = useState(false)
+
+    const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('Sending')
+
+    let data = {
+        name,
+        email,
+        message
+    }
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then((res) => {
+        console.log('Response received')
+        if (res.status === 200) {
+            console.log('Response succeeded!')
+            setSubmitted(true) 
+            setName('')
+            setEmail('')
+            setMessage('')
+        }
+    })
+  }
+
     return(
         <main className="main">
             <Head>
@@ -68,6 +110,19 @@ export default function Verein(){
                         }
                     </div>
                 <h2>Kontaktformular</h2>
+                <div >
+  < form >  
+    < label htmlFor='name'>Name</label>
+    < input type='text' name='name' onChange={(e)=>{setName(e.target.value)}} />  
+
+    < label htmlFor='email'>Email</label>
+    < input type='email' name='email' onChange={(e)=>{setEmail(e.target.value)}} />
+
+    < label htmlFor='message'>Message</label>
+    < input type='text' name='message' onChange={(e)=>{setMessage(e.target.value)}} />
+   < input type='submit' onClick={(e)=>{handleSubmit(e)}}/>
+  </form >
+</div>
             </section>
         </main>
     )
