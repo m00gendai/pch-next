@@ -68,7 +68,13 @@ export default function Resultate(
                                                 return results.map(result3 =>{
                                                     if(result3.type == "file" && result3.parent_id == result2.id){
                                                         const name = result3.name.replaceAll("_", " ").replace(".pdf", "")
-                                                        return <div key={`result_${result3.id}`} className={s.link} onClick={()=>getFile(result3.id)}>{name}</div>
+                                                        return (
+                                                            <div key={`result_${result3.id}`} className={s.link} onClick={()=>getFile(result3.id)}>
+                                                                <div className={s.text}>
+                                                                    {name}
+                                                                </div>
+                                                            </div>
+                                                        )
                                                     }
                                                 })
                                             }
