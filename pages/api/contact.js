@@ -19,7 +19,7 @@ export default function (req, res) {
     
   const mailData = {
       from: req.body.email,
-      to: 'test@mrweber.ch',
+      to: `test@mrweber.ch, ${req.body.email}`,
       subject: `PCH: Nachricht von ${req.body.name}`,
       text: req.body.message,
       html: `<div>${req.body.message}</div>`
@@ -32,7 +32,6 @@ export default function (req, res) {
       console.log(info);
   })
   
-  console.log(req.body)
   res.send('success')
 
   }
