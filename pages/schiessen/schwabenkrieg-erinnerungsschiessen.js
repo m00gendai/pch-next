@@ -122,7 +122,7 @@ export default function SKES(
     )
 }
 
-export async function getServerSideProps(){
+export async function getStaticProps(){
 
 // SKES folder ID = 35
 
@@ -165,6 +165,6 @@ export async function getServerSideProps(){
         props: {
             sourceDirectoryList,
             links
-        } 
+        }, revalidate: 2
     }
 }
