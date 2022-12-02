@@ -45,6 +45,14 @@ export default function Links(){
                         <p>Schweiz</p>
                         <Link className={s.link} href="https://www.infomaniak.com/de" target="_blank">https://www.infomaniak.com/de</Link>
                     </div>
+                    <div className={s.containerItem}>
+                        <strong className={s.strong}>Mailverkehr über</strong>
+                        <p>cyon GmbH</p>
+                        <p>Brunngässlein 12</p>
+                        <p>4052 Basel</p>
+                        <p>Schweiz</p>
+                        <Link className={s.link} href="https://www.cyon.ch" target="_blank">https://www.cyon.ch</Link>
+                    </div>
                 </div>
                 <h2>Haftungsausschluss</h2>
                     <p>
