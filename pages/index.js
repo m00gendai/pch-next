@@ -12,6 +12,10 @@ export default function Home() {
       <Head>
         <title>Pistolenclub Hallau</title>
         <meta name="description" content="Pistolenclub Hallau" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Pistolenclub Hallau" />
+        <meta name="twitter:description" content="Der Pistolenclub in den Hallauer Weinbergern" />
+        <meta name="twitter:image" content="https://zingy-daffodil-ca4782.netlify.app/pch-logo.png" />
         <link rel="icon" href="/pch-logo.png" />
       </Head>
       <section className="section">
