@@ -12,8 +12,8 @@ export default function Footer(){
                 ©{currentYear.toString() == "2022" ? "2022" : `2022 - ${currentYear}`} Pistolenclub Hallau
             </p>
             <div className={s.linkContainer}>
-                <Link className={s.link} href="">Impressum</Link>
-                <Link className={s.link} href="">Datenschutz</Link>
+                <Link className={s.link} href="/impressum">Impressum</Link>
+                <Link className={s.link} href="/datenschutzerklaerung">Datenschutz</Link>
             </div>
         </footer>
     )
