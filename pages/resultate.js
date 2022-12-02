@@ -12,7 +12,11 @@ export default function Resultate(
     const date = new Date()
     const currentYear = date.getFullYear()
 
-    const results = sourceDirectoryList.data
+    const results = sourceDirectoryList.data.sort((a,b) =>{
+        const x = a.added_at
+        const y = b.added_at
+        return x < y ? 1 : x > y ? -1 : 0
+    })
 
     const currentYearDirs = results.filter(result =>{ // This filters for all directories of the current year
         return result.name == currentYear.toString()
@@ -90,7 +94,7 @@ export default function Resultate(
 export async function getServerSideProps() {
 
     // Gets all folders and files in the /Resultate directory recursively, sorted by last modified
-    const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/search?directory_id=15&depth=unlimited&per_page=1000&order_by=added_at&oder_for[added_at]=desc", {
+    const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/search?directory_id=15&depth=unlimited&per_page=1000", {
         method: "GET",
         headers: {
             Authorization: `Bearer ${process.env.KDRIVE}`,
