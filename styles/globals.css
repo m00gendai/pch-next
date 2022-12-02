@@ -38,7 +38,6 @@ main{
 
 section{
   position: relative;
-  width: 80%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -64,12 +63,18 @@ h1{
 }
 
 @media screen and (orientation: portrait) {
+  section{
+    width: 80%;
+  }
   h1 {
     font-size: 7.5vw;
   }
 }
 
 @media screen and (orientation: landscape) {
+  section {
+      width: 90%;
+    }
   h1 {
     font-size: 7.5vh;
   }
