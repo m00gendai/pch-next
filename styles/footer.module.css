@@ -2,15 +2,13 @@
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
     background: linear-gradient(135deg, rgba(0, 128, 0, 1) 0%, rgba(12, 197, 73, 1) 100%);
 }
 
 .footer p{
     position: relative;
-    width: 100%;
     padding: 0.5rem;
     color: white;
     text-align: center;
@@ -18,11 +16,22 @@
 
 .linkContainer{
     position: relative;
-    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 0 0 1rem 0;
+}
+
+@media screen and (orientation: portrait){
+    .footer {
+        flex-wrap: wrap;
+    }
+    .footer p{
+        width: 100%
+    }
+    .linkContainer{
+        width: 100%;
+    }
 }
 
 .link{
