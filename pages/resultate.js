@@ -90,7 +90,7 @@ export default function Resultate(
 export async function getServerSideProps() {
 
     // Gets all folders and files in the /Resultate directory recursively, sorted by last modified
-    const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/search?directory_id=15&depth=unlimited&per_page=1000&order_by=added_at&oder=desc", {
+    const getSourceDirectoryList = await fetch("https://api.infomaniak.com/2/drive/608492/files/search?directory_id=15&depth=unlimited&per_page=1000&order_by=added_at&oder_for[added_at]=desc", {
         method: "GET",
         headers: {
             Authorization: `Bearer ${process.env.KDRIVE}`,
