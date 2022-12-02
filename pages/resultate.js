@@ -132,6 +132,6 @@ export async function getStaticProps() {
             sourceDirectoryList, 
             links
         } , 
-            revalidate: 10
+            revalidate: 2
     }
 }
