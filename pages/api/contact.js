@@ -6,13 +6,14 @@
 export default function (req, res) {
 
   let nodemailer = require('nodemailer')
+  require('dotenv').config()
 
   const transporter = nodemailer.createTransport({
     port: 465,     
     host: "mail.cyon.ch",
       auth: {
         user: 'test@mrweber.ch',
-        pass: `${process.env.SMTP}`,
+        pass: process.env.SMTP,
       },
     secure: true,
   });
