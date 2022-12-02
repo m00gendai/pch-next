@@ -44,7 +44,7 @@ export default function Navbar(){
                     : null}
                 </div>
                 <Link className={s.link} href="/verein">Verein</Link>
-                <Link className={s.link} href="/">Links</Link>
+                <Link className={s.link} href="/links">Links</Link>
             </div>
         </nav>
     )
