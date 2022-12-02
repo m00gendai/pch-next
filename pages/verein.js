@@ -1,14 +1,11 @@
 import Link from "next/link"
 import Head from "next/head"
 import { useState } from "react"
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import s from "../styles/Verein.module.css"
+import c from "../styles/Contact_Form.module.css"
 import { vorstand } from "../lib/vorstand"
-
-/*
-  Code for the contact form shamelessly stolen, taken, mugged, thieved, looted, pilfered, appropriated, robbed, raided, burgled,
-  embezzled and snatched from 
-  https://medium.com/nerd-for-tech/coding-a-contact-form-with-next-js-and-nodemailer-d3a8dc6cd645 
-*/
 
 export default function Verein(){
 
@@ -16,15 +13,22 @@ export default function Verein(){
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
     const [submitted, setSubmitted] = useState(false)
+    const [response, setResponse] = useState("")
+    const [responseState, setResponseState] = useState("green")
 
     const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Sending')
-
+    setResponse("")
     let data = {
         name,
         email,
         message
+    }
+
+    if(data.name == "" || data.email == "" || data.message == ""){
+        setResponse("Bitte alle Felder ausfüllen")
+        setResponseState("red")
+        return
     }
 
     fetch('/api/contact', {
@@ -35,14 +39,16 @@ export default function Verein(){
       },
       body: JSON.stringify(data)
     }).then((res) => {
-        console.log('Response received')
         if (res.status === 200) {
-            console.log('Response succeeded!')
+            setResponse("Nachricht erfolgreich übermittelt. Sie haben auch eine Kopie erhalten.")
+            setResponseState("green")
             setSubmitted(true) 
             setName('')
             setEmail('')
             setMessage('')
         }
+    }).catch((err) =>{
+        setResponse(`Fehler: ${err}`)
     })
   }
 
@@ -110,19 +116,56 @@ export default function Verein(){
                         }
                     </div>
                 <h2>Kontaktformular</h2>
-                <div >
-  < form >  
-    < label htmlFor='name'>Name</label>
-    < input type='text' name='name' onChange={(e)=>{setName(e.target.value)}} />  
-
-    < label htmlFor='email'>Email</label>
-    < input type='email' name='email' onChange={(e)=>{setEmail(e.target.value)}} />
-
-    < label htmlFor='message'>Message</label>
-    < input type='text' name='message' onChange={(e)=>{setMessage(e.target.value)}} />
-   < input type='submit' onClick={(e)=>{handleSubmit(e)}}/>
-  </form >
-</div>
+                <div className={c.container}>
+                    <form className={c.form}>  
+                        <div className={c.row2}>
+                            <TextField 
+                                fullWidth
+                                id="outlined-name" 
+                                label="Name" 
+                                type="search" 
+                                required
+                                onChange={(e)=>{setName(e.target.value)}}
+                                color="success"
+                            />
+                            <TextField 
+                                fullWidth
+                                id="outlined-mail" 
+                                label="eMail" 
+                                type="mail" 
+                                required
+                                onChange={(e)=>{setEmail(e.target.value)}}
+                                color="success"
+                            />
+                        </div>
+                        <div className={c.row1}>
+                            <TextField 
+                                fullWidth
+                                id="outlined-message" 
+                                label="Ihre Nachricht" 
+                                type="text"
+                                multiline
+                                required
+                                rows={5}
+                                onChange={(e)=>{setMessage(e.target.value)}}
+                                color="success"
+                            />
+                        </div>
+                        <div className={c.row1}>
+                            <Button 
+                                variant="contained"
+                                type="submit"
+                                onClick={(e)=>{handleSubmit(e)}}
+                                sx={{
+                                    background: "linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);"
+                                }}
+                            >
+                                Absenden
+                            </Button>
+                        </div>
+                    </form >
+                    <div className={c.message} style={{color: responseState}}>{response}</div>
+                </div>
             </section>
         </main>
     )
