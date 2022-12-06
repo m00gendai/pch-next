@@ -8,7 +8,6 @@ export default function Navbar(){
     const [visible, setVisible] = useState(false) // checks if submenu is visible
 
     function handleSubMenuTrigger(e){
-        console.log(e.type)
         if(e.type == "mouseenter"){
             setOverTrigger(true)
         } else if(e.type == "mouseleave"){
