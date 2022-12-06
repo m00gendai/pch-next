@@ -18,7 +18,8 @@ export default function Verein(){
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setResponse("")
+        setResponse("Wird bearbeitet...")
+        setResponseState("black")
         let data = {
             name,
             email,
@@ -45,7 +46,6 @@ export default function Verein(){
       },
       body: JSON.stringify(data)
     }).then(async (res) => {
-        setResponse("Wird bearbeitet...")
         if (res.status === 200) {
             setResponse("Nachricht erfolgreich übermittelt. Sie haben auch eine Kopie erhalten.")
             setResponseState("green")
