@@ -5,7 +5,7 @@
 
 export default function (req, res) {
   require('dotenv').config()
-  const pw = process.env.SMTP
+  const pw = `${process.env.SMTP}`
   let nodemailer = require('nodemailer')
   
 
