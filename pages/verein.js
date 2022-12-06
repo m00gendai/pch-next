@@ -17,16 +17,22 @@ export default function Verein(){
     const [responseState, setResponseState] = useState("green")
 
     const handleSubmit = (e) => {
-    e.preventDefault()
-    setResponse("")
-    let data = {
-        name,
-        email,
-        message
-    }
+        e.preventDefault()
+        setResponse("")
+        let data = {
+            name,
+            email,
+            message
+        }
 
     if(data.name == "" || data.email == "" || data.message == ""){
         setResponse("Bitte alle Felder ausfüllen")
+        setResponseState("red")
+        return
+    }
+
+    if(!data.email.includes("@")){
+        setResponse("Bitte eine E-Mail-Adresse angeben")
         setResponseState("red")
         return
     }
@@ -38,21 +44,22 @@ export default function Verein(){
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    }).then((res) => {
+    }).then(async (res) => {
         if (res.status === 200) {
             setResponse("Nachricht erfolgreich übermittelt. Sie haben auch eine Kopie erhalten.")
             setResponseState("green")
             setSubmitted(true) 
-            setName('')
-            setEmail('')
-            setMessage('')
         } else {
-            setResponse("Fehler")
+            const errmsg = await res.json()
+            setResponse(`
+                Es ist etwas schiefgegangen. Bitte überprüfen Sie insbesondere Ihre angegebene E-Mail-Adresse. Ansonsten wenden SIe sich an die im Impressum angegebene Kontaktmöglichkeit.
+                
+                
+                Fehler: ${res.status} 
+                Meldung ${errmsg.err}
+            `)
             setResponseState("red")
             setSubmitted(false) 
-            setName('')
-            setEmail('')
-            setMessage('')
         }
     })
   }
@@ -128,7 +135,7 @@ export default function Verein(){
                                 fullWidth
                                 id="outlined-name" 
                                 label="Name" 
-                                type="search" 
+                                type="text" 
                                 required
                                 onChange={(e)=>{setName(e.target.value)}}
                                 color="success"
@@ -136,8 +143,8 @@ export default function Verein(){
                             <TextField 
                                 fullWidth
                                 id="outlined-mail" 
-                                label="eMail" 
-                                type="mail" 
+                                label="E-Mail" 
+                                type="email" 
                                 required
                                 onChange={(e)=>{setEmail(e.target.value)}}
                                 color="success"
