@@ -3,8 +3,8 @@
   from https://medium.com/nerd-for-tech/coding-a-contact-form-with-next-js-and-nodemailer-d3a8dc6cd645 
 */
 
-export default function (req, res) {
-  require('dotenv').config()
+export default async function (req, res) {
+
   const pw = `${process.env.SMTP}`
   let nodemailer = require('nodemailer')
   
@@ -27,13 +27,13 @@ export default function (req, res) {
       html: `<div>${req.body.message}</div>`
   }
   
-  transporter.sendMail(mailData, function (err, info) {
-    if(err)
-      console.log(err)
-    else
-      console.log(info);
-  })
+  try{
+    await transporter.sendMail(mailData)
+  } catch(err){
+    return res.status(500).json({err: err.message || err.toString()})
+  }
+
+  return res.status(200).json({err: ""})
   
-  res.send('success')
 
   }

@@ -46,9 +46,14 @@ export default function Verein(){
             setName('')
             setEmail('')
             setMessage('')
+        } else {
+            setResponse("Fehler")
+            setResponseState("red")
+            setSubmitted(false) 
+            setName('')
+            setEmail('')
+            setMessage('')
         }
-    }).catch((err) =>{
-        setResponse(`Fehler: ${err}`)
     })
   }
 
