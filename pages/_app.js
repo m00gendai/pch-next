@@ -6,7 +6,7 @@ import { useMediaQuery } from '@react-hook/media-query'
 
 function MyApp({ Component, pageProps }) {
 
-  const isMobile = useMediaQuery('only screen and (orientation: portrait)')
+  const isMobile = useMediaQuery('only screen and (max-aspect-ratio: 13/9)')
 
   return(
     <>
