@@ -25,13 +25,15 @@
     margin: 1rem 0 1rem 0;
 }
 
-@media screen and (orientation: landscape){
+/* media targeting ref https: //stackoverflow.com/a/26932152 */
+
+@media only screen and (min-aspect-ratio: 13/9) {
     .row2{
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media screen and (orientation: portrait) {
+@media only screen and (max-aspect-ratio: 13/9) {
     .row2 {
         grid-template-columns: 1fr;
     }
@@ -42,7 +44,7 @@
     width: 100%;
     display: grid;
     grid-gap: 1rem;
-    grid-template-colums: 1fr;
+    grid-template-columns: 1fr;
     margin: 1rem 0 1rem 0;
 }
 
@@ -50,7 +52,8 @@
     position: relative;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: left;
 }

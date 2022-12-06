@@ -7,9 +7,22 @@
     position: relative;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
     margin: 2rem 0 0 0;
+}
+
+/* media targeting ref https: //stackoverflow.com/a/26932152 */
+
+@media only screen and (min-aspect-ratio: 13/9) {
+    .linkContainer {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 13/9) {
+    .linkContainer {
+        grid-template-columns: 1fr;
+    }
 }
 
 .link{
