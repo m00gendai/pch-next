@@ -45,6 +45,7 @@ export default function Verein(){
       },
       body: JSON.stringify(data)
     }).then(async (res) => {
+        setResponse("Wird bearbeitet...")
         if (res.status === 200) {
             setResponse("Nachricht erfolgreich übermittelt. Sie haben auch eine Kopie erhalten.")
             setResponseState("green")
@@ -54,7 +55,7 @@ export default function Verein(){
             setResponse(`
                 Es ist etwas schiefgegangen. Bitte überprüfen Sie insbesondere Ihre angegebene E-Mail-Adresse. Ansonsten wenden SIe sich an die im Impressum angegebene Kontaktmöglichkeit.
                 
-                
+
                 Fehler: ${res.status} 
                 Meldung ${errmsg.err}
             `)
