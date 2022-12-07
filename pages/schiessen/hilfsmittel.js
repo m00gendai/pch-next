@@ -1,16 +1,16 @@
 import Link from "next/link"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import s from "../../styles/Hilfsmittel.module.css"
 
 export default function Hilfsmittel(){
 
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
+
     return (
         <main className="main">
-            <Head>
-                <title>PCH Hilfsmittel</title>
-                <meta name="description" content="Pistolenclub Hallau Zugelassene Hilfsmittel und Pistolen" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Zugelassene Hilfsmittel und Pistolen"} content={"Informationen zu den von uns verwendeten Waffen und deren Zubehör"} url={headUrl} />
             <section className="section">
                 <h1>Zugelassene Pistolen und Hilfsmittel</h1>
                 <h2>Generelles</h2>

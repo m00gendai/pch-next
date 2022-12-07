@@ -1,20 +1,20 @@
 import Link from "next/link"
 import Image from "next/image"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import s from "../../styles/Feldschiessen.module.css"
 
 export default function FS(){
+
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
 
     const date = new Date()
     const currentYear = date.getFullYear()
 
     return (
         <main className="main">
-            <Head>
-                <title>PCH Feldschiessen</title>
-                <meta name="description" content="Pistolenclub Hallau Feldschiessen" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Feldschiessen"} content={"Alle Informationen rund ums Feldschiessen - dem grössten Schützenfest der Welt - in Schaffhausen"} url={headUrl} />
             <section className="section">
                 <h1>Feldschiessen</h1>
                 <div className={s.introContainer}>

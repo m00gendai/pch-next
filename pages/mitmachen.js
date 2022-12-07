@@ -1,15 +1,16 @@
 import Link from "next/link"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import s from "../styles/Mitmachen.module.css"
 
 export default function Verein(){
+
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
+
     return(
         <main className="main">
-            <Head>
-                <title>Mach mit beim PCH</title>
-                <meta name="description" content="Pistolenclub Hallau Mitmachen" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Mitmachen"} content={"Mach mit beim Pistolenclub Hallau!"} url={headUrl} />
             <section className="section">
                 <h1>Mitmachen</h1>
                     <div className={s.introContainer}>

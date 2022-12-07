@@ -1,15 +1,16 @@
 import Link from "next/link"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import s from "../styles/Impressum.module.css"
 
 export default function Links(){
+
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
+
     return(
         <main className="main">
-            <Head>
-                <title>PCH Impressum</title>
-                <meta name="description" content="Pistolenclub Hallau Impressum" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Impressum"} content={"Relevante Informationen über unsere Webseite"} url={headUrl} />
             <section className="section">
                 <h1>Impressum</h1>
                 <div className={s.gridContainer}>

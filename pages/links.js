@@ -1,16 +1,17 @@
 import Link from "next/link"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import { links } from "../lib/links"
 import s from "../styles/Links.module.css"
 
 export default function Links(){
+
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
+
     return(
         <main className="main">
-            <Head>
-                <title>PCH Links</title>
-                <meta name="description" content="Pistolenclub Hallau Links" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Links"} content={"Links zu interessanten Seiten, relevanten Verbänden und befreundeten Vereinen"} url={headUrl} />
             <section className="section">
                 <h1>Links</h1>
                 <h2>Schweizer Schützensport</h2>

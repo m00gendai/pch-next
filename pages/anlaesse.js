@@ -1,15 +1,16 @@
 import Link from "next/link"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import s from "../styles/Anlaesse.module.css" 
 
 export default function Anlaesse(){
+
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
+
     return (
         <main className="main">
-            <Head>
-                <title>PCH Anlässe</title>
-                <meta name="description" content="Pistolenclub Hallau Anlässe" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Anlässe"} content={"Unser interner und externer Terminkalender"} url={headUrl} />
             <section className="section">
                 <h1>Anlässe</h1>
                 <h2>Kalender</h2>

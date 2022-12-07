@@ -1,16 +1,17 @@
 import Link from "next/link"
 import Image from "next/image"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import s from "../../styles/Obligatorisches.module.css"
 
 export default function Obli(){
+
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
+
     return (
         <main className="main">
-            <Head>
-                <title>PCH Obligatorisches</title>
-                <meta name="description" content="Pistolenclub Hallau Obligatorisches" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Obligatorisches"} content={"Informationen rund um die Bundesübung - das Obligatorische in Schaffhausen"} url={headUrl} />
             <section className="section">
                 <h1>Obligatorisches</h1>
                 <div className={s.introContainer}>

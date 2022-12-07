@@ -1,5 +1,6 @@
 import Link from "next/link"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import s from "../styles/Resultate.module.css"
 
 export default function Resultate(
@@ -8,6 +9,9 @@ export default function Resultate(
         links
     }
 ){
+
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
 
     const date = new Date()
     const currentYear = date.getFullYear()
@@ -35,11 +39,7 @@ export default function Resultate(
 
     return(
         <main className="main">
-            <Head>
-                <title>PCH Resultate</title>
-                <meta name="description" content="Pistolenclub Hallau Resultate" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Resultate"} content={"Diesjährige Resultate und Ranglisten der Schützen vom Pistolenclub Hallau"} url={headUrl} />
             <section className="section">
                 <h1>Resultate</h1>
                 <div className={s.introContainer}>

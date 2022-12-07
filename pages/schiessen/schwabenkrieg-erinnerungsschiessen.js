@@ -1,5 +1,6 @@
 import Link from "next/link"
-import Head from "next/head"
+import Header from "../components/header"
+import { useRouter } from 'next/router'
 import s from "../../styles/SKES.module.css"
 import { shootTimes } from "../../lib/shootTimes"
 
@@ -11,6 +12,9 @@ export default function SKES(
         SKESlinks
     }
 ){
+
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
 
     const date = new Date()
     const currentYear = date.getFullYear()
@@ -38,11 +42,7 @@ export default function SKES(
 
     return(
         <main className="main">
-            <Head>
-                <title>PCH SKES</title>
-                <meta name="description" content="Pistolenclub Hallau Schwabenkrieg-Erinnerungsschiessen SKES" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Schwabenkrieg-Erinnerungsschiessen"} content={"Informationen rund um das Schwabenkrieg-Erinnerungsschiessen (SKES) 50m Pistole in Hallau"} url={headUrl} />
             <section className="section">
                 <h1>Schwaben<wbr/>krieg-Erinnerungs<wbr/>schiessen</h1>
                 <div className={s.introContainer}>
