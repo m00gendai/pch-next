@@ -1,13 +1,16 @@
 import Link from "next/link"
-import Head from "next/head"
 import { useState } from "react"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import s from "../styles/Verein.module.css"
 import c from "../styles/Contact_Form.module.css"
 import { vorstand } from "../lib/vorstand"
+import { useRouter } from 'next/router'
 
 export default function Verein(){
+    
+    const router = useRouter()
+    const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -67,11 +70,7 @@ export default function Verein(){
 
     return(
         <main className="main">
-            <Head>
-                <title>PCH Verein</title>
-                <meta name="description" content="Pistolenclub Hallau Verein" />
-                <link rel="icon" href="/pch-logo.png" />
-            </Head>
+            <Header title={"PC Hallau - Verein"} content={"Unser Verein"} url={headUrl} />
             <section className="section">
                 <h1>Verein</h1>
                 <h2>Über uns</h2>
