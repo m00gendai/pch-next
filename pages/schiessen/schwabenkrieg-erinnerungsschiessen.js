@@ -1,11 +1,14 @@
 import Link from "next/link"
 import Head from "next/head"
 import s from "../../styles/SKES.module.css"
+import { shootTimes } from "../../lib/shootTimes"
 
 export default function SKES(
     { 
         sourceDirectoryList,
-        links 
+        links,
+        SKESfileNames,
+        SKESlinks
     }
 ){
 
@@ -27,6 +30,10 @@ export default function SKES(
             return link.id == id        
         })
         window.open(url[0].temporary_url, "_blank")
+    }
+
+    function getSKESfile(link){
+        window.open(link.temporary_url, "_blank")
     }
 
     return(
@@ -61,15 +68,21 @@ export default function SKES(
                             }) 
                         }
                     </div>
-                <h2>{`Schiesszeiten ${currentYear}`}</h2>
-                    <div className={s.container}>
+                <h2>{`Schiesszeiten 2023`}</h2>
+                    <div className={s.gridContainer}>
                         <div className={s.containerItem}>
-
+                            {
+                                SKESlinks.data.map(link=>{
+                                    return <div key={`Skesfile_${link.id}`} className={s.link} onClick={()=>getSKESfile(link)}>{SKESfileNames[0]}</div>
+                                })
+                            }
                         </div>
                         <div className={s.containerItem}>
-                            <p>Sonntag, 27. März 2022 8.30–13.00 Uhr</p>
-                            <p>Samstag, 02. April 2022 8.30–12.00 / 13.15–16.00 Uhr</p>
-                            <p>Sonntag, 03. April 2022 8.30–12.00 / 13.15–15.00 Uhr</p>
+                            {
+                                shootTimes.skes.map((item, index) =>{
+                                    return <p key={`skestime_${index}`}>{item.time}</p>
+                                })
+                            }
                         </div>
                     </div>
                 <h2>Wettkampfprogramm Pistole 50m</h2>
@@ -159,12 +172,43 @@ export async function getStaticProps(){
         ),
     })
     const links = await getLinks.json()
+
+    const getSKESfiles = await fetch("https://api.infomaniak.com/2/drive/608492/files/433/files", {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${process.env.KDRIVE}`,
+            "Content-Type" : "application/json"
+        },
+
+    })
+    const SKESfiles = await getSKESfiles.json()
+    const SKESfileIds = SKESfiles.data.map(file=>{
+        return file.id
+    })
+    const SKESfileNames = SKESfiles.data.map(file=>{
+        return file.name
+    })
+    const getSKESlinks = await fetch("https://api.infomaniak.com/2/drive/608492/files/temporary_urls", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${process.env.KDRIVE}`,
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(
+            {
+                "ids": SKESfileIds
+            }
+        ),
+    })
+    const SKESlinks = await getSKESlinks.json()
     
         
     return { 
         props: {
             sourceDirectoryList,
-            links
+            links,
+            SKESfileNames,
+            SKESlinks
         }, revalidate: 2
     }
 }
