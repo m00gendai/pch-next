@@ -14,7 +14,7 @@ export default async function (req, res) {
     port: 465,     
     host: "mail.cyon.ch",
       auth: {
-        user: 'test@mrweber.ch',
+        user: 'info@pistolenclub-hallau.ch',
         pass: pw,
       },
     secure: true,
@@ -22,7 +22,7 @@ export default async function (req, res) {
     
   const mailData = {
       from: req.body.email,
-      to: `test@mrweber.ch, ${req.body.email}`,
+      to: `info@pistolenclub-hallau.ch, mrweber@gmx.ch, ${req.body.email}`,
       subject: `PCH: Nachricht von ${req.body.name}`,
       text: req.body.message,
       html: `<div>${req.body.message}</div>`
