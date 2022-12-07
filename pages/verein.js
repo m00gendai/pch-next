@@ -6,6 +6,7 @@ import s from "../styles/Verein.module.css"
 import c from "../styles/Contact_Form.module.css"
 import { vorstand } from "../lib/vorstand"
 import { useRouter } from 'next/router'
+import Header from "../components/header"
 
 export default function Verein(){
     
