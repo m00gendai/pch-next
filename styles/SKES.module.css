@@ -13,6 +13,25 @@
     row-gap: 1rem;
 }
 
+.gridContainer {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+@media screen and (orientation: landscape){
+    .gridContainer{
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .gridContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
 .container p {
     width: 100%;
 }
