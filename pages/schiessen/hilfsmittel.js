@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Header from "../components/header"
+import Header from "../../components/header"
 import { useRouter } from 'next/router'
 import s from "../../styles/Hilfsmittel.module.css"
 

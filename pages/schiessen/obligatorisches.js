@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import Header from "../components/header"
+import Header from "../../components/header"
 import { useRouter } from 'next/router'
 import s from "../../styles/Obligatorisches.module.css"
 
