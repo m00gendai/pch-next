@@ -107,6 +107,7 @@ export default function FS(
                                 return <>{item.date} {item.time} <br /></>
                             })}
                         </p>
+                        <p>Weitere Zeiten & Orte sind beim <u><em><Link href={`https://sh-schiessen.ch/anlass/eidg-feldschiessen-${currentYear}/`} target="_blank">SH KSV</Link></em></u> gelistet.</p>
                     </>
                     :
                         <p>Zeiten & Ort noch nicht bekannt</p>
