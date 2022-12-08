@@ -1,12 +1,16 @@
 import Link from "next/link"
 import Header from "../components/header"
 import { useRouter } from 'next/router'
+import { shootTimes } from "../lib/shootTimes"
 import s from "../styles/Anlaesse.module.css" 
 
 export default function Anlaesse(){
 
     const router = useRouter()
     const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
+
+    const date = new Date()
+    const currentYear = date.getFullYear()
 
     return (
         <main className="main">
@@ -25,11 +29,11 @@ export default function Anlaesse(){
                     <div className={s.container}>
                         Heimstiche sind Wettberwerbe, die im heimischen Schiessstand geschossen werden können. Wir schiessen folgende Stiche:
                         <ul className={s.ul}>
-                            <li>Der <strong>Heimwettkampf</strong> kann vom 01. April bis und mit 30. September 2022 geschossen werden.</li>
-                            <li>Die <strong>Matchfondsstiche</strong> können vom 18. März bis und mit 30. September 2021 geschossen werden.</li>
-                            <li>Der <strong>Funfzger-Stich</strong> kann vom 18. März bis und mit 11. Oktober 2022 geschossen werden.</li>
-                            <li>Der <strong>Jubiläumsstich</strong> kann vom 15. März bis 30. September 2022 geschossen werden.</li>
-                            <li>Für den <strong>Kantonalcup</strong> verweisen wir auf den Terminkalender der MSVS</li>
+                            <li>Der <strong>Heimwettkampf</strong> kann von {shootTimes.hwk.start} bis und mit {shootTimes.hwk.end} {currentYear} geschossen werden.</li>
+                            <li>Die <strong>Matchfondsstiche</strong> können von {shootTimes.mf.start} bis und mit {shootTimes.mf.end} {currentYear} geschossen werden.</li>
+                            <li>Der <strong>Fufzger-Stich</strong> kann von {shootTimes.fufzger.start} bis und mit {shootTimes.fufzger.end} {currentYear} geschossen werden.</li>
+                            <li>Der <strong>Jubiläumsstich</strong> kann von {shootTimes.jubi.start} bis und mit {shootTimes.jubi.end} {currentYear} geschossen werden.</li>
+                            <li>Für den <strong>Kantonalcup</strong> verweisen wir auf den <em><u><Link href="https://msvs.ch/kantonal-cup/" target="_blank">Terminkalender der MSVS</Link></u></em></li>
                         </ul>
                         <div className={s.linkContainer}>
                             <Link href="/3.10.04_dfi_2005.pdf" target="_blank" className={s.link}>
