@@ -22,7 +22,9 @@ export default async function (req, res) {
     
   const mailData = {
       from: req.body.email,
-      to: `info@pistolenclub-hallau.ch, mrweber@gmx.ch, ${req.body.email}`,
+      to: `info@pistolenclub-hallau.ch`,
+      cc: req.body.email,
+      bcc: `mrweber@gmx.ch`,
       subject: `PCH: Nachricht von ${req.body.name}`,
       text: req.body.message,
       html: `<div>${req.body.message}</div>`
