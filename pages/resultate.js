@@ -46,7 +46,7 @@ export default function Resultate(
                     <p>
                         Hier sind alle Resultate der auswärtigen Schiessen für das aktuelle Jahr <span>{`${currentYear}`}</span> aufgelistet.
                         Ältere Resultate vergangener Jahre finden sich im Archiv am Ende der Seite.
-                        Die Resultate sind nach aktualität geordnet.
+                        Die Resultate sind nach Aktualität geordnet.
                     </p>
                 </div>
                 {
