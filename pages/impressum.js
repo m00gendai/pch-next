@@ -26,7 +26,7 @@ export default function Links(){
                         <p>Marcel Weber</p>
                         <p>8215 Hallau</p>
                         <p>Schweiz</p>
-                        <Link className={s.link} href="https://pistolenclub-hallau.ch" target="_blank">https://pistolenclub-hallau.ch</Link>
+                        <Link className={s.link} href="mailto:mrweber@gmx.ch" target="_blank">mrweber@gmx.ch</Link>
                     </div>
                     <div className={s.containerItem}>
                         <strong className={s.strong}>Hosting Webseite</strong>
@@ -53,6 +53,15 @@ export default function Links(){
                         <p>4052 Basel</p>
                         <p>Schweiz</p>
                         <Link className={s.link} href="https://www.cyon.ch" target="_blank">https://www.cyon.ch</Link>
+                    </div>
+                    <div className={s.containerItem}>
+                        <strong className={s.strong}>Versionskontrolle & Quellcode</strong>
+                        <p>GitHub, Inc.</p>
+                        <p>88 Colin P Kelly Junior Street</p>
+                        <p>San Francisco</p>
+                        <p>California 94107</p>
+                        <p>USA</p>
+                        <Link className={s.link} href="https://github.com/m00gendai/pch-next" target="_blank">https://github.com</Link>
                     </div>
                 </div>
                 <h2>Haftungsausschluss</h2>
