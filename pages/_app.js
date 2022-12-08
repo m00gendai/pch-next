@@ -5,6 +5,7 @@ import Link from "next/link"
 import '../styles/globals.css'
 import { useMediaQuery } from '@react-hook/media-query'
 import CookieConsent from "react-cookie-consent"
+import { GoogleAnalytics } from "nextjs-google-analytics"
 
 function MyApp({ Component, pageProps }) {
 
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }) {
 
   return(
     <>
+    <GoogleAnalytics trackPageViews />
     {isMobile ?
         <Navbar_Mobile />
       :
