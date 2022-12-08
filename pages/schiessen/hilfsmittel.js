@@ -23,10 +23,10 @@ export default function Hilfsmittel(){
                         </p>
                     </div>
                     <div className={s.resultContainer}>
-                        <Link className={s.link} href="/27_132_dfi_2022.pdf" target="_blank">Hilfsmittelverzeichnis</Link>
-                        <Link className={s.link} href="https://schussfreude.ch/welche-waffe-fuers-sportschiessen-teil-2-50-25m-pistole-einstieg/" target="_blank">Welche Waffe fürs Sportschiessen Teil 2: 50/25m Pistole Einstieg</Link>
-                        <Link className={s.link} href="https://schussfreude.ch/welche-waffe-fuers-sportschiessen-teil-2-pistole-50-25m-ordonnanz-2022/" target="_blank">Welche Waffe fürs Sportschiessen Teil 2: Pistole 50/25m Ordonnanz ab 2022</Link>
-                        <Link className={s.link} href="https://schussfreude.ch/welche-waffe-fuers-sportschiessen-teil-3-50-25m-pistole-sportpistolen/" target="_blank">Welche Waffe fürs Sportschiessen Teil 2: 50/25m Pistole Sportpistolen</Link>
+                        <Link className="link" href="/27_132_dfi_2022.pdf" target="_blank">Hilfsmittelverzeichnis</Link>
+                        <Link className="link" href="https://schussfreude.ch/welche-waffe-fuers-sportschiessen-teil-2-50-25m-pistole-einstieg/" target="_blank">Welche Waffe fürs Sportschiessen Teil 2: 50/25m Pistole Einstieg</Link>
+                        <Link className="link" href="https://schussfreude.ch/welche-waffe-fuers-sportschiessen-teil-2-pistole-50-25m-ordonnanz-2022/" target="_blank">Welche Waffe fürs Sportschiessen Teil 2: Pistole 50/25m Ordonnanz ab 2022</Link>
+                        <Link className="link" href="https://schussfreude.ch/welche-waffe-fuers-sportschiessen-teil-3-50-25m-pistole-sportpistolen/" target="_blank">Welche Waffe fürs Sportschiessen Teil 2: 50/25m Pistole Sportpistolen</Link>
                     </div>
                 <h2>Reglemente</h2>
                     <p>

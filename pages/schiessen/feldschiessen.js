@@ -82,7 +82,7 @@ export default function FS(
                                     return results.map(result2 =>{
                                         if(result2.type == "file" && result2.parent_id == result.id){
                                             const name = result2.name.replaceAll("_", " ").replace(".pdf", "")
-                                            return <div key={`FSresult${result2.id}`} className={s.link} onClick={()=>getFile(result2.id)}>{name}</div>
+                                            return <div key={`FSresult${result2.id}`} className="link" onClick={()=>getFile(result2.id)}>{name}</div>
                                         }
                                     })
                                 } 
@@ -170,9 +170,9 @@ export default function FS(
                 </div>
                 <h2>Dokumente</h2>
                 <div className={s.resultContainer}>
-                    <Link className={s.link} href="/3.10.04_dfi_2005.pdf" target="_blank">Auszeichnungslimiten OP/FS</Link>
-                    <Link className={s.link} href="/4_02_01_d_Kommandos_Ablaeufe_PistolenWK_2010.pdf" target="_blank">Abläufe Pistolenwettkämpfe</Link>
-                    <Link className={s.link} href="/512.311.pdf" target="_blank">Verordnung des VBS über das Schiesswesen ausser Dienst</Link>
+                    <Link className="link" href="/3.10.04_dfi_2005.pdf" target="_blank">Auszeichnungslimiten OP/FS</Link>
+                    <Link className="link" href="/4_02_01_d_Kommandos_Ablaeufe_PistolenWK_2010.pdf" target="_blank">Abläufe Pistolenwettkämpfe</Link>
+                    <Link className="link" href="/512.311.pdf" target="_blank">Verordnung des VBS über das Schiesswesen ausser Dienst</Link>
                 </div>
             </section>
         </main>

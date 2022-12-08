@@ -36,12 +36,12 @@ export default function Anlaesse(){
                             <li>Für den <strong>Kantonalcup</strong> verweisen wir auf den <em><u><Link href="https://msvs.ch/kantonal-cup/" target="_blank">Terminkalender der MSVS</Link></u></em></li>
                         </ul>
                         <div className={s.linkContainer}>
-                            <Link href="/3.10.04_dfi_2005.pdf" target="_blank" className={s.link}>
+                            <Link href="/3.10.04_dfi_2005.pdf" target="_blank" className="link">
                                 <span className={s.text}>
                                     Auszeichnungslimiten OP/FS
                                 </span>
                             </Link>
-                            <Link href="/84c-A-Uebersicht-Kranzlimiten-50m-SHKSV.pdf" target="_blank" className={s.link}>
+                            <Link href="/84c-A-Uebersicht-Kranzlimiten-50m-SHKSV.pdf" target="_blank" className="link">
                                 <span className={s.text}>
                                     Kranzlimiten Pistole 50m ab 2017
                                 </span>

@@ -61,7 +61,7 @@ export default function SKES(
                                     return results.map(result2 =>{
                                         if(result2.type == "file" && result2.parent_id == result.id){
                                             const name = result2.name.replaceAll("_", " ").replace(".pdf", "")
-                                            return <div key={`SKESresult_${result2.id}`} className={s.link} onClick={()=>getFile(result2.id)}>{name}</div>
+                                            return <div key={`SKESresult_${result2.id}`} className="link" onClick={()=>getFile(result2.id)}>{name}</div>
                                         }
                                     })
                                 }
@@ -73,7 +73,7 @@ export default function SKES(
                         <div className={s.containerItem}>
                             {
                                 SKESlinks.data.map(link=>{
-                                    return <div key={`Skesfile_${link.id}`} className={s.link} onClick={()=>getSKESfile(link)}>{SKESfileNames[0]}</div>
+                                    return <div key={`Skesfile_${link.id}`} className="link" onClick={()=>getSKESfile(link)}>{SKESfileNames[0]}</div>
                                 })
                             }
                         </div>

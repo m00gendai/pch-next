@@ -105,9 +105,9 @@ export default function Obli(){
                 </div>
                 <h2>Dokumente</h2>
                 <div className={s.resultContainer}>
-                    <Link className={s.link} href="/3.10.04_dfi_2005.pdf" target="_blank">Auszeichnungslimiten OP/FS</Link>
-                    <Link className={s.link} href="/4_02_01_d_Kommandos_Ablaeufe_PistolenWK_2010.pdf" target="_blank">Abläufe Pistolenwettkämpfe</Link>
-                    <Link className={s.link} href="/512.311.pdf" target="_blank">Verordnung des VBS über das Schiesswesen ausser Dienst</Link>
+                    <Link className="link" href="/3.10.04_dfi_2005.pdf" target="_blank">Auszeichnungslimiten OP/FS</Link>
+                    <Link className="link" href="/4_02_01_d_Kommandos_Ablaeufe_PistolenWK_2010.pdf" target="_blank">Abläufe Pistolenwettkämpfe</Link>
+                    <Link className="link" href="/512.311.pdf" target="_blank">Verordnung des VBS über das Schiesswesen ausser Dienst</Link>
                 </div>
             </section>
         </main>
