@@ -103,6 +103,7 @@ h2 {
   align-items: center;
   text-align: center;
   padding: 0.5rem;
+  transition: 0.2s;
 }
 
 @media screen and (orientation: landscape) {
@@ -119,4 +120,5 @@ h2 {
 
 .link:hover {
   cursor: pointer;
+  box-shadow: 0px 0px 10px 0px black;
 }
