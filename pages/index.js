@@ -30,7 +30,7 @@ export default function Home() {
           <div className={s.logo}></div>
           }
           <Link className={s.link} href="/mitmachen"><span className={s.text}>Mitmachen</span></Link>
-          <Link className={s.link} href="/anlaesse"><span className={s.text}>Jahres-programm</span></Link>
+          <Link className={s.link} href="/anlaesse"><span className={s.text}>Jahres<wbr/>programm</span></Link>
         </div>
          {isMobile?
         null
