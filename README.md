@@ -12,6 +12,7 @@ yarn dev
 
 - Material UI
 - nodemailer
+- react-cookie-consent
 
 See `package.json` for details and next/react dependencies.
 
