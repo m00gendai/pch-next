@@ -4,7 +4,7 @@ import Header from "../../components/header"
 import { useRouter } from 'next/router'
 import { fsTimes } from "../../lib/fsInfo"
 import s from "../../styles/Feldschiessen.module.css"
-import getFile from "../functions/getFile"
+import getFile from "../../functions/getFile"
 
 export default function FS(
     { 
