@@ -3,6 +3,7 @@ import Header from "../../components/header"
 import { useRouter } from 'next/router'
 import s from "../../styles/SKES.module.css"
 import { shootTimes } from "../../lib/shootTimes"
+import getFile from "../functions/getFile"
 
 export default function SKES(
     { 
@@ -26,28 +27,6 @@ export default function SKES(
     const currentYearDirIds = currentYearDirs.map(item=>{ // this extracts the parent_id of the current year directories
         return item.parent_id
     })
-
-    function getFile(id){
-        const setFileId = async function(){
-            let file = {"file_id" : id}
-            
-            const response = await fetch('/api/download', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            body:
-                JSON.stringify(file)
-            })
-
-            return await response.json()
-        }
-        
-        setFileId().then((data) =>{
-            window.open(data.url, "_blank")
-        })
-    }
 
     return(
         <main className="main">

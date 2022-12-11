@@ -4,6 +4,7 @@ import Header from "../../components/header"
 import { useRouter } from 'next/router'
 import { fsTimes } from "../../lib/fsInfo"
 import s from "../../styles/Feldschiessen.module.css"
+import getFile from "../functions/getFile"
 
 export default function FS(
     { 
@@ -30,28 +31,6 @@ export default function FS(
     const currentYearDirIds = currentYearDirs.map(item=>{ // this extracts the parent_id of the current year directories
         return item.parent_id
     })
-
-    function getFile(id){
-        const setFileId = async function(){
-            let file = {"file_id" : id}
-            
-            const response = await fetch('/api/download', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            body:
-                JSON.stringify(file)
-            })
-
-            return await response.json()
-        }
-        
-        setFileId().then((data) =>{
-            window.open(data.url, "_blank")
-        })
-    }
 
     function renderMap(place){
         switch(place){
