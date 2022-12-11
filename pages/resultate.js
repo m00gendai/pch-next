@@ -5,8 +5,7 @@ import s from "../styles/Resultate.module.css"
 
 export default function Resultate(
     {   
-        sourceDirectoryList, 
-        links
+        sourceDirectoryList
     }
 ){
 
@@ -31,10 +30,25 @@ export default function Resultate(
     })
 
     function getFile(id){
-        const url = links.data.filter(link=>{
-            return link.id == id        
+        const setFileId = async function(){
+            let file = {"file_id" : id}
+            
+            const response = await fetch('/api/download', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body:
+                JSON.stringify(file)
+            })
+
+            return await response.json()
+        }
+        
+        setFileId().then((data) =>{
+            window.open(data.url, "_blank")
         })
-        window.open(url[0].temporary_url, "_blank")
     }
 
     return(
@@ -110,33 +124,9 @@ export async function getStaticProps() {
     })
     const sourceDirectoryList = await getSourceDirectoryList.json()
 
-    const files = sourceDirectoryList.data.filter(item=>{ // filters for files only
-        return item.type == "file"
-    })
-
-    const fileIds = files.map(file =>{ // gets the file ids
-        return file.id
-    })
-
-    // Gets temporary urls for all file ids
-    const getLinks = await fetch("https://api.infomaniak.com/2/drive/608492/files/temporary_urls", {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${process.env.KDRIVE}`,
-            "Content-Type" : "application/json"
-        },
-        body: JSON.stringify(
-            {
-                "ids": fileIds
-            }
-        ),
-    })
-    const links = await getLinks.json()
-
     return { 
         props: {
-            sourceDirectoryList, 
-            links
+            sourceDirectoryList
         } , 
             revalidate: 2
     }
