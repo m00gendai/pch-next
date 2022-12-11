@@ -3,7 +3,7 @@ import Header from "../../components/header"
 import { useRouter } from 'next/router'
 import s from "../../styles/SKES.module.css"
 import { shootTimes } from "../../lib/shootTimes"
-import getFile from "../functions/getFile"
+import getFile from "../../functions/getFile"
 
 export default function SKES(
     { 
