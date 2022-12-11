@@ -7,9 +7,7 @@ import { shootTimes } from "../../lib/shootTimes"
 export default function SKES(
     { 
         sourceDirectoryList,
-        links,
-        SKESfileNames,
-        SKESlinks
+        SKESfiles
     }
 ){
 
@@ -30,14 +28,25 @@ export default function SKES(
     })
 
     function getFile(id){
-        const url = links.data.filter(link=>{
-            return link.id == id        
-        })
-        window.open(url[0].temporary_url, "_blank")
-    }
+        const setFileId = async function(){
+            let file = {"file_id" : id}
+            
+            const response = await fetch('/api/download', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body:
+                JSON.stringify(file)
+            })
 
-    function getSKESfile(link){
-        window.open(link.temporary_url, "_blank")
+            return await response.json()
+        }
+        
+        setFileId().then((data) =>{
+            window.open(data.url, "_blank")
+        })
     }
 
     return(
@@ -72,8 +81,8 @@ export default function SKES(
                     <div className={s.gridContainer}>
                         <div className={s.containerItem}>
                             {
-                                SKESlinks.data.map(link=>{
-                                    return <div key={`Skesfile_${link.id}`} className="link" onClick={()=>getSKESfile(link)}>{SKESfileNames[0]}</div>
+                                SKESfiles.data.map(link=>{
+                                    return <div key={`Skesfile_${link.id}`} className="link" onClick={()=>getFile(link.id)}>{link.name}</div>
                                 })
                             }
                         </div>
@@ -150,29 +159,6 @@ export async function getStaticProps(){
     })
     const sourceDirectoryList = await getSourceDirectoryList.json()
 
-    const files = sourceDirectoryList.data.filter(item=>{ // filters for files only
-        return item.type == "file"
-    })
-
-    const fileIds = files.map(file =>{ // gets the file ids
-        return file.id
-    })
-
-    // Gets temporary urls for all file ids
-    const getLinks = await fetch("https://api.infomaniak.com/2/drive/608492/files/temporary_urls", {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${process.env.KDRIVE}`,
-            "Content-Type" : "application/json"
-        },
-        body: JSON.stringify(
-            {
-                "ids": fileIds
-            }
-        ),
-    })
-    const links = await getLinks.json()
-
     const getSKESfiles = await fetch("https://api.infomaniak.com/2/drive/608492/files/433/files", {
         method: "GET",
         headers: {
@@ -182,33 +168,11 @@ export async function getStaticProps(){
 
     })
     const SKESfiles = await getSKESfiles.json()
-    const SKESfileIds = SKESfiles.data.map(file=>{
-        return file.id
-    })
-    const SKESfileNames = SKESfiles.data.map(file=>{
-        return file.name
-    })
-    const getSKESlinks = await fetch("https://api.infomaniak.com/2/drive/608492/files/temporary_urls", {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${process.env.KDRIVE}`,
-            "Content-Type" : "application/json"
-        },
-        body: JSON.stringify(
-            {
-                "ids": SKESfileIds
-            }
-        ),
-    })
-    const SKESlinks = await getSKESlinks.json()
-    
-        
+            
     return { 
         props: {
             sourceDirectoryList,
-            links,
-            SKESfileNames,
-            SKESlinks
+            SKESfiles
         }, revalidate: 2
     }
 }
