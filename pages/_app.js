@@ -6,10 +6,13 @@ import '../styles/globals.css'
 import { useMediaQuery } from '@react-hook/media-query'
 import CookieConsent from "react-cookie-consent"
 import { GoogleAnalytics } from "nextjs-google-analytics"
+import { useState } from "react"
+import Spinner from "../components/Spinner"
 
 function MyApp({ Component, pageProps }) {
 
   const isMobile = useMediaQuery('only screen and (max-aspect-ratio: 13/9)')
+  const [show, setShow] = useState(false)
 
   return(
     <>
@@ -19,7 +22,8 @@ function MyApp({ Component, pageProps }) {
       :
         <Navbar />
     }
-    <Component {...pageProps} />
+    {show ? <Spinner /> : null }
+    <Component setShow={setShow} {...pageProps} />
     <Footer />
     <CookieConsent
       location="bottom"
