@@ -8,7 +8,8 @@ import getFile from "../../functions/getFile"
 
 export default function FS(
     { 
-        sourceDirectoryList
+        sourceDirectoryList,
+        setShow
     }
 ){
 
@@ -80,7 +81,7 @@ export default function FS(
                                     return results.map(result2 =>{
                                         if(result2.type == "file" && result2.parent_id == result.id){
                                             const name = result2.name.replaceAll("_", " ").replace(".pdf", "")
-                                            return <div key={`FSresult${result2.id}`} className="link" onClick={()=>getFile(result2.id)}>{name}</div>
+                                            return <div key={`FSresult${result2.id}`} className="link" onClick={()=>getFile(result2.id, setShow)}>{name}</div>
                                         }
                                     })
                                 } 

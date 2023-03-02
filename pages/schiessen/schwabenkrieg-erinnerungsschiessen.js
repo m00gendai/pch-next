@@ -8,7 +8,8 @@ import getFile from "../../functions/getFile"
 export default function SKES(
     { 
         sourceDirectoryList,
-        SKESfiles
+        SKESfiles,
+        setShow
     }
 ){
 
@@ -49,7 +50,7 @@ export default function SKES(
                                     return results.map(result2 =>{
                                         if(result2.type == "file" && result2.parent_id == result.id){
                                             const name = result2.name.replaceAll("_", " ").replace(".pdf", "")
-                                            return <div key={`SKESresult_${result2.id}`} className="link" onClick={()=>getFile(result2.id)}>{name}</div>
+                                            return <div key={`SKESresult_${result2.id}`} className="link" onClick={()=>getFile(result2.id, setShow)}>{name}</div>
                                         }
                                     })
                                 }
@@ -61,7 +62,7 @@ export default function SKES(
                         <div className={s.containerItem}>
                             {
                                 SKESfiles.data.map(link=>{
-                                    return <div key={`Skesfile_${link.id}`} className="link" onClick={()=>getFile(link.id)}>{link.name}</div>
+                                    return <div key={`Skesfile_${link.id}`} className="link" onClick={()=>getFile(link.id, setShow)}>{link.name}</div>
                                 })
                             }
                         </div>
