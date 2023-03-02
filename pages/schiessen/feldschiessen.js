@@ -44,6 +44,11 @@ export default function FS(
                     <iframe className={s.map} src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2109.3356584343683!2d8.58849526125184!3d47.674377609921684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479078d6ab0a6bbd%3A0xc60b5fb3f18dfd2!2sLangrietstrasse%20100%2C%208212%20Neuhausen%20am%20Rheinfall!5e1!3m2!1sen!2sch!4v1670495270414!5m2!1sen!2sch" ></iframe>
                 )
                 break
+            case "Thayngen":
+                return (
+                    <iframe className={s.map} src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8427.179335458155!2d8.692212667270152!3d47.737202686941124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479a8062691581f9%3A0xb68b87b669b35eb8!2sSchie%C3%9Fstand%20Weiher!5e1!3m2!1sen!2sch!4v1677770885915!5m2!1sen!2sch" ></iframe>
+                )
+                break
         }
     }
 
