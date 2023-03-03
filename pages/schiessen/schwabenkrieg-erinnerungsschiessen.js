@@ -62,7 +62,7 @@ export default function SKES(
                         <div className={s.containerItem}>
                             {
                                 SKESfiles.data.map(link=>{
-                                    return <div key={`Skesfile_${link.id}`} className="link" onClick={()=>getFile(link.id, setShow)}>{link.name}</div>
+                                    return <div key={`Skesfile_${link.id}`} className="link" onClick={()=>getFile(link.id, setShow)}>{link.name.replace(".pdf", "")}</div>
                                 })
                             }
                         </div>
