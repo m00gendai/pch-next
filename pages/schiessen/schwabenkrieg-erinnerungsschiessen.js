@@ -58,6 +58,7 @@ export default function SKES(
                         }
                     </div>
                 <h2>{`Schiesszeiten 2023`}</h2>
+                        <p style={{margin: "0 0 2rem 0"}}><strong>Anmeldungen sind weiterhin möglich</strong></p>
                     <div className={s.gridContainer}>
                         <div className={s.containerItem}>
                             {
@@ -96,7 +97,7 @@ export default function SKES(
                     </div>
                 <h2>Anmeldung Gruppen</h2>
                 <div className={s.container}>
-                <p>Anmeldungen sind bis zur im Schiessplan angegebenen Zeit an <u><em><Link href="mailto:mrweber@gmx.ch">Marcel Weber</Link></em></u> zu richten.
+                <p><strong>Anmeldungen sind weiterhin möglich</strong> und per e-Mail an <u><em><Link href="mailto:mrweber@gmx.ch">mrweber@gmx.ch</Link></em></u> zu richten.
                 <br />
                 <br />
                 Je fünf Schützen eines Vereines bilden eine Gruppe.<br />
