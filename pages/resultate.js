@@ -14,7 +14,7 @@ export default function Resultate({ sourceDirectoryList, setShow }) {
   const results = sourceDirectoryList.data.sort((a, b) => {
     const x = a.added_at;
     const y = b.added_at;
-    return x < y ? -1 : x > y ? 1 : 0;
+    return x < y ? 1 : x > y ? -1 : 0;
   });
 
   const currentYearDirs = results.filter((result) => {
