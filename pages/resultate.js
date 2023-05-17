@@ -12,8 +12,8 @@ export default function Resultate({ sourceDirectoryList, setShow }) {
   const currentYear = date.getFullYear();
 
   const results = sourceDirectoryList.data.sort((a, b) => {
-    const x = a.added_at;
-    const y = b.added_at;
+    const x = a.last_modified_at;
+    const y = b.last_modified_at;
     return x < y ? 1 : x > y ? -1 : 0;
   });
 
