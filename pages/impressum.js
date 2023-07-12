@@ -22,10 +22,12 @@ export default function Links(){
                         <Link className={s.link} href="https://pistolenclub-hallau.ch" target="_blank">https://pistolenclub-hallau.ch</Link>
                     </div>
                     <div className={s.containerItem}>
-                        <strong className={s.strong}>Webmaster</strong>
+                        <strong className={s.strong}>Verantwortlicher Webseite</strong>
+                        <p>mrweber.ch</p>
                         <p>Marcel Weber</p>
                         <p>8215 Hallau</p>
                         <p>Schweiz</p>
+                        <Link className={s.link} href="https://mrweber.ch" target="_blank">https://mrweber.ch</Link>
                         <Link className={s.link} href="mailto:mrweber@gmx.ch" target="_blank">mrweber@gmx.ch</Link>
                     </div>
                     <div className={s.containerItem}>
