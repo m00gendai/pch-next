@@ -3,6 +3,7 @@ import s from '../styles/Home.module.css'
 import { useMediaQuery } from '@react-hook/media-query'
 import Header from "../components/header"
 import { useRouter } from 'next/router'
+import {GiAchievement, GiCalendar, GiStabbedNote, GiThreeFriends} from "react-icons/gi"
 
 export default function Home() {
   const router = useRouter()
@@ -22,15 +23,15 @@ export default function Home() {
         null
         }
         <div className={s.linkContainer}>
-          <Link className={s.link} href="/anlaesse"><span className={s.text}>Anlässe</span></Link>
-          <Link className={s.link} href="/resultate"><span className={s.text}>Resultate</span></Link>
+          <Link className={s.link} href="/anlaesse"><span className={s.text}><GiCalendar /></span></Link>
+          <Link className={s.link} href="/resultate"><span className={s.text}><GiAchievement /></span></Link>
           {isMobile?
           null
           :
           <div className={s.logo}></div>
           }
-          <Link className={s.link} href="/mitmachen"><span className={s.text}>Mitmachen</span></Link>
-          <Link className={s.link} href="/anlaesse"><span className={s.text}>Jahres<wbr/>programm</span></Link>
+          <Link className={s.link} href="/mitmachen"><span className={s.text}><GiThreeFriends /></span></Link>
+          <Link className={s.link} href="/anlaesse"><span className={s.text}><GiStabbedNote /></span></Link>
         </div>
          {isMobile?
         null
