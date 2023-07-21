@@ -4,28 +4,13 @@ import { useRouter } from "next/router";
 import s from "../styles/Resultate.module.css";
 import getFile from "../functions/getFile";
 
-export default function Resultate({ sourceDirectoryList, setShow }) {
+export default function Resultate({ sortedYearDirectoryList, fileList, setShow }) {
+  
   const router = useRouter();
   const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`;
 
   const date = new Date();
   const currentYear = date.getFullYear();
-
-  const results = sourceDirectoryList.data.sort((a, b) => {
-    const x = a.last_modified_at;
-    const y = b.last_modified_at;
-    return x < y ? 1 : x > y ? -1 : 0;
-  });
-
-  const currentYearDirs = results.filter((result) => {
-    // This filters for all directories of the current year
-    return result.name == currentYear.toString();
-  });
-
-  const currentYearDirIds = currentYearDirs.map((item) => {
-    // this extracts the parent_id of the current year directories
-    return item.parent_id;
-  });
 
   return (
     <main className="main">
@@ -46,58 +31,38 @@ export default function Resultate({ sourceDirectoryList, setShow }) {
             Resultate sind nach Aktualität geordnet.
           </p>
         </div>
-        {currentYearDirs.length == 0 ? ( // if there are no folders with the current year at all, render placeholder
-          <h2>{`${currentYear} ist noch nichts gelaufen...`}</h2>
-        ) : (
-          results.map((result) => {
-            if (
-              result.type == "dir" &&
-              isNaN(parseInt(result.name)) &&
-              currentYearDirIds.includes(result.id)
-            ) {
-              /* If directory AND the directory name is not a number AND there is a subdirectory with the name of the current 
-                            year present (see parent_id filtering above) */
-              return (
-                <div className={s.container} key={`fragment_${result.id}`}>
-                  <h2 key={`resultTitle_${result.name}`}>{result.name}</h2>{" "}
-                  {/* only displayed if there is something for the current year */}
-                  <div
-                    key={`linkContainer_${result.name}`}
-                    className={s.linkContainer}
-                  >
-                    {results.map((result2) => {
-                      if (
-                        result2.type == "dir" &&
-                        result2.name == currentYear.toString() &&
-                        result2.parent_id == result.id
-                      ) {
-                        return results.map((result3) => {
-                          if (
-                            result3.type == "file" &&
-                            result3.parent_id == result2.id
-                          ) {
-                            const name = result3.name
-                              .replaceAll("_", " ")
-                              .replace(".pdf", "");
-                            return (
-                              <div
-                                key={`result_${result3.id}`}
-                                className="link"
-                                onClick={() => getFile(result3.id, setShow)}
-                              >
-                                <div className={s.text}>{name}</div>
-                              </div>
-                            );
-                          }
-                        });
+        {
+          sortedYearDirectoryList.length == 0 
+          ? 
+          <h2>{`${currentYear} war noch nichts los...`}</h2>
+          :
+          sortedYearDirectoryList.map((years) => {
+            const title = years.path.split("/")[2]
+            return (
+              <div className={s.container} key={`fragment_${years.id}`}>
+                <h2 key={`resultTitle_${title}`}>
+                  {title}
+                </h2>
+                <div key={`linkContainer_${title}`} className={s.linkContainer}>
+                  {fileList.map(fileObject => {
+                    return fileObject.data.map(file=>{
+                      if(file.parent_id == years.id){
+                        const name = file.name.replaceAll("_", " ").replace(".pdf", "");
+                        return (
+                          <div key={`result_${file.id}`} className="link" onClick={() => getFile(file.id, setShow)}>
+                            <div className={s.text}>
+                              {name}
+                            </div>
+                          </div>
+                        );
                       }
-                    })}
-                  </div>
+                    });
+                  })}
                 </div>
-              );
-            }
+              </div>
+            );
           })
-        )}
+        }
         <hr />
         <Link
           className={s.archiv}
@@ -112,9 +77,13 @@ export default function Resultate({ sourceDirectoryList, setShow }) {
 }
 
 export async function getStaticProps() {
-  // Gets all folders and files in the /Resultate directory recursively, sorted by last modified
-  const getSourceDirectoryList = await fetch(
-    "https://api.infomaniak.com/2/drive/608492/files/search?directory_id=15&depth=unlimited&per_page=1000",
+
+  const date = new Date();
+  const currentYear = date.getFullYear();
+
+  // searches all folders with {currentYear} as directory name and includes the directory path (to extract the parent directory name easier)
+  const getYearDirectoryList = await fetch(
+    `https://api.infomaniak.com/2/drive/608492/files/search?with=path&directory_id=15&depth=unlimited&types[]=dir&query=${currentYear}&per_page=1000`,
     {
       method: "GET",
       headers: {
@@ -123,12 +92,35 @@ export async function getStaticProps() {
       },
     }
   );
-  const sourceDirectoryList = await getSourceDirectoryList.json();
+  const yearDirectoryList = await getYearDirectoryList.json();
+
+  // sorts the year folders by last_modified_at (latest first)
+  const sortedYearDirectoryList = yearDirectoryList.data.sort((a, b) => {
+    const x = a.added_at;
+    const y = b.added_at;
+    return x < y ? 1 : x > y ? -1 : 0;
+  })
+
+  // gets all files within the year directories
+  const fileList = await Promise.all(sortedYearDirectoryList.map(async directory =>{
+    const getFiles = await fetch(
+      `https://api.infomaniak.com/2/drive/608492/files/${directory.id}/files`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${process.env.KDRIVE}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await getFiles.json();
+  }))
 
   return {
     props: {
-      sourceDirectoryList,
+      sortedYearDirectoryList, 
+      fileList
     },
-    revalidate: 2,
+    revalidate: 10,
   };
 }
