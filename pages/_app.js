@@ -3,7 +3,6 @@ import Navbar_Mobile from "../components/navbar_mobile"
 import Footer from "../components/footer"
 import Link from "next/link"
 import '../styles/globals.css'
-import { useMediaQuery } from '@react-hook/media-query'
 import CookieConsent from "react-cookie-consent"
 import { GoogleAnalytics } from "nextjs-google-analytics"
 import { useState } from "react"
@@ -11,17 +10,13 @@ import Spinner from "../components/Spinner"
 
 function MyApp({ Component, pageProps }) {
 
-  const isMobile = useMediaQuery('only screen and (max-aspect-ratio: 13/9)')
   const [show, setShow] = useState(false)
 
   return(
     <>
     <GoogleAnalytics trackPageViews />
-    {isMobile ?
         <Navbar_Mobile />
-      :
         <Navbar />
-    }
     {show ? <Spinner /> : null }
     <Component setShow={setShow} {...pageProps} />
     <Footer />
