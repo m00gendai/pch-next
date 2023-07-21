@@ -11,6 +11,12 @@
     height: 10vh;
 }
 
+@media only screen and (max-aspect-ratio: 13/9){
+    .nav{
+        display: none;
+    }
+}
+
 .linkContainer{
     position: relative;
     width: 80%;

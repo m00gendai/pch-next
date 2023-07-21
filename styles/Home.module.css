@@ -72,7 +72,19 @@
   background-repeat: no-repeat;
 }
 
-
+@media only screen and (max-aspect-ratio: 13/9){
+  .bottom{
+      display: none;
+  }
+  .logo{
+    display: none;
+  }
+}
+@media only screen and (min-aspect-ratio: 13/9){
+  .top{
+      display: none;
+  }
+}
 
 .skes{
   width: 100%;
