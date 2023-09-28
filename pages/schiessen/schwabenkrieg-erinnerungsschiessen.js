@@ -76,7 +76,7 @@ export default function SKES({ sourceDirectoryList, SKESfiles, setShow }) {
             }
           })}
         </div>
-        <h2>{`Schiesszeiten 2023`}</h2>
+        <h2>{`Schiesszeiten 2024`}</h2>
         {/*   <p style={{margin: "0 0 2rem 0"}}><strong>Anmeldungen sind weiterhin möglich</strong></p>*/}
         <div className={s.gridContainer}>
           <div className={s.containerItem}>
@@ -125,7 +125,7 @@ export default function SKES({ sourceDirectoryList, SKESfiles, setShow }) {
             Anmeldungen sind per e-Mail an{" "}
             <u>
               <em>
-                <Link href="mailto:mrweber@gmx.ch">mrweber@gmx.ch</Link>
+                <Link href="mailto:info@pistolenclub-hallau.ch">info@pistolenclub-hallau.ch</Link>
               </em>
             </u>{" "}
             zu richten.
