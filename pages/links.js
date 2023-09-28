@@ -77,7 +77,7 @@ export default function Links(){
                         })
                     }
                 </div>
-                <h2>Andere Vereine</h2>
+                <h2>Befreundete Vereine</h2>
                 <div className={s.gridContainer}>
                     {
                         links.vereine.map(link =>{
