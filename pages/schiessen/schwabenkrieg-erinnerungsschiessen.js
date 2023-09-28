@@ -81,14 +81,15 @@ export default function SKES({ sourceDirectoryList, SKESfiles, setShow }) {
         <div className={s.gridContainer}>
           <div className={s.containerItem}>
             {SKESfiles.data.map((link) => {
+              const month = date.getMonth()+1
               return (
-                <div
+                parseInt(link.name.split(" ")[1]) == currentYear && month < 7 ? <div
                   key={`Skesfile_${link.id}`}
                   className="link"
                   onClick={() => getFile(link.id, setShow)}
                 >
                   {link.name.replace(".pdf", "")}
-                </div>
+                </div> : `Schiessplan für ${currentYear+1} noch nicht bereit`
               );
             })}
           </div>
