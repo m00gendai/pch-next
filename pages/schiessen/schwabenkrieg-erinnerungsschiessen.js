@@ -19,10 +19,15 @@ export default function SKES({ sourceDirectoryList, SKESfiles, setShow }) {
     return result.name == currentYear.toString();
   });
 
-  const currentYearDirIds = currentYearDirs.map((item) => {
-    // this extracts the parent_id of the current year directories
-    return item.parent_id;
-  });
+  const currentSkesFile = SKESfiles.data.filter(file =>{
+    if(file.name.toLowerCase().includes(currentYear) && date.getMonth() < 7){
+      return file
+    }
+    else if(file.name.toLowerCase().includes(currentYear+1) && date.getMonth() > 7){
+      return file
+    }
+else return null
+  })
 
   return (
     <main className="main">
@@ -80,17 +85,15 @@ export default function SKES({ sourceDirectoryList, SKESfiles, setShow }) {
         {/*   <p style={{margin: "0 0 2rem 0"}}><strong>Anmeldungen sind weiterhin möglich</strong></p>*/}
         <div className={s.gridContainer}>
           <div className={s.containerItem}>
-            {SKESfiles.data.map((link) => {
-              const month = date.getMonth()+1
+            {currentSkesFile.length === 0 ? <p>{`Schiessplan ${currentYear+1} noch nicht bereit`}</p> : currentSkesFile.map((link) => {
               return (
-                parseInt(link.name.split(" ")[1]) == currentYear && month < 7 ? <div
+                <div
                   key={`Skesfile_${link.id}`}
                   className="link"
                   onClick={() => getFile(link.id, setShow)}
                 >
                   {link.name.replace(".pdf", "")}
-                </div> : `Schiessplan für ${currentYear+1} noch nicht bereit`
-              );
+                </div> );
             })}
           </div>
           <div className={s.containerItem}>
