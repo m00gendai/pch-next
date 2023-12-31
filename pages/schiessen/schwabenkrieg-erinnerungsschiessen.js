@@ -91,14 +91,14 @@ else return null
         <div className={s.gridContainer}>
           <div className={s.containerItem}>
             {currentSkesFile.length === 0 ? <p>{`Schiessplan ${currentYear+1} noch nicht bereit`}</p> : currentSkesFile.map((link) => {
-              return (
-                <div
+              <div
                   key={`Skesfile_${link.id}`}
                   className="link"
                   onClick={() => getFile(link.id, setShow)}
                 >
                   {link.name.replace(".pdf", "")}
-                </div> );
+                </div> : `Schiessplan für ${currentYear+1} noch nicht bereit`
+              );
             })}
           </div>
           <div className={s.containerItem}>
