@@ -24,7 +24,7 @@ export default function Home() {
           <Link className={s.link} href="/mitmachen"><span className={s.text}><GiThreeFriends /></span></Link>
           <Link className={s.link} href="/anlaesse"><span className={s.text}><GiStabbedNote /></span></Link>
           </div>
-        <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen"><span className={s.skesText}>Schwabenkrieg-Erinnerungsschiessen 2023</span></Link>
+        <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen"><span className={s.skesText}>Schwabenkrieg-Erinnerungsschiessen 2024</span></Link>
       </section>
     </main>
   )

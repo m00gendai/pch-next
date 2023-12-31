@@ -24,6 +24,16 @@ export default function SKES({ sourceDirectoryList, SKESfiles, setShow }) {
     return item.parent_id;
   });
 
+  const currentSkesFile = SKESfiles.data.filter(file =>{
+    if(file.name.toLowerCase().includes(currentYear) && date.getMonth() < 7){
+      return file
+    }
+    else if(file.name.toLowerCase().includes(currentYear+1) && date.getMonth() > 7){
+      return file
+    }
+else return null
+  })
+
   return (
     <main className="main">
       <Header
@@ -80,7 +90,7 @@ export default function SKES({ sourceDirectoryList, SKESfiles, setShow }) {
         {/*   <p style={{margin: "0 0 2rem 0"}}><strong>Anmeldungen sind weiterhin möglich</strong></p>*/}
         <div className={s.gridContainer}>
           <div className={s.containerItem}>
-            {SKESfiles.data.map((link) => {
+            {currentSkesFile.length === 0 ? <p>{`Schiessplan ${currentYear+1} noch nicht bereit`}</p> : currentSkesFile.map((link) => {
               return (
                 <div
                   key={`Skesfile_${link.id}`}
@@ -88,8 +98,7 @@ export default function SKES({ sourceDirectoryList, SKESfiles, setShow }) {
                   onClick={() => getFile(link.id, setShow)}
                 >
                   {link.name.replace(".pdf", "")}
-                </div>
-              );
+                </div> );
             })}
           </div>
           <div className={s.containerItem}>
