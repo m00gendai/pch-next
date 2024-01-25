@@ -83,7 +83,7 @@ export async function getStaticProps() {
 
   // searches all folders with {currentYear} as directory name and includes the directory path (to extract the parent directory name easier)
   const getYearDirectoryList = await fetch(
-    `https://api.infomaniak.com/2/drive/608492/files/search?with=path&directory_id=15&depth=unlimited&types[]=dir&query=${currentYear}&per_page=1000`,
+    `https://api.infomaniak.com/2/drive/608492/files/search?with=path&directory_id=15&depth=unlimited&types[]=dir&query="${currentYear}"&per_page=1000`,
     {
       method: "GET",
       headers: {
@@ -93,6 +93,7 @@ export async function getStaticProps() {
     }
   );
   const yearDirectoryList = await getYearDirectoryList.json();
+  console.log(yearDirectoryList)
 
   // sorts the year folders by last_modified_at (latest first)
   const sortedYearDirectoryList = yearDirectoryList.data.sort((a, b) => {
