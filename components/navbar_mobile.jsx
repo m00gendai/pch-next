@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import s from "../styles/navbar_mobile.module.css"
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import LunchDiningIcon from '@mui/icons-material/LunchDining';
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
 
 export default function Navbar_Mobile(){
 
@@ -41,15 +37,9 @@ export default function Navbar_Mobile(){
             <div className={s.menu} onClick={(e)=>handleSubMenuTrigger(e)}>
                 {
                 visible ?
-                    <LocalDiningIcon sx={{
-                        color: "white",
-                        fontSize: "5vh"
-                    }}/>
+                    "V"
                 :
-                    <LunchDiningIcon sx={{
-                        color: "white",
-                        fontSize: "5vh"
-                    }}/>
+                    "X"
                 }
             </div>
             {

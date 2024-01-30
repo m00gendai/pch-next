@@ -4,7 +4,6 @@ import Footer from "../components/footer"
 import Link from "next/link"
 import '../styles/globals.css'
 import CookieConsent from "react-cookie-consent"
-import { GoogleAnalytics } from "nextjs-google-analytics"
 import { useState } from "react"
 import Spinner from "../components/Spinner"
 
@@ -14,7 +13,7 @@ function MyApp({ Component, pageProps }) {
 
   return(
     <>
-    <GoogleAnalytics trackPageViews />
+   
         <Navbar_Mobile />
         <Navbar />
     {show ? <Spinner /> : null }
