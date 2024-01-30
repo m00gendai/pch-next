@@ -1,13 +1,15 @@
+"use client"
+
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import s from "../styles/navbar.module.css"
 
 export default function Navbar(){
 
-    const [overTrigger, setOverTrigger] = useState(false) // checks if cursor is over trigger link
-    const [visible, setVisible] = useState(false) // checks if submenu is visible
+    const [overTrigger, setOverTrigger] = useState<boolean>(false) // checks if cursor is over trigger link
+    const [visible, setVisible] = useState<boolean>(false) // checks if submenu is visible
 
-    function handleSubMenuTrigger(e){
+    function handleSubMenuTrigger(e:React.MouseEvent){
         if(e.type == "mouseenter"){
             setOverTrigger(true)
         } else if(e.type == "mouseleave"){
