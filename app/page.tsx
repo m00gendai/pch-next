@@ -1,18 +1,11 @@
 import Link from "next/link"
 import s from '../styles/Home.module.css'
-import Header from "../components/header"
-import { useRouter } from 'next/router'
 import {GiAchievement, GiCalendar, GiStabbedNote, GiThreeFriends} from "react-icons/gi"
 
 export default function Home() {
-
-  const router = useRouter()
-  const headUrl = `https://pistolenclub-hallau.ch${router.pathname}`
-
   return (
     <main className="main">
-      <Header title={"Pistolenclub Hallau"} content={"Der Pistolenclub in den Hallauer Weinbergen"} url={headUrl} />
-      <section className="section">
+     <section className="section">
         <h1 className={s.title}>
           Pistolenclub Hallau
         </h1>
