@@ -9,7 +9,7 @@ async function getDirs(){
 
     // searches all folders with {currentYear} as directory name and includes the directory path (to extract the parent directory name easier)
     const getYearDirectoryList:Response = await fetch(
-        `https://api.infomaniak.com/2/drive/608492/files/search?with=path&directory_id=15&depth=unlimited&types[]=dir&query="${currentYear}"&per_page=1000`,
+        `https://api.infomaniak.com/2/drive/${process.env.DRIVE}/files/search?with=path&directory_id=${process.env.RESULTATE}&depth=unlimited&types[]=dir&query="${currentYear}"&per_page=1000`,
         {
             method: "GET",
             headers: {
@@ -36,7 +36,7 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
     
     const fileList:FileResponse[] = await Promise.all(sortedYearDirectoryList.map(async directory =>{
         const getFiles:Response = await fetch(
-            `https://api.infomaniak.com/2/drive/608492/files/${directory.id}/files`,
+            `https://api.infomaniak.com/2/drive/${process.env.DRIVE}/files/${directory.id}/files`,
             {
                 method: "GET",
                 headers: {
