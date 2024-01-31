@@ -1,4 +1,4 @@
-export default async function (req, res) {
+export default async function GET(req, res) {
     let url
     try{
        const getUrl = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${req.body.file_id}/temporary_url`,{
