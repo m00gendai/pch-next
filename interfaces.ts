@@ -52,3 +52,16 @@ export interface File{
     extension_type: string
     scan_status: string  
 }
+
+export interface ShootTime{
+    name: string
+    startDate: string | null
+    endDate: string | null
+    remarks: string | null
+    _state: number
+    _modified: number
+    _mby: string
+    _created: number
+    _cby: string
+    _id: string
+}
