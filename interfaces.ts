@@ -53,15 +53,70 @@ export interface File{
     scan_status: string  
 }
 
-export interface ShootTime{
-    name: string
-    startDate: string | null
-    endDate: string | null
-    remarks: string | null
-    _state: number
+export interface PageContent{
+    chapter: Chapter
     _modified: number
     _mby: string
     _created: number
+    _state: number
     _cby: string
     _id: string
 }
+
+export interface Chapter{
+    title: string
+    content: Content[]
+}
+
+export interface Content{
+    text: string
+    table: Table[]
+    images: Medium[]
+    documents: Document[]
+}
+
+export interface Medium {
+    path: string
+    title: string
+    mime: string
+    type: string
+    description: string
+    tags: string[]
+    size: number
+    colors: string[]
+    width: number
+    height: number
+    _hash: string
+    _created: number
+    _modified: number
+    _cby: string
+    folder: string
+    _id: string
+  }
+
+  export interface Document {
+    path: string;
+    title: string;
+    mime: string;
+    type: string;
+    description: string;
+    tags: string[];
+    size: number;
+    colors: string[] | null;
+    width: string | null;
+    height: string | null;
+    _hash: string;
+    _created: number;
+    _modified: number;
+    _cby: string;
+    folder: string;
+    _id: string;
+  }
+
+  export interface Table{
+    column: Column
+  }
+
+  export interface Column{
+    [key:string]: string
+  }
