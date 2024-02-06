@@ -1,8 +1,9 @@
-import { PageContent } from "@/interfaces"
+import { PageContent, Document, Table } from "@/interfaces"
 import { innerTextReplacer } from "@/utils"
 import React from "react"
 import DocumentContainer from "@/components/DocumentContainer"
 import TableContainer from "@/components/TableContainer"
+import ChapterTitle from "@/components/ChapterTitle"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -31,13 +32,17 @@ export default async function Anlaesse(){
                 {pageContent.map(content=>{
                     return(
                         <>
-                        <h2>{content.chapter.title}</h2>
+                        <ChapterTitle title={content.chapter.title} />
                         {content.chapter.content.map(elements =>{
+                            const text:string = elements.text
+                            const tables:Table[] = elements.table
+                            const docs:Document[] = elements.documents
+                            
                             return(
                                 <div className="chapter">
-                                {elements.text ? <div className="chapter_text" dangerouslySetInnerHTML={{__html: innerTextReplacer(elements.text)}}></div> : null}
-                                {elements.table ? <TableContainer table={elements.table} /> : null}
-                                {elements.documents ? <DocumentContainer files={elements.documents} /> : null}
+                                {text && text.length !==0 ? <div className="chapter_text" dangerouslySetInnerHTML={{__html: innerTextReplacer(elements.text)}}></div> : null}
+                                {tables && tables.length !== 0 ? <TableContainer table={elements.table} /> : null}
+                                {docs && docs.length !== 0 ? <DocumentContainer files={elements.documents} /> : null}
                                 </div>
                             )
                         }
