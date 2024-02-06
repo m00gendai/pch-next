@@ -1,27 +1,3 @@
-.introContainer {
-    position: relative;
-    width: 100%;
-}
-
-.container{
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.text {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
 .archiv {
     width: 100%;
     aspect-ratio: 3/1;
