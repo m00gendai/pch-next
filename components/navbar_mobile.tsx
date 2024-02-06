@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
-import s from "../styles/navbar_mobile.module.css"
+import s from "@/styles/components/navbar_mobile.module.css"
+import { GiHamburger, GiKnifeFork } from "react-icons/gi";
 
 export default function Navbar_Mobile(){
 
@@ -19,9 +20,9 @@ export default function Navbar_Mobile(){
             <div className={s.menu} onClick={()=>{setVisible(!visible)}}>
                 {
                 visible ?
-                    "V"
+                    <GiKnifeFork style={{fontSize: "2rem", color: "white"}}/>
                 :
-                    "X"
+                    <GiHamburger style={{fontSize: "2rem", color: "white"}}/>
                 }
             </div>
             {

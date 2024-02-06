@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import s from "../styles/navbar.module.css"
+import s from "@/styles/components/navbar.module.css"
 
 export default function Navbar(){
 
