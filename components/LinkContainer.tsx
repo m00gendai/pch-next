@@ -4,17 +4,20 @@ import { FileResponse } from "@/interfaces"
 import s from "@/styles/components/linkContainer.module.css"
 
 interface Props{
-    files: FileResponse
+    fileList: FileResponse[]
+    year: number
 }
 
-export default function LinkContainer({files}:Props){
+export default function LinkContainer({fileList, year}:Props){
     return(
         <div className={s.linkContainer}>
-           {files.data.map(file=>{
-                return(
-                    <LinkButton key={file.id} file={file} />
-                )
-            })} 
+           {fileList.map(fileObject => {
+                    return fileObject.data.map(file=>{
+                      if(file.parent_id == year){
+                        return <LinkButton file={file} />
+                      }
+                    });
+                  })}
         </div>
     )
 }
