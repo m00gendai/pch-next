@@ -1,6 +1,6 @@
 import React from "react"
 import { Document } from "@/interfaces"
-import s from "@/styles/components/linkContainer.module.css"
+import s from "@/styles/components/documentContainer.module.css"
 import DocumentButton from "./DocumentButton"
 
 interface Props{
