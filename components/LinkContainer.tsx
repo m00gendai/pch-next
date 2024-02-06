@@ -12,9 +12,7 @@ export default function LinkContainer({files}:Props){
         <div className={s.linkContainer}>
            {files.data.map(file=>{
                 return(
-                    <React.Fragment key={file.id}>
-                        <LinkButton file={file} />
-                    </React.Fragment>
+                    <LinkButton key={file.id} file={file} />
                 )
             })} 
         </div>
