@@ -120,3 +120,21 @@ export interface Medium {
   export interface Column{
     [key:string]: string
   }
+
+  export interface skesTimes{
+    title: string
+    plan: Document
+    times: dateTime[]
+    _modified: number,
+    _mby: string
+    _created: number
+    _state: number
+    _cby: string
+    _id: string
+  }
+
+  export interface dateTime{
+    date: string
+    timeslot: string[]
+    
+  }
