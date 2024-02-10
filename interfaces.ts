@@ -72,7 +72,8 @@ export interface Content{
     text: string
     table: Table[]
     images: Medium[]
-    imagesSeparate?: boolean
+    imageInText?: boolean
+    imageDirection?: string
     documents: Document[]
 }
 
