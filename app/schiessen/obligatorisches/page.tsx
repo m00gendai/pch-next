@@ -1,10 +1,12 @@
 import Link from "next/link"
 import Image from "next/image"
-import { PageContent, Table, Document } from "@/interfaces"
+import { PageContent, Table, Document, Medium } from "@/interfaces"
 import ChapterTitle from "@/components/ChapterTitle"
 import TableContainer from "@/components/TableContainer"
 import DocumentContainer from "@/components/DocumentContainer"
 import { innerTextReplacer } from "@/utils"
+import TextImageContainer from "@/components/TextImageContainer"
+import Gallery from "@/components/Gallery"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -47,12 +49,14 @@ export default async function Obli(){
                             const text:string = elements.text
                             const tables:Table[] = elements.table
                             const docs:Document[] = elements.documents
+                            const imgs:Medium[] = elements.images
                             
                             return(
                                 <div className="chapter">
                                 {text && text.length !==0 ? <div className="chapter_text" dangerouslySetInnerHTML={{__html: innerTextReplacer(elements.text)}}></div> : null}
                                 {tables && tables.length !== 0 ? <TableContainer table={elements.table} /> : null}
                                 {docs && docs.length !== 0 ? <DocumentContainer files={elements.documents} /> : null}
+                                {imgs && imgs.length !== 0 ? <Gallery images={imgs} /> : null}
                                 </div>
                             )
                         }
