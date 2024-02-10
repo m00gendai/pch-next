@@ -9,7 +9,7 @@ interface Props{
 export default function LinkButton({file}:Props){
     const fileType:string = file.mime.split("/")[1] === "pdf" ? "pdf" : "generic"
     return(
-        <Link key={`result_${file._id}`} target="_blank" className={s.link} href={`${process.env.STORAGE}${file.path}`}>
+        <Link key={`result_${file._id}`} target="_blank" className={s.link} href={`${process.env.NEXT_PUBLIC_STORAGE}${file.path}`}>
             <div className={`${s.document} ${s[fileType]}`}></div>
             <div >
                 {file.title}
