@@ -72,6 +72,7 @@ export interface Content{
     text: string
     table: Table[]
     images: Medium[]
+    imagesSeparate?: boolean
     documents: Document[]
 }
 
@@ -135,6 +136,29 @@ export interface Medium {
 
   export interface dateTime{
     date: string
-    timeslot: string[]
-    
+    timeslot: string[] 
+  }
+
+  export interface FsInfo{
+    title: string
+    range: Range
+    times: dateTime[]
+    plan: Document
+    _modified: number,
+    _mby: string
+    _created: number
+    _state: number
+    _cby: string
+    _id: string
+  }
+
+  export interface Range{
+    name: string
+    map: string
+    _modified: number,
+    _mby: string
+    _created: number
+    _state: number
+    _cby: string
+    _id: string
   }
