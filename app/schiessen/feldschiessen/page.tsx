@@ -1,5 +1,3 @@
-import Link from "next/link"
-import Image from "next/image"
 import { PageContent, Table, Document, FsInfo, Medium } from "@/interfaces"
 import ChapterTitle from "@/components/ChapterTitle"
 import TableContainer from "@/components/TableContainer"
