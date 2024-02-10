@@ -163,3 +163,9 @@ export interface Medium {
     _cby: string
     _id: string
   }
+
+  export interface Board{
+    position: string
+    name: string
+    image: Medium
+  }
