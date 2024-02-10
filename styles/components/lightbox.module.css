@@ -1,0 +1,129 @@
+.veil{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.8);
+    z-index: 999;
+}
+
+.modal{
+    position: fixed;
+    top: 50%;
+    width: calc(100vw - 4rem);
+    height: calc(100svh - 4rem);
+    background: white;
+    border: 0.5rem solid black;
+    transform: translateY(-50%);
+}
+
+.imageWrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
+.closeWrapper,
+.fullWrapper{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index:99999;
+    user-select: none;
+    background: transparent;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    margin: 0;
+    color: rgba(255,255,255,0.5);
+}
+
+.fullWrapper{
+    right: 5rem;
+}
+
+.closeWrapper:hover{
+    cursor: pointer;
+    color: red;
+}
+.fullWrapper:hover{
+    cursor: pointer;
+    color: green;
+}
+
+
+.prev,
+.next{
+    position: absolute;
+    top: 0;
+    width: 20vw;
+    display: flex;
+    align-items: center;
+    color: rgba(255,255,255,0.5);;
+    z-index:9999;
+    height: 100%;
+    font-size: 5rem;
+    user-select: none;
+}
+.prev{
+    left: 0;
+    justify-content: flex-start;
+}
+.next{
+    right: 0;
+    justify-content: flex-end;
+}
+.prev:hover,
+.next:hover{
+    cursor: pointer;
+}
+
+.caption{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.text{
+    position: relative;
+    width: 100%;
+    margin: 1rem;
+}
+.text strong{
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 1rem 0;
+}
+
+.lever{
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 0.25rem 1rem;
+    top:0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.lever:hover{
+    cursor: pointer;
+}

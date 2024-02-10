@@ -1,0 +1,105 @@
+.container{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 0 2rem 0;
+}
+
+.flex{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.single{
+    position: relative;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.single:hover{
+    cursor: pointer;
+}
+
+@media only screen and (max-aspect-ratio: 13/9){
+    .single{
+        width: 100%;
+    }
+  }
+
+.image{
+    box-shadow: 0px 5px 10px 0px black;
+}
+
+.caption{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    font-style: italic;
+    margin: 2rem 0 0 0;
+    overflow: hidden;
+    font-size: 0.75rem;
+}
+
+.caption strong{
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 1rem 0;
+}
+
+.text{
+    position: relative;
+    height: auto;
+}
+
+.grid{
+    position: relative;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-gap: 1rem;
+}
+
+@media only screen and (max-aspect-ratio: 13/9){
+    .grid{
+        width: 100%;
+        grid-template-columns: repeat(1fr, 1fr);
+    }
+  }
+
+.itemFrame{
+    position: relative;
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px 0px black;
+}
+
+.itemFrame:hover{
+    cursor: pointer;
+}
+
+.itemContainer{
+    position: relative;
+    height: 90%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
