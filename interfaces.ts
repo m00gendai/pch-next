@@ -169,3 +169,26 @@ export interface Medium {
     name: string
     image: Medium
   }
+
+  export interface LinkItem{
+    name: string
+    url: string
+    image: Medium
+    _modified: number,
+    _mby: string
+    _created: number
+    _state: number
+    _cby: string
+    _id: string
+  }
+
+export interface LinkCollection{
+  title: string
+  linkItem: LinkItem[]
+  _modified: number,
+    _mby: string
+    _created: number
+    _state: number
+    _cby: string
+    _id: string
+}
