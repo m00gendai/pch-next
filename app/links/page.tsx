@@ -26,7 +26,7 @@ export default async function Links(){
     return(
         <main className="main">
             <section className="section">
-                <h1>Mitmachen</h1>
+                <h1>Links</h1>
                 {links.map(linkCategory=>{
                     return(
                         <>
