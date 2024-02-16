@@ -192,3 +192,11 @@ export interface LinkCollection{
     _cby: string
     _id: string
 }
+
+export interface Logo{
+  logo: Medium
+}
+
+export interface Hero{
+  image: Medium
+}
