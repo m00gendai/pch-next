@@ -1,6 +1,7 @@
 import ChapterTitle from "@/components/ChapterTitle"
 import DocumentContainer from "@/components/DocumentContainer"
 import Gallery from "@/components/Gallery"
+import Spacer from "@/components/Spacer"
 import TableContainer from "@/components/TableContainer"
 import { PageContent, Table, Document, Medium } from "@/interfaces"
 import { innerTextReplacer } from "@/utils"
@@ -52,6 +53,7 @@ export default async function Hilfsmittel(){
                         </>
                     )
                 })}
+                <Spacer />
             </section>
         </main>
     )

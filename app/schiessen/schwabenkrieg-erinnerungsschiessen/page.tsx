@@ -8,6 +8,7 @@ import Gallery from "@/components/Gallery";
 import revalidate from "@/app/actions/revalidate";
 import React from "react";
 import LinkContainer from "@/components/LinkContainer";
+import Spacer from "@/components/Spacer";
 
 async function getSkesTimes(){
   const getSkesTimes:Response = await fetch(
@@ -173,6 +174,7 @@ export default async function SKES() {
                         </>
                     )
                 })}
+                <Spacer />
             </section>
         </main>
     )

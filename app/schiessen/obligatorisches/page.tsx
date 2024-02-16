@@ -4,6 +4,7 @@ import TableContainer from "@/components/TableContainer"
 import DocumentContainer from "@/components/DocumentContainer"
 import { innerTextReplacer } from "@/utils"
 import Gallery from "@/components/Gallery"
+import Spacer from "@/components/Spacer"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -60,6 +61,7 @@ export default async function Obli(){
                         </>
                     )
                 })}
+                <Spacer />
             </section>
         </main>
     )

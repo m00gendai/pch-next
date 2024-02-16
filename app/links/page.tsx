@@ -1,5 +1,6 @@
 import ChapterTitle from "@/components/ChapterTitle"
 import LinkGallery from "@/components/LinkGallery"
+import Spacer from "@/components/Spacer"
 import { LinkCollection } from "@/interfaces"
 
 async function getLinks(){
@@ -35,6 +36,7 @@ export default async function Links(){
                         </>
                     )
                 })}
+                <Spacer />
             </section>
         </main>
     )

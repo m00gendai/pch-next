@@ -4,6 +4,7 @@ import React from "react";
 import LinkContainer from "@/components/LinkContainer";
 import Archive from "@/components/Archive";
 import revalidate from "../actions/revalidate";
+import Spacer from "@/components/Spacer";
 
 async function getDirs(){
     const date:Date = new Date();
@@ -97,6 +98,7 @@ export default async function Resultate() {
           })
         }
         <Archive />
+        <Spacer />
       </section>
     </main>
   );

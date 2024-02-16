@@ -6,6 +6,7 @@ import { innerTextReplacer } from "@/utils"
 import Gallery from "@/components/Gallery"
 import BoardContainer from "@/components/BoardContainer"
 import ContactForm from "@/components/ContactForm/ContactForm"
+import Spacer from "@/components/Spacer"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -77,6 +78,7 @@ export default async function Verein(){
                 <ContactForm />
                 <ChapterTitle title={"Vorstand"} />
                 <BoardContainer board={board} />  
+                <Spacer />
             </section>
         </main>
     )

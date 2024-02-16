@@ -5,6 +5,7 @@ import DocumentContainer from "@/components/DocumentContainer"
 import { innerTextReplacer } from "@/utils"
 import PlanContainer from "@/components/PlanContainer"
 import Gallery from "@/components/Gallery"
+import Spacer from "@/components/Spacer"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -89,6 +90,7 @@ export default async function FS(){
                         </>
                     )
                 })}
+                <Spacer />
             </section>
         </main>
     )

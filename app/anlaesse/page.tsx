@@ -5,6 +5,7 @@ import DocumentContainer from "@/components/DocumentContainer"
 import TableContainer from "@/components/TableContainer"
 import ChapterTitle from "@/components/ChapterTitle"
 import Gallery from "@/components/Gallery"
+import Spacer from "@/components/Spacer"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -52,6 +53,7 @@ export default async function Anlaesse(){
                         </>
                     )
                 })}
+                <Spacer />
             </section>
         </main>
     )
