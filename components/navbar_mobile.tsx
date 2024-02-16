@@ -11,12 +11,9 @@ export default function Navbar_Mobile(){
 
     return(
         <nav className ={s.nav}>
-            {
-            visible ?
-                null
-            :
+
                 <Link className={s.homeLink} href="/"></Link>
-            }   
+            
             <div className={s.menu} onClick={()=>{setVisible(!visible)}}>
                 {
                 visible ?
@@ -33,15 +30,15 @@ export default function Navbar_Mobile(){
                     <Link className={s.link} href="/resultate">Resultate</Link>
                     <div className={s.link} >Schiessen</div>
                     <div className={s.subLinkContainer} >
-                        <Link className={s.link} href="/schiessen/schwabenkrieg-erinnerungsschiessen">Schwabenkrieg-Erinnerungsschiessen</Link>
-                        <Link className={s.link} href="/schiessen/obligatorisches">Obligatorisches</Link>
-                        <Link className={s.link} href="/schiessen/feldschiessen">Feldschiessen</Link>
-                        <Link className={s.link} href="/schiessen/hilfsmittel">Zugelassene Hilfsmittel und Pistolen</Link>
+                        <Link className={s.sublink} href="/schiessen/schwabenkrieg-erinnerungsschiessen">Schwabenkrieg-Erinnerungsschiessen</Link>
+                        <Link className={s.sublink} href="/schiessen/obligatorisches">Obligatorisches</Link>
+                        <Link className={s.sublink} href="/schiessen/feldschiessen">Feldschiessen</Link>
+                        <Link className={s.sublink} href="/schiessen/hilfsmittel">Zugelassene Hilfsmittel und Pistolen</Link>
                     </div>
                     <div className={s.link} >Verein</div>
                     <div className={s.subLinkContainer} >
-                        <Link className={s.link} href="/verein/informationen">Informationen</Link>
-                        <Link className={s.link} href="/verein/mitmachen">Mitmachen</Link>
+                        <Link className={s.sublink} href="/verein/informationen">Informationen</Link>
+                        <Link className={s.sublink} href="/verein/mitmachen">Mitmachen</Link>
                     </div>
                     <Link className={s.link} href="/links">Links</Link>
                 </div>
