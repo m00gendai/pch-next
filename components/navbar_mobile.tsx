@@ -38,7 +38,11 @@ export default function Navbar_Mobile(){
                         <Link className={s.link} href="/schiessen/feldschiessen">Feldschiessen</Link>
                         <Link className={s.link} href="/schiessen/hilfsmittel">Zugelassene Hilfsmittel und Pistolen</Link>
                     </div>
-                    <Link className={s.link} href="/verein">Verein</Link>
+                    <div className={s.link} >Verein</div>
+                    <div className={s.subLinkContainer} >
+                        <Link className={s.link} href="/verein/informationen">Informationen</Link>
+                        <Link className={s.link} href="/verein/mitmachen">Mitmachen</Link>
+                    </div>
                     <Link className={s.link} href="/links">Links</Link>
                 </div>
             : 
