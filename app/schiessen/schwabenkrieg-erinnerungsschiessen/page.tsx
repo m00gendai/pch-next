@@ -154,24 +154,24 @@ export default async function SKES() {
         </div>
         {pageContent.map(content=>{
                     return(
-                        <>
-                        {content.chapter.title && content.chapter.title.length !== 0 ? <ChapterTitle title={content.chapter.title} /> : null}
-                        {content.chapter.content.map(elements =>{
-                            const text:string = elements.text
-                            const tables:Table[] = elements.table
-                            const docs:Document[] = elements.documents
-                            const imgs:Medium[] = elements.images
-                            
-                            return(
-                                <div className="chapter">
-                                    {text && text.length !==0 && text[0] !== null ? <div className="chapter_text" dangerouslySetInnerHTML={{__html: innerTextReplacer(elements.text)}}></div> : null}
-                                    {tables && tables.length !== 0 && tables[0] !== null ? <TableContainer table={elements.table} /> : null}
-                                    {imgs && imgs.length !== 0 && imgs[0] !== null ? <Gallery images={imgs} /> : null}
-                                    {docs && docs.length !== 0 && docs[0] !== null ? <DocumentContainer files={elements.documents} /> : null}
-                                </div>
-                            )
-                        })}
-                        </>
+                      <React.Fragment key={content._id}>
+                      {content.chapter.title && content.chapter.title.length !== 0 ? <ChapterTitle title={content.chapter.title} /> : null}
+                      {content.chapter.content.map((elements, index) =>{
+                          const text:string = elements.text
+                          const tables:Table[] = elements.table
+                          const docs:Document[] = elements.documents
+                          const imgs:Medium[] = elements.images
+                          
+                          return(
+                              <div className="chapter" key={`elements_${index}`}>
+                                  {text && text.length !==0 && text[0] !== null ? <div className="chapter_text" dangerouslySetInnerHTML={{__html: innerTextReplacer(elements.text)}}></div> : null}
+                                  {tables && tables.length !== 0 && tables[0] !== null ? <TableContainer table={elements.table} /> : null}
+                                  {imgs && imgs.length !== 0 && imgs[0] !== null ? <Gallery images={imgs} /> : null}
+                                  {docs && docs.length !== 0 && docs[0] !== null ? <DocumentContainer files={elements.documents} /> : null}
+                              </div>
+                          )
+                      })}
+                      </React.Fragment>
                     )
                 })}
                 <Spacer />

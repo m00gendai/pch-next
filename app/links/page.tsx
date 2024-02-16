@@ -2,6 +2,7 @@ import ChapterTitle from "@/components/ChapterTitle"
 import LinkGallery from "@/components/LinkGallery"
 import Spacer from "@/components/Spacer"
 import { LinkCollection } from "@/interfaces"
+import React from "react"
 
 async function getLinks(){
     const getLinks:Response = await fetch(
@@ -30,10 +31,10 @@ export default async function Links(){
                 <h1>Links</h1>
                 {links.map(linkCategory=>{
                     return(
-                        <>
-                        <ChapterTitle title={linkCategory.title} />
-                        <LinkGallery links={linkCategory.linkItem} />
-                        </>
+                        <React.Fragment key={linkCategory._id}>
+                            <ChapterTitle title={linkCategory.title} />
+                            <LinkGallery links={linkCategory.linkItem} />
+                        </React.Fragment>
                     )
                 })}
                 <Spacer />

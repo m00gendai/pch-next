@@ -7,6 +7,7 @@ import Gallery from "@/components/Gallery"
 import BoardContainer from "@/components/BoardContainer"
 import ContactForm from "@/components/ContactForm/ContactForm"
 import Spacer from "@/components/Spacer"
+import React from "react"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -54,16 +55,16 @@ export default async function Verein(){
                 <h1>Verein</h1>
                 {pageContent.map(content=>{
                     return(
-                        <>
+                        <React.Fragment key={content._id}>
                         {content.chapter.title && content.chapter.title.length !== 0 ? <ChapterTitle title={content.chapter.title} /> : null}
-                        {content.chapter.content.map(elements =>{
+                        {content.chapter.content.map((elements, index) =>{
                             const text:string = elements.text
                             const tables:Table[] = elements.table
                             const docs:Document[] = elements.documents
                             const imgs:Medium[] = elements.images
                             
                             return(
-                                <div className="chapter">
+                                <div className="chapter" key={`elements_${index}`}>
                                     {text && text.length !==0 && text[0] !== null ? <div className="chapter_text" dangerouslySetInnerHTML={{__html: innerTextReplacer(elements.text)}}></div> : null}
                                     {tables && tables.length !== 0 && tables[0] !== null ? <TableContainer table={elements.table} /> : null}
                                     {imgs && imgs.length !== 0 && imgs[0] !== null ? <Gallery images={imgs} /> : null}
@@ -71,7 +72,7 @@ export default async function Verein(){
                                 </div>
                             )
                         })}
-                        </>
+                        </React.Fragment>
                     )
                 })}
                 <ChapterTitle title={"Kontakt"} />
