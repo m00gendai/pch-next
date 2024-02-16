@@ -31,7 +31,7 @@ export default async function Impressum(){
     return(
         <main className="main">
             <section className="section">
-                <h1>Datenschutz</h1>
+                <h1>Impressum</h1>
                 {pageContent.map(content=>{
                     return(
                         <>
