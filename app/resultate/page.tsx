@@ -3,6 +3,7 @@ import ChapterTitle from "@/components/ChapterTitle";
 import React from "react";
 import LinkContainer from "@/components/LinkContainer";
 import Archive from "@/components/Archive";
+import revalidate from "../actions/revalidate";
 
 async function getDirs(){
     const date:Date = new Date();
@@ -17,6 +18,9 @@ async function getDirs(){
                 Authorization: `Bearer ${process.env.KDRIVE}`,
                 "Content-Type": "application/json",
             },
+            next: {
+              tags: ["resultDirs"]
+            }
         }
     );
     
@@ -44,6 +48,9 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
                     Authorization: `Bearer ${process.env.KDRIVE}`,
                     "Content-Type": "application/json",
                 },
+                next: {
+                  tags: ["resultFiles"]
+                }
             }
         );
             const files:FileResponse = await getFiles.json();
@@ -53,6 +60,8 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
 }
 
 export default async function Resultate() {
+  revalidate("ResultDirs")
+  revalidate("ResultFiles")
   
   const date:Date = new Date();
   const currentYear:number = date.getFullYear();
