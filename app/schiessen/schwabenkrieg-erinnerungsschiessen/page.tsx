@@ -1,4 +1,3 @@
-import s from "@/styles/SKES.module.css";
 import { PageContent, Table, skesTimes, Document, Medium } from "@/interfaces";
 import PlanContainer from "@/components/PlanContainer";
 import ChapterTitle from "@/components/ChapterTitle";
@@ -46,9 +45,6 @@ export default async function SKES() {
 
   const skesTimes:skesTimes = await getSkesTimes()
   const pageContent:PageContent[] = await getPageContent()
-console.log(pageContent)
-  const date = new Date();s
-  const currentYear = date.getFullYear()
 
   return (
     <main className="main">
