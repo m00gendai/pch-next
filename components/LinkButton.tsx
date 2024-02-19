@@ -7,19 +7,23 @@ interface Props{
 }
 
 async function getFile(id:number){
+    try{
+        const getUrl:Response = await fetch(`${process.env.GETFILE}/api/getFile`,{
+            method: "POST",
+                headers: {
+                    Authorization: `Bearer ${process.env.KDRIVE}`,
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({id: id})
+            }
+        )
 
-    const getUrl:Response = await fetch(`${process.env.GETFILE}/api/getFile`,{
-        method: "POST",
-            headers: {
-                Authorization: `Bearer ${process.env.KDRIVE}`,
-                "Content-Type" : "application/json"
-            },
-            body: JSON.stringify({id: id})
-        }
-    )
-
-    const url:GetFileResponse = await getUrl.json()
-    return url.data.temporary_url
+        const url:GetFileResponse = await getUrl.json()
+        return url.data.temporary_url
+    } catch{ 
+        return `${process.env.ARCHIVE}`
+    }
+   
 }
 
 export default async function LinkButton({file}:Props){
