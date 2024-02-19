@@ -200,3 +200,8 @@ export interface Logo{
 export interface Hero{
   image: Medium
 }
+
+export interface GetFileResponse{
+  result: string
+  data: {temporary_url: string}
+}

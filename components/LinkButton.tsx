@@ -1,36 +1,36 @@
-"use client"
-
-import { File } from "@/interfaces"
+import { File, GetFileResponse } from "@/interfaces"
 import s from "@/styles/components/linkButton.module.css"
+import Link from "next/link"
 
 interface Props{
     file:File
 }
 
 async function getFile(id:number){
-    let url:any
 
-    const getUrl:Response = await fetch(`https://api.infomaniak.com/2/drive/608492/files/${id}/temporary_url`,{
-        method: "GET",
+    const getUrl:Response = await fetch(`${process.env.GETFILE}/api/getFile`,{
+        method: "POST",
             headers: {
                 Authorization: `Bearer ${process.env.KDRIVE}`,
                 "Content-Type" : "application/json"
             },
+            body: JSON.stringify({id: id})
         }
     )
 
-    url = await getUrl.json()
-    return url
+    const url:GetFileResponse = await getUrl.json()
+    return url.data.temporary_url
 }
 
-export default function LinkButton({file}:Props){
+export default async function LinkButton({file}:Props){
     const name:string = file.name.replaceAll("_", " ").replace(".pdf", "");
+    const path:string = await getFile(file.id)
 
     return(
-        <div key={`result_${file.id}`} className={s.link} onClick={() => getFile(file.id)}>
+        <Link key={`result_${file.id}`} className={s.link} href={path} target="_blank">
             <div >
                 {name}
             </div>
-        </div>
+        </Link>
     )
 }
