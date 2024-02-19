@@ -6,6 +6,7 @@ import DocumentContainer from "@/components/DocumentContainer"
 import { innerTextReplacer } from "@/utils"
 import Spacer from "@/components/Spacer"
 import React from "react"
+import CookieExplainer from "@/components/CookieExplainer"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -33,6 +34,7 @@ export default async function DSGVO(){
         <main className="main">
             <section className="section">
                 <h1>Datenschutz</h1>
+                <CookieExplainer />
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>
