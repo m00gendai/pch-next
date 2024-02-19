@@ -66,7 +66,9 @@ async function getDirs(){
   );
   
   const yearDirectoryList:DirectoryResponse = await getYearDirectoryList.json();
-
+if(yearDirectoryList.data.length === 0){
+  return yearDirectoryList.data
+}
   // sorts the year folders by last_modified_at (latest first)
   const sortedYearDirectoryList:Directory[] = yearDirectoryList.data.sort((a:Directory, b:Directory) => {
       const x:number = a.added_at;
@@ -109,7 +111,6 @@ export default async function SKES() {
   const currentYear:number = date.getFullYear();
 
   const sortedYearDirectoryList:Directory[] = await getDirs()
-  const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
   const skesTimes:skesTimes = await getSkesTimes()
   const pageContent:PageContent[] = await getPageContent()
 
@@ -137,8 +138,8 @@ export default async function SKES() {
           ? 
           null
           :
-          sortedYearDirectoryList.map((years:Directory) => {
-            const title:string = years.path.split("/")[2]
+          sortedYearDirectoryList.map(async (years:Directory) => {
+            const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
             return (
               <React.Fragment key={`fragment_${years.id}`}>
                 <ChapterTitle title={`Resultate ${currentYear}`} />

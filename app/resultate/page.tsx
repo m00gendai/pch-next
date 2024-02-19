@@ -26,7 +26,9 @@ async function getDirs(){
     );
     
     const yearDirectoryList:DirectoryResponse = await getYearDirectoryList.json();
-
+    if(yearDirectoryList.data.length === 0){
+      return yearDirectoryList.data
+    }
     // sorts the year folders by last_modified_at (latest first)
     const sortedYearDirectoryList:Directory[] = yearDirectoryList.data.sort((a:Directory, b:Directory) => {
         const x:number = a.added_at;
@@ -68,7 +70,7 @@ export default async function Resultate() {
   const currentYear:number = date.getFullYear();
 
   const sortedYearDirectoryList:Directory[] = await getDirs()
-  const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
+  
 
   return (
     <main className="main">
@@ -87,8 +89,9 @@ export default async function Resultate() {
           ? 
           <ChapterTitle title={`${currentYear} war noch nichts los...`} />
           :
-          sortedYearDirectoryList.map((years:Directory) => {
+          sortedYearDirectoryList.map(async (years:Directory) => {
             const title:string = years.path.split("/")[2]
+            const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
             return (
               <React.Fragment key={`fragment_${years.id}`}>
                 <ChapterTitle title={title} key={`resultTitle_${title}`} />
