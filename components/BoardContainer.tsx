@@ -9,8 +9,8 @@ interface Props{
 export default function BoardContainer({board}:Props){
     return(
         <div className={s.container}>
-        {board.map(member=>{
-            return <BoardMember member={member} />
+        {board.map((member, index)=>{
+            return <BoardMember member={member} key={`member_${index}`}/>
         })}
         </div>
     )

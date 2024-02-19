@@ -14,7 +14,7 @@ export default function LinkContainer({fileList, year}:Props){
            {fileList.map(fileObject => {
                     return fileObject.data.map(file=>{
                       if(file.parent_id == year){
-                        return <LinkButton file={file} />
+                        return <LinkButton file={file} key={file.id}/>
                       }
                     });
                   })}

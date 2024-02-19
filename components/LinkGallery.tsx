@@ -12,7 +12,7 @@ export default function LinkGallery({links}:Props){
         <div className={s.container}>
             {links.map(link=>{
                 return (
-                    <Link className={s.frame} href={link.url} target="_blank">
+                    <Link className={s.frame} href={link.url} target="_blank" key={link._id}>
                         <div className={s.image}>
                             <Image 
                                 src={`${process.env.NEXT_PUBLIC_STORAGE}${link.image.path}`}

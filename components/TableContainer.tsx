@@ -12,10 +12,10 @@ export default function Table({table}:Props){
                 <thead className={s.head}>
                     {table.map((column, itemIndex)=>{
                         return(
-                            <tr className={s.headRow}>
-                                {Object.values(column).map(value =>{
+                            <tr className={s.headRow} key={`row_${itemIndex}`}>
+                                {Object.values(column).map((value, index) =>{
                                     if(itemIndex < 1){
-                                        return <th className={s.headItem}>{value}</th>
+                                        return <th className={s.headItem} key={`head_${index}`}>{value}</th>
                                     }
                                 })}
                             </tr>
@@ -25,10 +25,10 @@ export default function Table({table}:Props){
                 <tbody className={s.body}>
                     {table.map((column, itemIndex)=>{
                         return(
-                            <tr className={s.bodyRow}>
-                                {Object.values(column).map(value =>{
+                            <tr className={s.bodyRow} key={`row_${itemIndex}`}>
+                                {Object.values(column).map((value, index) =>{
                                     if(itemIndex > 0){
-                                        return <td className={s.bodyItem}>{value}</td>
+                                        return <td className={s.bodyItem} key={`value_${index}`}>{value}</td>
                                     }
                                 })}
                             </tr>
