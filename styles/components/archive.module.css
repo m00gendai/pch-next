@@ -10,6 +10,7 @@
     padding: 1rem;
     transition: 20s;
     transition-timing-function: linear;
+    text-decoration: none;
 }
 
 .archiv:hover {
