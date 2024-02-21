@@ -1,0 +1,28 @@
+.container{
+    position: relative;
+    width: 100%;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inner{
+    position: relative;
+    width: auto;
+}
+
+.title{
+    position: relative;
+    width: 100%;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0 1ch 0 0;
+}
+
+.deco{
+    position: relative;
+    width: 100%;
+    height: 0.25rem;
+    background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
+}

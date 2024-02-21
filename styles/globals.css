@@ -13,11 +13,6 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -43,7 +38,8 @@ section{
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin: 0 0 2rem 0;
+  width: 90%;
+  max-width: 1500px;
 }
 
 .footer{
@@ -62,63 +58,62 @@ h1{
   word-wrap: break-word;
 }
 
-@media screen and (orientation: portrait) {
-  section{
-    width: 90%;
-  }
-  h1 {
-    font-size: 7.5vw;
-  }
-}
-
-@media screen and (orientation: landscape) {
-  section {
-      width: 90%;
-    }
-  h1 {
-    font-size: 7.5vh;
-  }
-}
-
-h2 {
+.chapter{
   position: relative;
   width: 100%;
-  background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
-  color: white;
-  margin: 2rem 0 2rem 0;
-  box-shadow: 0px 5px 5px -5px black;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 0.25rem 0 0.25rem 0;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 1rem 0;
 }
 
-.link {
+.chapter_text{
+  position: relative;
   width: 100%;
-  background-color: #e7eff9;
-  background-image: linear-gradient(315deg, #e7eff9 0%, #cfd6e6 74%);
-  box-shadow: 0px 0px 5px -2px black;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0.5rem;
-  transition: 0.2s;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 1rem 0;
 }
 
-@media screen and (orientation: landscape) {
-  .link {
-    aspect-ratio: 2/1;
+.chapter_text p{
+  position: relative;
+  width: 100%;
+}
+
+iframe{
+  position: relative;
+  width: 100%;
+  border: 0;
+  outline: 0;
+}
+
+table{
+  overflow-x:scroll;
+}
+
+@media screen and (max-aspect-ratio: 13/9) {
+  h1 {
+    font-size: 2rem;
+  }
+  iframe{
+    aspect-ratio: 3/4;
+  }
+  iframe.desktop{
+    display: none;
   }
 }
 
-@media screen and (orientation: portrait) {
-  .link {
-    aspect-ratio: 3/1;
+@media screen and (min-aspect-ratio: 13/9) {
+  h1 {
+    font-size: 4rem;
   }
-}
-
-.link:hover {
-  cursor: pointer;
-  box-shadow: 0px 0px 10px 0px black;
+  iframe{
+    aspect-ratio: 21/10;
+  }
+  iframe.mobile{
+    display: none;
+  }
 }

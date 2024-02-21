@@ -1,0 +1,38 @@
+.slots{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.row{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.dateRow{
+    position: relative;
+    width: 100%;
+    font-weight: bolder;
+}
+.timeRow{
+    position: relative;
+    width: 100%;
+    margin: 0 0 1rem 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    white-space: pre;
+}
+
+.row:last-child .timeRow{
+    margin: 0;
+}
+  
