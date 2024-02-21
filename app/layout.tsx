@@ -1,5 +1,5 @@
-import Navbar from "@/components/navbar"
-import Navbar_Mobile from "@/components/navbar_mobile"
+import Navbar from "@/components/Navbar/navbar"
+import Navbar_Mobile from "@/components/Navbar/navbar_mobile"
 import Footer from "@/components/footer"
 import "@/styles/globals.css"
 import CookieProvider from "@/components/CookieProvider"
