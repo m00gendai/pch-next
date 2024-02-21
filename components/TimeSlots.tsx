@@ -17,7 +17,7 @@ export default function TimeSlots({timeSlots}:Props){
                         </div>
                         <div className={s.timeRow}>
                             {timeSlot.timeslot.map((time, index)=>{
-                                return <p key={`time_${index}`} className={s.time}>{index === 0 ? time : index%2 !==0 ? ` - ${time} ` : ` und ${time}`}</p>
+                                return <p key={`time_${index}`} className={s.time}>{index === 0 ? time : index%2 !==0 ? ` - ${time} ` : `und ${time}`}</p>
                             })}
                         </div>
                     </div>
