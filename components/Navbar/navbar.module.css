@@ -1,0 +1,122 @@
+.nav{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 10px 0px black;
+    z-index: 100;
+    height: 5rem;
+}
+
+@media only screen and (max-aspect-ratio: 13/9){
+    .nav{
+        display: none;
+    }
+}
+
+.linkContainer{
+    position: relative;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.surLinkContainer{
+    position: relative;
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.surLinkContainer:hover{
+    cursor: pointer;
+}
+
+.subLinkContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
+    background-attachment: fixed;
+    z-index: -1;
+    
+}
+
+.buffer{
+    position: relative;
+    width: 100%;
+    height: 5rem;
+    
+}
+
+.content{
+   position: relative;
+    width: 100%;
+  box-shadow: 0px 5px 5px -3px black;
+  z-index: -1;
+}
+
+.items{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 2rem;
+}
+
+.link{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin: 1rem 0 1rem 0;
+    text-shadow: 2px 2px black;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.homeLink {
+    margin: 1rem 0 1rem 0;
+    background-image: url("/pch-logo.png");
+    background-size: contain;
+    height: 80%;
+    aspect-ratio: 1/1;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.sublink {
+    color: white;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-shadow: 2px 2px black;
+    border-bottom: 1px solid white;
+    padding: 1rem 0.25rem;
+    text-decoration: none;
+}
+
+.sublink:last-child{
+    border:none;
+    margin: 0 0 1rem 0;
+}
+
+.sublink:hover{
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+}

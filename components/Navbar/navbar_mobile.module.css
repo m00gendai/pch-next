@@ -1,0 +1,103 @@
+.nav{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 10px 0px black;
+    z-index: 100;
+    min-height: 5rem;
+    flex-wrap: wrap;
+}
+
+@media only screen and (min-aspect-ratio: 13/9){
+    .nav{
+        display: none;
+    }
+}
+
+.homeLink {
+    background-image: url("/pch-logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0% 0%;
+    position: absolute;
+    top: 50%;
+    left:5vh;
+    transform: translateY(-50%);
+    height: 80%;
+    aspect-ratio: 1/1;
+}
+
+.menu{
+    position: absolute;
+    top: 50%;
+    right:5vh;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.menu:hover{
+    cursor: pointer;
+}
+
+.linkContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 80dvh;
+padding: 5rem 0 0 0;
+z-index: -1;
+overflow-y:scroll;
+    background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.subLinkContainer{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 80%;
+}
+
+.link,
+.sublink{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-shadow: 2px 2px black;
+    width: 80%;
+    border-bottom: 1px solid white;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sublink{
+    width: 100%;
+    padding: 0.5rem 0 0.5rem 2rem;
+}
+
+.link:hover,
+.sublink:hover{
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+}
+
+.link:last-child{
+    border: none;
+    margin: 0 0 2rem 0;
+}
