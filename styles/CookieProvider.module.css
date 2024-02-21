@@ -69,3 +69,30 @@
 .decline:hover{
     cursor: pointer;
 }
+
+@media only screen and (max-aspect-ratio: 13/9){
+    .bar{
+        max-height: 20dvh;
+    }
+    .inner{
+        justify-content: center;
+        align-items: flex-start;
+        text-align: center;
+        margin: 0.5rem 0;
+    }
+    .buttons{
+        width: 100%;
+        margin: 0.5rem 0;
+        display: flex;
+        justify-content: center;
+    }
+    .accept{
+        aspect-ratio: 42/10;
+        margin: 0;
+    }
+    .decline{
+        aspect-ratio: 42/10;
+        margin: 0;
+    }
+  }
+
