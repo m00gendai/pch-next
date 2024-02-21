@@ -1,3 +1,5 @@
+import { Metadata } from "@/interfaces"
+
 const date:Date = new Date()
 
 export function convertDate(inputDate:string){
@@ -35,4 +37,41 @@ export function gradientPlaceholder(rgb:string[]){
             `,
     }
     return style
+}
+
+export async function pageMetadata(pageName:string){
+    const getMetadata: Response = await fetch(
+        `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${pageName}%22%7D&populate=1`,
+        {
+            headers: {
+                'api-key': `${process.env.CMS}`,
+            },
+        }
+    )
+    const metadata:Metadata = await getMetadata.json()
+
+    return {
+        title: metadata.title,
+        description: metadata.description,
+        openGraph: {
+            title: metadata.title,
+            description: metadata.description,
+            images: [
+                {
+                    url: metadata.image ? `${process.env.NEXT_PUBLIC_STORAGE}${metadata.image.path}` : "./sd_mrweber3.jpg",
+                }
+            ],
+            locale: 'de_CH',
+            type: 'website',
+        },
+        icons: {
+            icon: '/pch-logo.png',
+            shortcut: 'pch-logo.png',
+            apple: 'pch-logo.png',
+            other: {
+                rel: 'apple-touch-icon-precomposed',
+                url: 'pch-logo.png',
+            },
+        },
+    }
 }
