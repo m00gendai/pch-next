@@ -8,7 +8,6 @@
 
 .table{
     position: relative;
-    min-width: 1200px;
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
@@ -51,4 +50,19 @@
 
 .bodyRow:nth-child(2n+0) .bodyItem:first-child{
     background: white;
+}
+
+@media screen and (min-aspect-ratio: 13/9){
+    .table{
+        min-width: 1200px;
+    }
+}
+
+@media screen and (max-aspect-ratio: 13/9){
+    .headItem:first-child{
+        max-width: 50vw;
+    }
+    .bodyItem:first-child{
+        max-width: 50vw;
+    }
 }
