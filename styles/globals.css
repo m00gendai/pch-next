@@ -38,6 +38,7 @@ section{
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
+  width: 90%;
   max-width: 1500px;
 }
 
@@ -55,24 +56,6 @@ h1{
   border-bottom: 2px solid #0cc549;
   font-style: italic;
   word-wrap: break-word;
-}
-
-@media screen and (orientation: portrait) {
-  section{
-    width: 90%;
-  }
-  h1 {
-    font-size: 7.5vw;
-  }
-}
-
-@media screen and (orientation: landscape) {
-  section {
-      width: 90%;
-    }
-  h1 {
-    font-size: 7.5vh;
-  }
 }
 
 .chapter{
@@ -105,9 +88,32 @@ iframe{
   width: 100%;
   border: 0;
   outline: 0;
-  aspect-ratio: 21/10;
 }
 
 table{
   overflow-x:scroll;
+}
+
+@media screen and (max-aspect-ratio: 13/9) {
+  h1 {
+    font-size: 2rem;
+  }
+  iframe{
+    aspect-ratio: 3/4;
+  }
+  iframe.desktop{
+    display: none;
+  }
+}
+
+@media screen and (min-aspect-ratio: 13/9) {
+  h1 {
+    font-size: 4rem;
+  }
+  iframe{
+    aspect-ratio: 21/10;
+  }
+  iframe.mobile{
+    display: none;
+  }
 }
