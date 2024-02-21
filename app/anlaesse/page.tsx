@@ -1,5 +1,5 @@
 import { PageContent, Document, Table, Medium } from "@/interfaces"
-import { innerTextReplacer } from "@/utils"
+import { innerTextReplacer, pageMetadata } from "@/utils"
 import React from "react"
 import DocumentContainer from "@/components/DocumentContainer"
 import TableContainer from "@/components/TableContainer"
@@ -23,6 +23,10 @@ async function getPageContent(){
     const pageContent:PageContent[] = await getPageContent.json()
     return pageContent
 }
+
+export async function generateMetadata(){
+    return pageMetadata("Anlässe")
+  }
 
 export default async function Anlaesse(){
     const pageContent:PageContent[] = await getPageContent()

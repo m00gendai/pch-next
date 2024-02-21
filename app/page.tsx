@@ -3,6 +3,7 @@ import s from '../styles/Home.module.css'
 import {GiAchievement, GiCalendar, GiStabbedNote, GiThreeFriends} from "react-icons/gi"
 import { Hero, Logo } from "@/interfaces"
 import Image from "next/image"
+import { pageMetadata } from "@/utils"
 
 async function getLogoClub(){
   const getLogo: Response = await fetch(
@@ -55,6 +56,9 @@ async function getHeroImage(){
   return hero[0]
 }
 
+export async function generateMetadata(){
+  return pageMetadata("Home")
+}
 
 export default async function Home() {
 

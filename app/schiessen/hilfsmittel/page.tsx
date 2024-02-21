@@ -4,7 +4,7 @@ import Gallery from "@/components/Gallery"
 import Spacer from "@/components/Spacer"
 import TableContainer from "@/components/TableContainer"
 import { PageContent, Table, Document, Medium } from "@/interfaces"
-import { innerTextReplacer } from "@/utils"
+import { innerTextReplacer, pageMetadata } from "@/utils"
 import React from "react"
 
 async function getPageContent(){
@@ -23,6 +23,10 @@ async function getPageContent(){
     const pageContent:PageContent[] = await getPageContent.json()
     return pageContent
 }
+
+export async function generateMetadata(){
+    return pageMetadata("Hilfsmittel")
+  }
 
 export default async function Hilfsmittel(){
 

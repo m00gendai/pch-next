@@ -5,6 +5,7 @@ import LinkContainer from "@/components/LinkContainer";
 import Archive from "@/components/Archive";
 import revalidate from "../actions/revalidate";
 import Spacer from "@/components/Spacer";
+import { pageMetadata } from "@/utils";
 
 async function getDirs(){
     const date:Date = new Date();
@@ -60,6 +61,10 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
             return files
     }))
     return fileList
+}
+
+export async function generateMetadata(){
+  return pageMetadata("Resultate")
 }
 
 export default async function Resultate() {

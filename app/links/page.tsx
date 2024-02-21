@@ -2,6 +2,7 @@ import ChapterTitle from "@/components/ChapterTitle"
 import LinkGallery from "@/components/LinkGallery"
 import Spacer from "@/components/Spacer"
 import { LinkCollection } from "@/interfaces"
+import { pageMetadata } from "@/utils"
 import React from "react"
 
 async function getLinks(){
@@ -20,6 +21,10 @@ async function getLinks(){
     const links:LinkCollection[] = await getLinks.json()
     return links
 }
+
+export async function generateMetadata(){
+    return pageMetadata("Links")
+  }
 
 export default async function Links(){
 
