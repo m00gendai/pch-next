@@ -205,3 +205,16 @@ export interface GetFileResponse{
   result: string
   data: {temporary_url: string}
 }
+
+export interface Metadata{
+  page: string;
+  title: string;
+  description: string;
+  image: Medium,
+  _modified: number;
+  _mby: string;
+  _created: number;
+  _state: number;
+  _cby: string;
+  _id: string;
+}
