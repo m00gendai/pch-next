@@ -8,7 +8,7 @@ interface Props{
 
 export default function PlanButton({plan}:Props){
     return(
-        <Link key={`result_${plan._id}`} target="_blank" className={s.link} href={`${process.env.STORAGE}${plan.path}`}>
+        <Link key={`result_${plan._id}`} target="_blank" className={s.link} href={`${process.env.NEXT_PUBLIC_STORAGE}${plan.path}`}>
            <div className={s.flag}></div>
             <div className={s.title}>
                 {plan.title}
