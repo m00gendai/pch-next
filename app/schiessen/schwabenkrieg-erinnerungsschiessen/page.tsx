@@ -1,7 +1,7 @@
 import { PageContent, Table, skesTimes, Document, Medium, DirectoryResponse, Directory, FileResponse } from "@/interfaces";
 import PlanContainer from "@/components/PlanContainer";
 import ChapterTitle from "@/components/ChapterTitle";
-import { innerTextReplacer } from "@/utils";
+import { innerTextReplacer, pageMetadata } from "@/utils";
 import TableContainer from "@/components/TableContainer";
 import DocumentContainer from "@/components/DocumentContainer";
 import Gallery from "@/components/Gallery";
@@ -100,6 +100,10 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
           return files
   }))
   return fileList
+}
+
+export async function generateMetadata(){
+  return pageMetadata("Schwabenkrieg-Erinnerungsschiessen")
 }
 
 export default async function SKES() {

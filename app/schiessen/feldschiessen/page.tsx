@@ -2,7 +2,7 @@ import { PageContent, Table, Document, FsInfo, Medium } from "@/interfaces"
 import ChapterTitle from "@/components/ChapterTitle"
 import TableContainer from "@/components/TableContainer"
 import DocumentContainer from "@/components/DocumentContainer"
-import { innerTextReplacer } from "@/utils"
+import { innerTextReplacer, pageMetadata } from "@/utils"
 import PlanContainer from "@/components/PlanContainer"
 import Gallery from "@/components/Gallery"
 import Spacer from "@/components/Spacer"
@@ -42,6 +42,9 @@ async function getFsInfo(){
     return fsInfo[0]
 }
 
+export async function generateMetadata(){
+    return pageMetadata("Feldschiessen")
+  }
 
 export default async function FS(){
 

@@ -38,7 +38,7 @@ export default function Navbar(){
                 <Link className={s.homeLink} href={navbar[0].url}></Link>
                 {navbar.map((item, index)=>{
                     return(
-                        item.sub ?
+                        item.sub && index > 0 ?
                         <div className={s.surLinkContainer} onMouseEnter={(e)=>handleSubMenuTrigger(e, item.name)} onMouseLeave={(e)=>handleSubMenuTrigger(e, item.name)} key={`subMain_${index}`}>
                             <div className={s.link} >{`${item.name}`} <BsCaretDown style={{margin: "0 0 0 1rem"}}/></div>
                             {visible && submenu === item.name ?
@@ -59,7 +59,10 @@ export default function Navbar(){
                             }
                         </div>
                         :
-                        <Link className={s.link} href={item.url} key={`main_${index}`}>{`${item.name}`}</Link>
+                        index > 0 ? 
+                            <Link className={s.link} href={item.url} key={`main_${index}`}>{`${item.name}`}</Link>
+                        :
+                            null
                         )
                 })}
             </div>

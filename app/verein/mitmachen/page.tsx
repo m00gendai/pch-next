@@ -3,7 +3,7 @@ import ChapterTitle from "@/components/ChapterTitle"
 import Gallery from "@/components/Gallery"
 import TableContainer from "@/components/TableContainer"
 import DocumentContainer from "@/components/DocumentContainer"
-import { innerTextReplacer } from "@/utils"
+import { innerTextReplacer, pageMetadata } from "@/utils"
 import Spacer from "@/components/Spacer"
 import React from "react"
 
@@ -24,6 +24,9 @@ async function getPageContent(){
     return pageContent
 }
 
+export async function generateMetadata(){
+    return pageMetadata("Mitmachen")
+  }
 
 export default async function Mitmachen(){
 

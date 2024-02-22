@@ -2,7 +2,7 @@ import { PageContent, Table, Document, Medium, Board } from "@/interfaces"
 import ChapterTitle from "@/components/ChapterTitle"
 import TableContainer from "@/components/TableContainer"
 import DocumentContainer from "@/components/DocumentContainer"
-import { innerTextReplacer } from "@/utils"
+import { innerTextReplacer, pageMetadata } from "@/utils"
 import Gallery from "@/components/Gallery"
 import BoardContainer from "@/components/BoardContainer"
 import ContactForm from "@/components/ContactForm/ContactForm"
@@ -43,6 +43,9 @@ async function getBoard(){
     return board
 }
 
+export async function generateMetadata(){
+    return pageMetadata("Informationen")
+  }
 
 export default async function Verein(){
 

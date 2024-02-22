@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
-import s from "@/styles/CookieExplainer.module.css"
-import ChapterTitle from "./ChapterTitle"
+import s from "./CookieExplainer.module.css"
+import ChapterTitle from "@/components/ChapterTitle"
+import CookieDeleteButton from "./CookieDeleteButton"
 
 export default function CookieExplainer(){
 
@@ -22,13 +23,18 @@ export default function CookieExplainer(){
                                 <tr>
                                 <th>Cookie Name</th>
                                 <th>Cookie Wert</th>
+                                <th>Aktion</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                 cookieStore.getAll().map((cookie) => {
                                     return (
-                                    <tr key={`cookietr_${cookie.name}`}><td>{cookie.name}</td><td>{cookie.value}</td></tr>
+                                    <tr key={`cookietr_${cookie.name}`}>
+                                        <td>{cookie.name}</td>
+                                        <td>{cookie.value}</td>
+                                        <td><CookieDeleteButton cookie={cookie.name} /></td>
+                                    </tr>
                                     )
                                 })
                                 }
