@@ -1,6 +1,6 @@
 import { cookies } from "next/headers"
-import s from "@/styles/CookieExplainer.module.css"
-import ChapterTitle from "./ChapterTitle"
+import s from "./CookieExplainer.module.css"
+import ChapterTitle from "@/components/ChapterTitle"
 import CookieDeleteButton from "./CookieDeleteButton"
 
 export default function CookieExplainer(){

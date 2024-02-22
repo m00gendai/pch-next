@@ -4,8 +4,7 @@ import { CookieConsent, getCookieConsentValue } from "react-cookie-consent";
 import { useEffect } from "react"
 import ReactGA from "react-ga4";
 import Link from "next/link"
-
-import c from "@/styles/CookieProvider.module.css"
+import c from "./CookieProvider.module.css"
 
 interface Props{
     children: React.ReactNode
