@@ -6,7 +6,7 @@ import DocumentContainer from "@/components/DocumentContainer"
 import { innerTextReplacer, pageMetadata } from "@/utils"
 import Spacer from "@/components/Spacer"
 import React from "react"
-import CookieExplainer from "@/components/CookieExplainer"
+import CookieExplainer from "@/components/Cookies/CookieExplainer"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
