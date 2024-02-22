@@ -25,7 +25,7 @@ async function getPageContent(){
 }
 
 export async function generateMetadata(){
-    return pageMetadata("Obligatorisch")
+    return pageMetadata("Obligatorisches")
   }
 
 export default async function Obli(){
