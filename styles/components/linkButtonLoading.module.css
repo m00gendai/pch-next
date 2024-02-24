@@ -1,0 +1,51 @@
+.link {
+  width: 100%;
+  background: linear-gradient(315deg, #e7eff9, #cfd6e6);
+  background-size: 400% 400%;
+  -webkit-animation: loading 2s ease infinite;
+  -moz-animation: loading 2s ease infinite;
+  animation: loading 2s ease infinite;
+  box-shadow: 0px 0px 5px -2px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+  transition: 0.2s;
+  text-decoration: none;
+  color: black;
+}
+
+@media only screen and (max-aspect-ratio: 13/9){
+  .link {
+      aspect-ratio: 5/1;
+    }
+}
+
+@media only screen and (min-aspect-ratio: 13/9){
+  .link {
+      aspect-ratio: 3/1;
+    }
+}
+
+.link:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 0px black;
+}
+
+
+@-webkit-keyframes loading {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@-moz-keyframes loading {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes loading {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
