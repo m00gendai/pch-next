@@ -1,11 +1,12 @@
 import { Directory, DirectoryResponse, FileResponse } from "../../interfaces"
 import ChapterTitle from "@/components/ChapterTitle";
-import React from "react";
+import React, { Suspense } from "react";
 import LinkContainer from "@/components/LinkContainer";
 import Archive from "@/components/Archive";
 import revalidate from "../actions/revalidate";
 import Spacer from "@/components/Spacer";
 import { pageMetadata } from "@/utils";
+import LoadingSkeleton from "@/components/loadingSkeleton";
 
 async function getDirs(){
     const date:Date = new Date();
@@ -89,6 +90,7 @@ export default async function Resultate() {
             Die Resultate sind nach Aktualität geordnet.`}}>
           </div>
         </div>
+        <Suspense fallback={<LoadingSkeleton />}>
         {
           sortedYearDirectoryList.length == 0 
           ? 
@@ -105,6 +107,7 @@ export default async function Resultate() {
             );
           })
         }
+        </Suspense>
         <Archive />
         <Spacer />
       </section>
