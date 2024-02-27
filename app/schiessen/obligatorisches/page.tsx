@@ -6,6 +6,7 @@ import { innerTextReplacer, pageMetadata } from "@/utils"
 import Gallery from "@/components/Gallery"
 import Spacer from "@/components/Spacer"
 import React from "react"
+import ShootingDays from "@/components/ShootingDays/ShootingDays"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -44,6 +45,8 @@ export default async function Obli(){
                         Daher gibt es auch keine Mindestpunktzahl, um das Obligatorische zu bestehen.`}}>
                     </div>
                 </div>
+                <ChapterTitle title={`Schiessdaten`} />
+                <ShootingDays />
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>
