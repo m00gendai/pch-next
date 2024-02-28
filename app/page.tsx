@@ -66,12 +66,15 @@ export default async function Home() {
   const logoSkes: Logo = await getLogoSkes()
   const hero: Hero = await getHeroImage()
 
+  const date:Date = new Date()
+  const currentYear: number = date.getFullYear()
+
   return (
     <main className="main">
      <section className="section">
       <div className={s.contentBox}>
         <Link className={`${s.skes} ${s.top}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}>
-          <span className={s.skesText}>Schwabenkrieg-Erinnerungsschiessen 2023</span>
+          <span className={s.skesText}>{`Schwabenkrieg-Erinnerungsschiessen ${currentYear}`}</span>
           </Link>
           <div className={s.hero}>
             <Image
@@ -95,7 +98,7 @@ export default async function Home() {
          
 
         
-        <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}><span className={s.skesText}>Schwabenkrieg-Erinnerungsschiessen 2024</span></Link>
+        <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}><span className={s.skesText}>{`Schwabenkrieg-Erinnerungsschiessen ${currentYear}`}</span></Link>
         </div>
       </section>
     </main>
