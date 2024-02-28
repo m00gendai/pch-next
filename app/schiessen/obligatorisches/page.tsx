@@ -46,7 +46,11 @@ export default async function Obli(){
                     </div>
                 </div>
                 <ChapterTitle title={`Schiessdaten`} />
-                <ShootingDays />
+                <ShootingDays 
+                    shootType={1}
+                    canton={["SH"]} 
+                    disciplineType={["P25", "P50"]}
+                    />
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>

@@ -1,7 +1,14 @@
 import s from "./ShootingDays.module.css"
 import MapLink from "./MapLink"
+import { getCanton, getShootingType } from "@/utils"
 
-async function getShootingDays(){
+interface Props{
+    shootType: number
+    canton: string[]
+    disciplineType: string[]
+}
+
+async function getShootingDays(shootType:number, canton:string[], disciplineType:string[]){
 
     const date:Date = new Date()
 
@@ -18,22 +25,17 @@ async function getShootingDays(){
             "type": {
                 "filterType": "number",
                 "variant": "equals",
-                "filter": 1
+                "filter": shootType
             },
             "canton": {
                 "filterType": "multi-select",
                 "variant": "singleTargetInListString",
-                "filter": [
-                    "SH"
-                ]
+                "filter": canton
             },
             "disciplineShortNameGerman": {
                 "filterType": "multi-select",
                 "variant": "singleTargetInListString",
-                "filter": [
-                    "P50", 
-                    "P25"
-                ]
+                "filter": disciplineType
             }
         },
         "sortModel": [
@@ -56,9 +58,9 @@ async function getShootingDays(){
 }
 
 
-export default async function ShootingDays(){
+export default async function ShootingDays({shootType, canton, disciplineType}:Props){
     const date: Date = new Date()
-    const shootingDays: ShootingDayResponse = await getShootingDays()
+    const shootingDays: ShootingDayResponse = await getShootingDays(shootType, canton, disciplineType)
     const dateOptions:Intl.DateTimeFormatOptions = {
         weekday: "long",
         year: "numeric", 
@@ -71,6 +73,8 @@ export default async function ShootingDays(){
     }
 
     return(
+        <>
+        <p>{`Im Jahre ${date.getFullYear()} finden im Kanton ${getCanton(canton)} ${getShootingType(shootType)} an folgenden Daten und Orten statt:`}</p>
             <div className={s.container}>
                 {shootingDays.items.map(item=>{
                     return(
@@ -80,16 +84,17 @@ export default async function ShootingDays(){
                                 <p className={s.time}>{`${new Date(item.from).toLocaleTimeString("de-CH", timeOptions)} - ${new Date(item.from).toLocaleTimeString("de-CH", timeOptions)}`}</p>
                             </div>
                             <div className={s.info}>
-                                <p className={s.location}>{item.location}</p>
+                                <p className={s.location}>{item.firingRangeName}</p>
                                 <p className={s.club}>{item.organizationName}</p>
                             </div>
-                            <div className={s.map}>
+
                                 <MapLink coord1={item.coordinates.split("/")[0]} coord2={item.coordinates.split("/")[1]} />
-                            </div>
+                            
                         </div>
                     )
                 })}
             </div>
+        </>
 
     )
 }
