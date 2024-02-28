@@ -75,3 +75,33 @@ export async function pageMetadata(pageName:string){
         },
     }
 }
+
+export function getShootingType(type:number){
+    switch(type){
+        case 1:
+            return "die Obligatorischen Übungen"
+        case 2:
+            return "das Feldschiessen"
+        case 3:
+            return "die Jungschützenkurse"
+        case 4:
+            return "Schützenfeste und Vereinswettkämpfe"
+        case 5:
+            return "Trainings"
+        case 6: 
+            return "anderweitige Anlässe"
+    }
+}
+
+export function getCanton(canton:string[]){
+    const longArr:string[] = []
+    canton.forEach(item=>{
+        if(item === "SH"){
+            longArr.push("Schaffhausen")
+        }
+        if(item === "ZH"){
+            longArr.push("Zürich")
+        }
+    })
+    return longArr.join(", ")
+}
