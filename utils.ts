@@ -1,4 +1,7 @@
 import { Metadata } from "@/interfaces"
+import P5025 from "./public/p5025.svg"
+import P50 from "./public/p50.svg"
+import P25 from "./public/p25.svg"
 
 const date:Date = new Date()
 
@@ -81,7 +84,7 @@ export function getShootingType(type:number, count: number){
         case 1:
             return count === 1 ? "Obligatorische Übung" : "Obligatorische Übungen"
         case 2:
-            return "das Feldschiessen"
+            return "Feldschiessen"
         case 3:
             return "die Jungschützenkurse"
         case 4:
@@ -187,10 +190,29 @@ export function getDiscipline(disciplineType:string[]){
         if(type === "P25"){
             longArr.push("Pistole 25m")
         }
+        if(type === "P25 + P50"){
+            longArr.push("Pistole 25/50m")
+        }
         if(type === "G300"){
             longArr.push("Gewehr 300m")
         }
     })
     console.log(longArr)
     return longArr.join(", ")
+}
+
+export function getIcon(type:string){
+    if(type === "P50"){
+        return P50
+    }
+    if(type === "P25"){
+        return P25
+    }
+    if(type === "P25 + P50"){
+        return P5025
+    }
+    if(type === "G300"){
+      
+    }
+    
 }
