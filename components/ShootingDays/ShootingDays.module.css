@@ -63,6 +63,16 @@
     padding: 0.5rem;
 }
 
+.image{
+    position: relative;
+    margin: 0.5rem;
+    height: calc(100% - 1rem);
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .map{
     position: relative;
     margin: 0.5rem;
