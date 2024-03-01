@@ -76,10 +76,10 @@ export async function pageMetadata(pageName:string){
     }
 }
 
-export function getShootingType(type:number){
+export function getShootingType(type:number, count: number){
     switch(type){
         case 1:
-            return "die Obligatorischen Übungen"
+            return count === 1 ? "Obligatorische Übung" : "Obligatorische Übungen"
         case 2:
             return "das Feldschiessen"
         case 3:
@@ -96,12 +96,101 @@ export function getShootingType(type:number){
 export function getCanton(canton:string[]){
     const longArr:string[] = []
     canton.forEach(item=>{
+        if(item === "AG"){
+            longArr.push("Aargau")
+        }
+        if(item === "AI"){
+            longArr.push("Appenzell Innerrhoden")
+        }
+        if(item === "AR"){
+            longArr.push("Appenzell Ausserrhoden")
+        }
+        if(item === "BE"){
+            longArr.push("Bern")
+        }
+        if(item === "BL"){
+            longArr.push("Basel-Landschaft")
+        }
+        if(item === "BS"){
+            longArr.push("Basel-Stadt")
+        }
+        if(item === "FR"){
+            longArr.push("Fribourg")
+        }
+        if(item === "GE"){
+            longArr.push("Genf")
+        }
+        if(item === "GL"){
+            longArr.push("Glarus")
+        }
+        if(item === "GR"){
+            longArr.push("Graubünden")
+        }
+        if(item === "JU"){
+            longArr.push("Jura")
+        }
+        if(item === "LU"){
+            longArr.push("Luzern")
+        }
+        if(item === "NE"){
+            longArr.push("Neuenburg")
+        }
+        if(item === "NW"){
+            longArr.push("Nidwalden")
+        }
+        if(item === "OW"){
+            longArr.push("Obwalden")
+        }
+        if(item === "SG"){
+            longArr.push("St. Gallen")
+        }
         if(item === "SH"){
             longArr.push("Schaffhausen")
+        }
+        if(item === "SO"){
+            longArr.push("Solothurn")
+        }
+        if(item === "SZ"){
+            longArr.push("Schwyz")
+        }
+        if(item === "TG"){
+            longArr.push("Thurgau")
+        }
+        if(item === "TI"){
+            longArr.push("Tessin")
+        }
+        if(item === "UR"){
+            longArr.push("Uri")
+        }
+        if(item === "VD"){
+            longArr.push("Waadt")
+        }
+        if(item === "VS"){
+            longArr.push("Wallis")
+        }
+        if(item === "ZG"){
+            longArr.push("Zug")
         }
         if(item === "ZH"){
             longArr.push("Zürich")
         }
     })
+    return longArr.join(", ")
+}
+
+export function getDiscipline(disciplineType:string[]){
+    const longArr:string[] = []
+    disciplineType.forEach(type =>{
+        if(type === "P50"){
+            longArr.push("Pistole 50m")
+        }
+        if(type === "P25"){
+            longArr.push("Pistole 25m")
+        }
+        if(type === "G300"){
+            longArr.push("Gewehr 300m")
+        }
+    })
+    console.log(longArr)
     return longArr.join(", ")
 }
