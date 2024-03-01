@@ -1,11 +1,19 @@
+import ShootingDayContainer from "./ShootingDayContainer"
+import Link from "next/link"
 import s from "./ShootingDays.module.css"
-import MapLink from "./MapLink"
-import { getCanton, getShootingType } from "@/utils"
+import { getCanton, getDiscipline, getShootingType } from "@/utils"
 
 interface Props{
     shootType: number
     canton: string[]
     disciplineType: string[]
+}
+
+
+async function convertSwissgrid(coord1:string, coord2:string){
+    // The coordinates from the Shooting Days are, for SOME GODFORSAKEN REASON, in LV03
+   const getCoordinates = await fetch(`https://geodesy.geo.admin.ch/reframe/lv03towgs84?easting=${coord1}&northing=${coord2}&format=json`)
+   return await getCoordinates.json()
 }
 
 async function getShootingDays(shootType:number, canton:string[], disciplineType:string[]){
@@ -54,47 +62,35 @@ async function getShootingDays(shootType:number, canton:string[], disciplineType
         body: JSON.stringify(requestBody)
     })
 
-    return await getShootingDays.json() 
+    const shootingDays:ShootingDayResponse = await getShootingDays.json()
+    const swissgridded:SwissgriddedItem[] = await Promise.all(shootingDays.items.map(async item=>{
+        const coord1=item.coordinates.split("/")[0]
+        const coord2=item.coordinates.split("/")[1]
+        const wgs84 = await convertSwissgrid(coord1, coord2)
+        return {...item, coordinates: wgs84}
+    }))
+    const swissgriddedItems:SwissgriddedShootingDays = {
+        items: swissgridded,
+        totalItems: shootingDays.totalItems
+    }
+    return swissgriddedItems
 }
-
 
 export default async function ShootingDays({shootType, canton, disciplineType}:Props){
     const date: Date = new Date()
-    const shootingDays: ShootingDayResponse = await getShootingDays(shootType, canton, disciplineType)
-    const dateOptions:Intl.DateTimeFormatOptions = {
-        weekday: "long",
-        year: "numeric", 
-        month: "2-digit",
-        day: "2-digit"
-    }
-    const timeOptions: Intl.DateTimeFormatOptions = {
-        hour: "2-digit",
-        minute: "2-digit"
-    }
-
+    const shootingDays: SwissgriddedShootingDays = await getShootingDays(shootType, canton, disciplineType)
     return(
-        <>
-        <p>{`Im Jahre ${date.getFullYear()} finden im Kanton ${getCanton(canton)} ${getShootingType(shootType)} an folgenden Daten und Orten statt:`}</p>
-            <div className={s.container}>
-                {shootingDays.items.map(item=>{
-                    return(
-                        <div className={s.entry}>
-                            <div className={s.dateTime}>
-                                <p className={s.date}>{new Date(item.from).toLocaleDateString("de-CH", dateOptions)}</p>
-                                <p className={s.time}>{`${new Date(item.from).toLocaleTimeString("de-CH", timeOptions)} - ${new Date(item.from).toLocaleTimeString("de-CH", timeOptions)}`}</p>
-                            </div>
-                            <div className={s.info}>
-                                <p className={s.location}>{item.firingRangeName}</p>
-                                <p className={s.club}>{item.organizationName}</p>
-                            </div>
-
-                                <MapLink coord1={item.coordinates.split("/")[0]} coord2={item.coordinates.split("/")[1]} />
-                            
-                        </div>
-                    )
-                })}
-            </div>
-        </>
+        <div className={s.shootingDays}>
+            <p className={s.intro} dangerouslySetInnerHTML={{__html: 
+                `Im Jahre ${date.getFullYear()} ${shootingDays.totalItems === 1 ? "findet" : "finden"} ${canton.length > 1 ? `in den Kantonen` : `im Kanton`} ${getCanton(canton)} ${shootingDays.totalItems} ${getShootingType(shootType, shootingDays.totalItems)} mit ${getDiscipline(disciplineType)} an folgenden Daten und Orten statt:`
+            }}></p>
+            <ShootingDayContainer shootingDays={shootingDays} />
+            <p className={s.dontForget} dangerouslySetInnerHTML={{__html: 
+                `<strong>Nicht vergessen mitzunehmen:</strong>
+                Aufforderungsschreiben mit den Klebeetiketten, Dienstbüchlein, Schiessbüchlein oder militärischer Leistungsausweis, amtlicher Ausweis, persönliche Dienstwaffe mit Putzzeug, persönlicher Gehörschutz.`
+            }}></p>
+            <Link className={s.link} title={"Schiesswesen ausser Dienst, Abfrage Schiesstage"} href={`https://www.sat.admin.ch/search-shooting-days`} target={`_blank`}>{`Weitere schweizweite Schiessdaten sind beim Schiesswesen ausser Dienst, Abfrage Schiesstage ersichtlich.`}</Link>
+        </div>
 
     )
 }
