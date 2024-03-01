@@ -49,7 +49,7 @@ export default async function Obli(){
                 <ShootingDays 
                     shootType={1}
                     canton={["SH"]} 
-                    disciplineType={["P25", "P50"]}
+                    disciplineType={["P25", "P50", "P25 + P50"]}
                     />
                 {pageContent.map(content=>{
                     return(
