@@ -1,6 +1,5 @@
 import Link from "next/link"
 import s from '../styles/Home.module.css'
-import {GiAchievement, GiCalendar, GiStabbedNote, GiThreeFriends} from "react-icons/gi"
 import { Hero, Logo } from "@/interfaces"
 import Image from "next/image"
 import { pageMetadata } from "@/utils"
