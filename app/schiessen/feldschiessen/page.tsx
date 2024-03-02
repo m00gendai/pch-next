@@ -7,6 +7,7 @@ import PlanContainer from "@/components/PlanContainer"
 import Gallery from "@/components/Gallery"
 import Spacer from "@/components/Spacer"
 import React from "react"
+import ShootingDays from "@/components/ShootingDays/ShootingDays"
 
 async function getPageContent(){
     const getPageContent:Response = await fetch(
@@ -72,6 +73,11 @@ export default async function FS(){
                     <div className="chapter_text" dangerouslySetInnerHTML={{__html: fsInfo.range.map }}>
                     </div>
                 </div>
+                <ShootingDays 
+                    shootType={2}
+                    canton={["SH"]} 
+                    disciplineType={["P25", "P50", "P25 + P50"]}
+                    />
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>
