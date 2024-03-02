@@ -27,8 +27,8 @@ export default function Navbar_Mobile(){
 
     return(
         <nav className ={s.nav}>
-            <Link className={s.homeLink} href={navbar[0].url}></Link>
-            <div className={s.menu} onClick={()=>{setVisible(!visible)}}>
+            <Link className={s.homeLink} href={navbar[0].url} title="Home"></Link>
+            <div className={s.menu} onClick={()=>{setVisible(!visible)}} title="Menü">
             {visible ?
                 <GiKnifeFork style={{fontSize: "2rem", color: "white"}}/>
             :
