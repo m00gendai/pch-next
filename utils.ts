@@ -69,12 +69,12 @@ export async function pageMetadata(pageName:string){
             type: 'website',
         },
         icons: {
-            icon: '/pch-logo.png',
-            shortcut: 'pch-logo.png',
-            apple: 'pch-logo.png',
+            icon: '/pch-logo32.png',
+            shortcut: '/pch-logo96.png',
+            apple: '/pch-logo180.png',
             other: {
                 rel: 'apple-touch-icon-precomposed',
-                url: 'pch-logo.png',
+                url: '/pch-logo180.png',
             },
         },
     }
