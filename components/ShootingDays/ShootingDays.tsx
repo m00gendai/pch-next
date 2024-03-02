@@ -85,10 +85,10 @@ export default async function ShootingDays({shootType, canton, disciplineType}:P
                 `Im Jahre ${date.getFullYear()} ${shootingDays.totalItems === 1 ? "findet" : "finden"} ${canton.length > 1 ? `in den Kantonen` : `im Kanton`} ${getCanton(canton)} ${shootingDays.totalItems} ${getShootingType(shootType, shootingDays.totalItems)} mit ${getDiscipline(disciplineType)} an folgenden Daten und Orten statt:`
             }}></p>
             <ShootingDayContainer shootingDays={shootingDays} />
-            <p className={s.dontForget} dangerouslySetInnerHTML={{__html: 
+            {shootType === 1 ? <p className={s.dontForget} dangerouslySetInnerHTML={{__html: 
                 `<strong>Nicht vergessen mitzunehmen:</strong>
                 Aufforderungsschreiben mit den Klebeetiketten, Dienstbüchlein, Schiessbüchlein oder militärischer Leistungsausweis, amtlicher Ausweis, persönliche Dienstwaffe mit Putzzeug, persönlicher Gehörschutz.`
-            }}></p>
+            }}></p> : null}
             <Link className={s.link} title={"Schiesswesen ausser Dienst, Abfrage Schiesstage"} href={`https://www.sat.admin.ch/search-shooting-days`} target={`_blank`}>{`Weitere schweizweite Schiessdaten sind beim Schiesswesen ausser Dienst, Abfrage Schiesstage ersichtlich.`}</Link>
         </div>
 

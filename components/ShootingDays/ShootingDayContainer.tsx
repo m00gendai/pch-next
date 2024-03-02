@@ -36,13 +36,15 @@ export default function ShootingDayContainer({shootingDays}:Props){
                         const icon = getIcon(item.disciplineShortNameGerman)
                     return(
                         <div className={s.entry} key={`entry_${index}`}>
-                            <div className={s.dateTime}>
-                                <p className={s.date} dangerouslySetInnerHTML={{__html: new Date(item.from).toLocaleDateString("de-CH", dateOptions)}}></p>
-                                <p className={s.time}>{`${new Date(item.from).toLocaleTimeString("de-CH", timeOptions)} - ${new Date(item.to).toLocaleTimeString("de-CH", timeOptions)}`}</p>
-                            </div>
-                            <div className={s.info}>
-                                <p className={s.location}>{item.firingRangeName}</p>
-                                <p className={s.club}>{item.organizationName}</p>
+                            <div className={s.text}>
+                                <div className={s.dateTime}>
+                                    <p className={s.date} dangerouslySetInnerHTML={{__html: new Date(item.from).toLocaleDateString("de-CH", dateOptions)}}></p>
+                                    <p className={s.time}>{`${new Date(item.from).toLocaleTimeString("de-CH", timeOptions)} - ${new Date(item.to).toLocaleTimeString("de-CH", timeOptions)}`}</p>
+                                </div>
+                                <div className={s.info}>
+                                    <p className={s.location}>{item.firingRangeName}</p>
+                                    <p className={s.club}>{item.organizationName}</p>
+                                </div>
                             </div>
                             <div className={s.image}>
                             <Image 
