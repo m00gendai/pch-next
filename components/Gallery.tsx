@@ -16,7 +16,7 @@ export default function Gallery({images}:Props){
 
     const [showLightBox, setShowLightBox] = useState<boolean>(false)
     const [lightBoxIndex, setLightBoxIndex] = useState<number>(0)
-console.log(process.env.CMS)
+
     function handleClick(index:number){
         setLightBoxIndex(index)
         setShowLightBox(true)

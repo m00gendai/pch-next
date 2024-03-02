@@ -35,7 +35,7 @@ export default function Navbar(){
     return(
         <nav className ={s.nav}>
             <div className={s.linkContainer}>
-                <Link className={s.homeLink} href={navbar[0].url}></Link>
+                <Link className={s.homeLink} href={navbar[0].url} title="Home"></Link>
                 {navbar.map((item, index)=>{
                     return(
                         item.sub && index > 0 ?
