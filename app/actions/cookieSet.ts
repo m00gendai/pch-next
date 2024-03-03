@@ -10,7 +10,7 @@ export default async function setThatCookie(name:string, value:string){
         cookies().set({
             name: name,
             value: value,
-            domain: domain
+            domain: `www.${domain}`
         })
     }
     if(domain === "localhost:3000"){
