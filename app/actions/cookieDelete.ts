@@ -11,7 +11,7 @@ export default async function deleteCookie(name:string){
             name: name,
             value: "",
             maxAge: 0,
-            domain: `www.${domain}`
+         
         })
         if(name === "pchallau_analytics"){
             cookies().getAll().map(cookie=>{
@@ -20,7 +20,7 @@ export default async function deleteCookie(name:string){
                         name: cookie.name,
                         value: "",
                         maxAge: 0,
-                        domain: `www.${domain}`
+                
                     })
                 }
             })
