@@ -14,7 +14,7 @@ export default function CookieExplainer(){
             <ChapterTitle title={"Cookies"} />
             <div className="chapter">
             <div className="chapter_text">
-                <p>{`${websiteName} nutzt nachfolgend aufgelistet die aktiven Cookies:`}</p>
+                <p dangerouslySetInnerHTML={{__html: `${websiteName} nutzt nachfolgend aufgelistete aktive Cookies. Diese können mittels <em>Cookie löschen</em> jederzeit von Hand wieder entfernt werden.`}}></p>
                 {
                     cookieStore.getAll().length !== 0 ?
                     <div className={s.tableContainer}>
@@ -22,8 +22,8 @@ export default function CookieExplainer(){
                             <thead>
                                 <tr>
                                 <th>Cookie Name</th>
-                                <th>Cookie Wert</th>
                                 <th>Aktion</th>
+                                <th>Cookie Wert</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,8 +32,13 @@ export default function CookieExplainer(){
                                     return (
                                     <tr key={`cookietr_${cookie.name}`}>
                                         <td>{cookie.name}</td>
+                                        <td>
+                                            <div className={s.cookieAction}>
+                                                <CookieDeleteButton cookie={cookie.name} />
+                                                <p dangerouslySetInnerHTML={{__html: cookie.name === "pchallau_analytics" ? `Löscht automatisch die Cookies <em>_ga</em> sowie <em>_ga_${process.env.NEXT_PUBLIC_GA?.split("-")[1]}</em>` : ""}}></p>
+                                            </div>
+                                        </td>
                                         <td>{cookie.value}</td>
-                                        <td><CookieDeleteButton cookie={cookie.name} /></td>
                                     </tr>
                                     )
                                 })
@@ -50,7 +55,6 @@ export default function CookieExplainer(){
                         <thead>
                             <tr>
                             <th>Cookie Name</th>
-                            <th>Zwingend</th>
                             <th>Voraussetzung</th>
                             <th>Cookie Wert</th>
                             <th>Erklärung</th>
@@ -59,7 +63,6 @@ export default function CookieExplainer(){
                         <tbody>
                             <tr>
                             <td>{`${cookieName}`}</td>
-                            <td></td>
                             <td>Cookies akzeptiert/abgelehnt</td>
                             <td><i>true</i> oder <i>false</i></td>
                             <td>
@@ -68,14 +71,12 @@ export default function CookieExplainer(){
                             </tr>
                             <tr>
                             <td>_ga</td>
-                            <td>nein</td>
                             <td>{`${cookieName} akzeptiert`}</td>
                             <td><i>{`Beispiel:\nGA1.1.991332693.1694678232`}</i></td>
                             <td>Zufallsgenerierte Nutzer-ID für Google Analytics</td>
                             </tr>
                             <tr>
-                            <td>_ga_A2ABC2ABCD</td>
-                            <td>nein</td>
+                            <td>{`_ga_${process.env.NEXT_PUBLIC_GA?.split("-")[1]}`}</td>
                             <td>{`${cookieName} akzeptiert`}</td>
                             <td><i>{`Beispiel:\nGS1.1.1694678231.1.1.1694678249.0.0.0`}</i></td>
                             <td>Zufallsgenerierte Nutzer-ID für Google Analytics</td>
