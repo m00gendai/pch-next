@@ -20,7 +20,7 @@ export default async function deleteCookie(name:string){
                         name: cookie.name,
                         value: "",
                         maxAge: 0,
-                
+                        domain: `.${domain}`
                     })
                 }
             })
