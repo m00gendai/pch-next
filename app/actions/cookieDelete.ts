@@ -13,11 +13,34 @@ export default async function deleteCookie(name:string){
             maxAge: 0,
             domain: domain
         })
+        if(name === "pchallau_analytics"){
+            cookies().getAll().map(cookie=>{
+                if(cookie.name.startsWith("_ga")){
+                    cookies().set({
+                        name: cookie.name,
+                        value: "",
+                        maxAge: 0,
+                        domain: domain
+                    })
+                }
+            })
+        }
     } else {
         cookies().set({
             name: name,
             value: "",
             maxAge: 0
         })
+        if(name === "pchallau_analytics"){
+            cookies().getAll().map(cookie=>{
+                if(cookie.name.startsWith("_ga")){
+                    cookies().set({
+                        name: cookie.name,
+                        value: "",
+                        maxAge: 0,
+                    })
+                }
+            })
+        }
     }
 }
