@@ -1,7 +1,15 @@
 "use server"
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 export default async function deleteCookie(name:string){
-    cookies().set(name, "", {maxAge: 0})
+
+    const headerList = headers()
+    const domain:string = headerList.get("host") || ""
+    cookies().set({
+        name: "",
+        value: "",
+        maxAge: 0,
+        domain: `.${domain}`
+    })
 }
