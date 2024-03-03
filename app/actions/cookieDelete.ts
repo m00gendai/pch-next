@@ -6,6 +6,7 @@ export default async function deleteCookie(name:string){
 
     const headerList = headers()
     const domain:string = headerList.get("host") || ""
+    cookies().set("test", domain)
     cookies().set({
         name: "",
         value: "",
