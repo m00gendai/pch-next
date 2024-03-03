@@ -34,3 +34,9 @@
     padding: 0.5rem;
     white-space: pre;
 }
+
+.cookieAction{
+    position: relative;
+    display: flex;
+    gap: 1rem;
+}
