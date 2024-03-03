@@ -6,11 +6,18 @@ export default async function deleteCookie(name:string){
 
     const headerList = headers()
     const domain:string = headerList.get("host") || ""
-    cookies().set("test", domain)
-    cookies().set({
-        name: "",
-        value: "",
-        maxAge: 0,
-        domain: `.${domain}`
-    })
+    if(domain !== "localhost:3000"){
+        cookies().set({
+            name: name,
+            value: "",
+            maxAge: 0,
+            domain: domain
+        })
+    } else {
+        cookies().set({
+            name: name,
+            value: "",
+            maxAge: 0
+        })
+    }
 }

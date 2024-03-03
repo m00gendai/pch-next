@@ -1,7 +1,22 @@
 "use server"
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 export default async function setThatCookie(name:string, value:string){
-    cookies().set(name, value)
+    const headerList = headers()
+    const domain:string = headerList.get("host") || ""
+
+    if(domain !== "localhost:3000"){
+        cookies().set({
+            name: name,
+            value: value,
+            domain: domain
+        })
+    }
+    if(domain === "localhost:3000"){
+        cookies().set({
+            name: name,
+            value: value,
+        })
+    }
 }
