@@ -83,6 +83,10 @@ h1{
   width: 100%;
 }
 
+.chapter_text a{
+  word-wrap: break-word;
+}
+
 iframe{
   position: relative;
   width: 100%;

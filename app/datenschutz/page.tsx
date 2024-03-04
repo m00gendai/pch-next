@@ -37,7 +37,12 @@ export default async function DSGVO(){
         <main className="main">
             <section className="section">
                 <h1>Datenschutz</h1>
-                <CookieExplainer />
+                <ChapterTitle title={"Cookies"} />
+                <div className="chapter">
+                    <div className="chapter_text">
+                        <CookieExplainer websiteName={"pistolenclub-hallau.ch"} analyticsCookie={"pchallau_analytics"}/>
+                    </div>
+                </div>
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>

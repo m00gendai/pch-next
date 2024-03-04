@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 
 interface Props{
     cookie: string
+    disabled: boolean
 }
 
 function handleClick(router:AppRouterInstance, cookie:string){
@@ -14,9 +15,9 @@ function handleClick(router:AppRouterInstance, cookie:string){
     router.refresh()
 }
 
-export default function CookieDeleteButton({cookie}:Props){
+export default function CookieDeleteButton({cookie, disabled}:Props){
     const router:AppRouterInstance = useRouter()
     return(
-        <button onClick={()=>handleClick(router, cookie)}>Cookie löschen</button>
+        <button disabled={disabled} onClick={()=>handleClick(router, cookie)}>Cookie löschen</button>
     )
 }
