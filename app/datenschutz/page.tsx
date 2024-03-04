@@ -40,7 +40,7 @@ export default async function DSGVO(){
                 <ChapterTitle title={"Cookies"} />
                 <div className="chapter">
                     <div className="chapter_text">
-                        <CookieExplainer websiteName={"pistolenclub-hallau.ch"} analyticsCookie={"pch_analytics"}/>
+                        <CookieExplainer websiteName={"pistolenclub-hallau.ch"} analyticsCookie={"pchallau_analytics"}/>
                     </div>
                 </div>
                 {pageContent.map(content=>{
