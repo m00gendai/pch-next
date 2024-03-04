@@ -34,7 +34,7 @@ export default function CookieExplainer({websiteName, analyticsCookie}:Props){
                                     <td>
                                         <div className={s.cookieAction}>
                                             <CookieDeleteButton cookie={cookie.name} disabled={cookie.name.startsWith("_ga") ? true : false} />
-                                            <p dangerouslySetInnerHTML={{__html: cookie.name === "pchallau_analytics" ? `Löscht automatisch die Cookies <em>_ga</em> sowie <em>_ga_${process.env.NEXT_PUBLIC_GA?.split("-")[1]}</em>` : `Werden mit Löschen des Cookies <em>${analyticsCookie}</em> mitgelöscht`}}></p>
+                                            <p dangerouslySetInnerHTML={{__html: cookie.name === analyticsCookie ? `Löscht automatisch die Cookies <em>_ga</em> sowie <em>_ga_${process.env.NEXT_PUBLIC_GA?.split("-")[1]}</em>` : cookie.name.startsWith("_ga") ? `Werden mit Löschen des Cookies <em>${analyticsCookie}</em> mitgelöscht` : ""}}></p>
                                         </div>
                                     </td>
                                     <td>{cookie.value}</td>
