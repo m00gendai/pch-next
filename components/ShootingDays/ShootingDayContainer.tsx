@@ -46,6 +46,7 @@ export default function ShootingDayContainer({shootingDays}:Props){
                                     <p className={s.club}>{item.organizationName}</p>
                                 </div>
                             </div>
+                            <div className={s.imageContainer}>
                             <div className={s.image}>
                             <Image 
                                 src={getIcon(item.disciplineShortNameGerman)}
@@ -55,6 +56,7 @@ export default function ShootingDayContainer({shootingDays}:Props){
                             />
                             </div>
                             <MapLink place={item.firingRangeName} coord1={item.coordinates.northing} coord2={item.coordinates.easting} />
+                            </div>
                         </div>
                     )}
                 })}
