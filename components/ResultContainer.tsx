@@ -75,7 +75,7 @@ export default async function ResultContainer(){
           ? 
           <ChapterTitle title={`${currentYear} war noch nichts los...`} />
           :
-          sortedYearDirectoryList.map(async (years:Directory) => {
+          await Promise.all(sortedYearDirectoryList.map(async (years:Directory) => {
             const title:string = years.path.split("/")[2]
             const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
             return (
@@ -84,7 +84,7 @@ export default async function ResultContainer(){
                 <LinkContainer fileList={fileList} year={years.id}/>
               </React.Fragment>
             );
-          })
+          }))
         }
         </>
     )
