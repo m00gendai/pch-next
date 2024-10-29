@@ -61,7 +61,7 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
 }
 
 export default async function ResultContainer(){
-    revalidate("ResultDirs")
+  revalidate("ResultDirs")
   revalidate("ResultFiles")
   
   const date:Date = new Date();
