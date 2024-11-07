@@ -31,7 +31,7 @@ export default async function Resultate() {
           </div>
         </div>
         <Suspense fallback={<LoadingSkeleton />}>
-        <ResultContainer />
+          <ResultContainer />
         </Suspense>
         <Archive />
         <Spacer />

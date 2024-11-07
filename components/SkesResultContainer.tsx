@@ -63,8 +63,8 @@ async function getDirs(){
   
   export default async function SkesResultContainer(){
 
-    revalidate("ResultDirs")
-  revalidate("ResultFiles")
+  //  revalidate("ResultDirs")
+  //  revalidate("ResultFiles")
   
   const date:Date = new Date();
   const currentYear:number = date.getFullYear();
@@ -78,7 +78,7 @@ async function getDirs(){
             ? 
             null
             :
-            sortedYearDirectoryList.map(async (years:Directory) => {
+            await Promise.all(sortedYearDirectoryList.map(async (years:Directory) => {
               const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
               return (
                 <React.Fragment key={`fragment_${years.id}`}>
@@ -86,7 +86,7 @@ async function getDirs(){
                   <LinkContainer fileList={fileList} year={years.id}/>
                 </React.Fragment>
               );
-            })
+            }))
           }
           </>
     )
