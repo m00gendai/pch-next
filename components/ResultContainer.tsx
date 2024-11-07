@@ -1,8 +1,9 @@
 import revalidate from "@/app/actions/revalidate";
 import { Directory, DirectoryResponse, FileResponse } from "@/interfaces";
 import ChapterTitle from "./ChapterTitle";
-import React from "react";
+import React, { Suspense } from "react";
 import LinkContainer from "./LinkContainer";
+import LoadingSkeleton from "./loadingSkeleton";
 
 async function getDirs(){
     const date:Date = new Date();
@@ -61,8 +62,8 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
 }
 
 export default async function ResultContainer(){
-  revalidate("ResultDirs")
-  revalidate("ResultFiles")
+  //revalidate("ResultDirs")
+  //revalidate("ResultFiles")
   
   const date:Date = new Date();
   const currentYear:number = date.getFullYear();
@@ -79,10 +80,12 @@ export default async function ResultContainer(){
             const title:string = years.path.split("/")[2]
             const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
             return (
+              <Suspense fallback={<LoadingSkeleton />}>
               <React.Fragment key={`fragment_${years.id}`}>
                 <ChapterTitle title={title} key={`resultTitle_${title}`} />
                 <LinkContainer fileList={fileList} year={years.id}/>
               </React.Fragment>
+              </Suspense>
             );
           }))
         }
