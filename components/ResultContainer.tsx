@@ -80,12 +80,10 @@ export default async function ResultContainer(){
             const title:string = years.path.split("/")[2]
             const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
             return (
-              <Suspense fallback={<LoadingSkeleton />}>
               <React.Fragment key={`fragment_${years.id}`}>
                 <ChapterTitle title={title} key={`resultTitle_${title}`} />
                 <LinkContainer fileList={fileList} year={years.id}/>
               </React.Fragment>
-              </Suspense>
             );
           }))
         }
