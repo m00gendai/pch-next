@@ -6,7 +6,7 @@ import LoadingSkeleton from "@/components/loadingSkeleton";
 import ResultContainer from "@/components/ResultContainer";
 
 
-
+export const dynamic = 'force-dynamic'
 
 
 export async function generateMetadata(){
