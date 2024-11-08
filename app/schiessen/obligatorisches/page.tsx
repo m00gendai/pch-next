@@ -8,6 +8,8 @@ import Spacer from "@/components/Spacer"
 import React from "react"
 import ShootingDays from "@/components/ShootingDays/ShootingDays"
 
+export const dynamic = 'force-dynamic'
+
 async function getPageContent(){
     const getPageContent:Response = await fetch(
         'https://cms.pistolenclub-hallau.ch/api/content/items/obli?populate=100',
@@ -15,9 +17,6 @@ async function getPageContent(){
             headers: {
                 'api-key': `${process.env.CMS}`,
             },
-            next: {
-                revalidate: 10,
-            }
         }
     )
 

@@ -1,4 +1,3 @@
-import revalidate from "@/app/actions/revalidate";
 import { Directory, DirectoryResponse, FileResponse } from "@/interfaces";
 import ChapterTitle from "./ChapterTitle";
 import React, { Suspense } from "react";
@@ -18,9 +17,6 @@ async function getDirs(){
                 Authorization: `Bearer ${process.env.KDRIVE}`,
                 "Content-Type": "application/json",
             },
-            next: {
-              tags: ["resultDirs"]
-            }
         }
     );
     
@@ -50,9 +46,6 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
                     Authorization: `Bearer ${process.env.KDRIVE}`,
                     "Content-Type": "application/json",
                 },
-                next: {
-                  tags: ["resultFiles"]
-                }
             }
         );
             const files:FileResponse = await getFiles.json();
@@ -62,8 +55,6 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
 }
 
 export default async function ResultContainer(){
-  //revalidate("ResultDirs")
-  //revalidate("ResultFiles")
   
   const date:Date = new Date();
   const currentYear:number = date.getFullYear();

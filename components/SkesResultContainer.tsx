@@ -1,4 +1,3 @@
-import revalidate from "@/app/actions/revalidate";
 import { Directory, DirectoryResponse, FileResponse } from "@/interfaces";
 import React from "react";
 import ChapterTitle from "./ChapterTitle";
@@ -17,9 +16,6 @@ async function getDirs(){
             headers: {
                 Authorization: `Bearer ${process.env.KDRIVE}`,
                 "Content-Type": "application/json",
-            },
-            next: {
-              tags: ["resultDirs"]
             }
         }
     );
@@ -49,9 +45,6 @@ async function getDirs(){
                 headers: {
                     Authorization: `Bearer ${process.env.KDRIVE}`,
                     "Content-Type": "application/json",
-                },
-                next: {
-                  tags: ["resultFiles"]
                 }
             }
         );
@@ -62,9 +55,6 @@ async function getDirs(){
   }
   
   export default async function SkesResultContainer(){
-
-  //  revalidate("ResultDirs")
-  //  revalidate("ResultFiles")
   
   const date:Date = new Date();
   const currentYear:number = date.getFullYear();
