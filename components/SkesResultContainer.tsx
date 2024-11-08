@@ -17,9 +17,6 @@ async function getDirs(){
             headers: {
                 Authorization: `Bearer ${process.env.KDRIVE}`,
                 "Content-Type": "application/json",
-            },
-            next: {
-              tags: ["resultDirs"]
             }
         }
     );
@@ -49,9 +46,6 @@ async function getDirs(){
                 headers: {
                     Authorization: `Bearer ${process.env.KDRIVE}`,
                     "Content-Type": "application/json",
-                },
-                next: {
-                  tags: ["resultFiles"]
                 }
             }
         );
@@ -62,9 +56,6 @@ async function getDirs(){
   }
   
   export default async function SkesResultContainer(){
-
-  //  revalidate("ResultDirs")
-  //  revalidate("ResultFiles")
   
   const date:Date = new Date();
   const currentYear:number = date.getFullYear();
