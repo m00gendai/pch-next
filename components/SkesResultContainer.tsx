@@ -1,4 +1,3 @@
-import revalidate from "@/app/actions/revalidate";
 import { Directory, DirectoryResponse, FileResponse } from "@/interfaces";
 import React from "react";
 import ChapterTitle from "./ChapterTitle";
