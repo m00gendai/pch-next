@@ -10,6 +10,8 @@ import Spacer from "@/components/Spacer";
 import LoadingSkeleton from "@/components/loadingSkeleton";
 import SkesResultContainer from "@/components/SkesResultContainer";
 
+export const dynamic = 'force-dynamic'
+
 async function getSkesTimes(){
   const getSkesTimes:Response = await fetch(
       'https://cms.pistolenclub-hallau.ch/api/content/items/skesTimes?populate=100',
@@ -17,9 +19,6 @@ async function getSkesTimes(){
           headers: {
               'api-key': `${process.env.CMS}`,
           },
-          next: {
-              revalidate: 10,
-          }
       }
   )
   
@@ -35,9 +34,6 @@ async function getPageContent(){
           headers: {
               'api-key': `${process.env.CMS}`,
           },
-          next: {
-              revalidate: 10,
-          }
       }
   )
   
