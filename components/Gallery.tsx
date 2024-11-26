@@ -37,7 +37,7 @@ export default function Gallery({images}:Props){
             {
                 images.length === 1 ? 
                     <>
-                    <div className={s.flex}>
+                    <div className={s.flex} >
                         <figure className={s.single}>
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_STORAGE}${images[0].path}`}
@@ -51,7 +51,7 @@ export default function Gallery({images}:Props){
                                 className={s.image}
                                 onClick={()=>handleClick(0)}
                             />
-                            <figcaption className={s.caption} dangerouslySetInnerHTML={{__html: images[0].description}}></figcaption>
+                           
                         </figure>
                         
                     </div> 
