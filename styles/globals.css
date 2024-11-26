@@ -38,8 +38,7 @@ section{
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  width: 90%;
-  max-width: 1500px;
+  width: 100%;
 }
 
 .footer{
@@ -48,14 +47,34 @@ section{
   width: 100%;
 }
 
-h1{
+.page_title{
   position: relative;
   width: 100%;
   font-variant: small-caps;
-  text-indent: 1rem;
-  border-bottom: 2px solid #0cc549;
   font-style: italic;
   word-wrap: break-word;
+  margin: 0;
+  padding: 10rem 0 0 0;
+  background-size:cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.page_title_inner{
+  position: relative;
+  width: 90%;
+  max-width: 1500px;
+  display: flex;
+  justify-content: center;
+}
+
+h1{
+  display: inline-block;
+  padding: 0 2rem;
+  margin: 0;
+  color: white;
 }
 
 .chapter{
@@ -70,7 +89,8 @@ h1{
 
 .chapter_text{
   position: relative;
-  width: 100%;
+  width: 90%;
+  max-width: 1500px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
