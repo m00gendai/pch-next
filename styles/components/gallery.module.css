@@ -1,6 +1,7 @@
 .container{
     position: relative;
-    width: 100%;
+    width: 90%;
+    max-width: 1500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,11 +16,19 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    height: 90dvh;
+    max-height: 50dvh;
+    overflow: hidden;
+    box-shadow: 0px 5px 10px 0px black;
 }
 
 .single{
-    position: relative;
-    width: 75%;
+    position: absolute;
+    top:50%;
+    left: 0;
+    transform: translateY(-50%);
+    margin: 0;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -36,10 +45,6 @@
         width: 100%;
     }
   }
-
-.image{
-    box-shadow: 0px 5px 10px 0px black;
-}
 
 .caption{
     position: relative;
