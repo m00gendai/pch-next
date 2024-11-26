@@ -1,6 +1,5 @@
 .nav{
-    position: absolute;
-    top: 0;
+    position: fixed;
     width: 100%;
     background: rgba(0,0,0,0.5);
     backdrop-filter: blur(10px);
@@ -14,7 +13,7 @@
 
 .nav2{
     transition: ease-in;
-    position: absolute;
+    position: fixed;
     top: 0rem;
     width: 100%;
     background: rgba(0,0,0,0.5);
