@@ -28,7 +28,7 @@ export default async function LinkButton({file}:Props){
 
     return(
         <Link key={`result_${file.id}`} className={s.link} href={path} target="_blank">
-            <div>
+            <div className={s.text}>
                 {name}
             </div>
         </Link>
