@@ -27,13 +27,16 @@ export default function Navbar_Mobile(){
 
     return(
         <nav className ={s.nav}>
+            <div className={s.homeRow}>
             <Link className={s.homeLink} href={navbar[0].url} title="Home"></Link>
             <div className={s.menu} onClick={()=>{setVisible(!visible)}} title="Menü">
+
             {visible ?
                 <GiKnifeFork style={{fontSize: "2rem", color: "white"}}/>
             :
                 <GiHamburger style={{fontSize: "2rem", color: "white"}}/>
             }
+            </div>
             </div>
         {visible ?
             <div className={s.linkContainer}>

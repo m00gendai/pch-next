@@ -1,15 +1,29 @@
 .nav{
-    position: sticky;
+    position: absolute;
     top: 0;
     width: 100%;
-    background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
-    background-attachment: fixed;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 2px 10px 0px black;
     z-index: 100;
-    height: 5rem;
+    height: 3rem;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.nav2{
+    transition: ease-in;
+    position: absolute;
+    top: 0rem;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    z-index: 99;
 }
 
 @media only screen and (max-aspect-ratio: 13/9){
@@ -41,15 +55,15 @@
 }
 
 .subLinkContainer{
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 3rem;
     left: 0;
-    width: auto;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    background: linear-gradient(135deg, rgba(12, 197, 73, 1) 0%, rgba(0, 128, 0, 1) 100%);
+    background: transparent;
     background-attachment: fixed;
     z-index: -1;
     
@@ -58,7 +72,7 @@
 .buffer{
     position: relative;
     width: 100%;
-    height: 5rem;
+    height: 3rem;
     
 }
 
@@ -70,24 +84,23 @@
 }
 
 .items{
+    margin: 3rem 0 0 0;
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex-wrap: wrap;
-    margin: 0 2rem;
+    flex-direction: column;
 }
 
 .link{
     color: white;
-    font-size: 1.5rem;
-    font-weight: bolder;
+    font-size: 1rem;
     margin: 1rem 0 1rem 0;
-    text-shadow: 2px 2px black;
+    padding: 0 1rem 0 1rem;
     text-decoration: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
+   
 }
 
 .homeLink {
@@ -101,14 +114,15 @@
 }
 
 .sublink {
+    position: relative;
     color: white;
-    width: 100%;
-    font-size: 1.5rem;
-    font-weight: bolder;
-    text-shadow: 2px 2px black;
-    border-bottom: 1px solid white;
-    padding: 1rem 0.25rem;
+    font-size: 0.9rem;
+    padding: 1rem 1rem;
     text-decoration: none;
+}
+
+.sublink:first-child{
+    margin: 1rem 0 0 0;
 }
 
 .sublink:last-child{
@@ -118,5 +132,5 @@
 
 .sublink:hover{
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.25);
 }
