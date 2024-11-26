@@ -1,4 +1,4 @@
-import { PageContent, Document, Table, Medium } from "@/interfaces"
+import { PageContent, Document, Table, Medium, Metadata } from "@/interfaces"
 import { innerTextReplacer, pageMetadata } from "@/utils"
 import React from "react"
 import DocumentContainer from "@/components/DocumentContainer"
@@ -28,13 +28,27 @@ export async function generateMetadata(){
     return pageMetadata("Anlässe")
   }
 
+  export async function getHeaderImage(page:string){
+    const getMetadata: Response = await fetch(
+      `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${page}%22%7D&populate=1`,
+      {
+          headers: {
+              'api-key': `${process.env.CMS}`,
+          },
+      }
+    )
+    const metadata:Metadata = await getMetadata.json()
+    return metadata.image
+  }
+
 export default async function Anlaesse(){
     const pageContent:PageContent[] = await getPageContent()
+    const headerImage: Medium = await getHeaderImage("Anlässe")
 
     return (
         <main className="main">
+            <div className={"page_title"} style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE}${headerImage.path})`}}><span className={"page_title_inner"}><h1>Anlässe</h1></span></div>
             <section className="section">
-                <h1>Anlässe</h1>
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>

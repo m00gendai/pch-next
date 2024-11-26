@@ -1,9 +1,32 @@
-export default function NotFound(){
+import { Medium, Metadata } from "@/interfaces"
+import { pageMetadata } from "@/utils"
+
+export async function generateMetadata(){
+    return pageMetadata("error")
+  }
+
+  export async function getHeaderImage(page:string){
+    const getMetadata: Response = await fetch(
+      `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${page}%22%7D&populate=1`,
+      {
+          headers: {
+              'api-key': `${process.env.CMS}`,
+          },
+      }
+    )
+    const metadata:Metadata = await getMetadata.json()
+    return metadata.image
+  }
+
+export default async function NotFound(){
+    const headerImage: Medium = await getHeaderImage("error")
+
+
     return(
         <main className="main">
+            <div className={"page_title"} style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE}${headerImage.path})`}}><span className={"page_title_inner"}><h1>Seite nicht gefunden</h1></span></div>
             <section className="section">
-                <h1>Oha!</h1>
-                <div style={{textAlign: "justify", textJustify: "inter-word"}}>
+                <div style={{width: "90%", maxWidth: "1500px", textAlign: "justify", textJustify: "inter-word"}}>
     {`Diçka shkoi keq, kjo faqe nuk ekziston.
     Zerbait gaizki atera da, orrialde hau ez dago.
     Што-то пайшло не так, гэтай старонкі няма.

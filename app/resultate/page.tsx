@@ -4,6 +4,8 @@ import Spacer from "@/components/Spacer";
 import { pageMetadata } from "@/utils";
 import LoadingSkeleton from "@/components/loadingSkeleton";
 import ResultContainer from "@/components/ResultContainer";
+import { Medium, Metadata } from "@/interfaces"
+import { url } from "inspector";
 
 
 export const dynamic = 'force-dynamic'
@@ -13,15 +15,30 @@ export async function generateMetadata(){
   return pageMetadata("Resultate")
 }
 
+export async function getHeaderImage(page:string){
+  const getMetadata: Response = await fetch(
+    `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${page}%22%7D&populate=1`,
+    {
+        headers: {
+            'api-key': `${process.env.CMS}`,
+        },
+    }
+  )
+  const metadata:Metadata = await getMetadata.json()
+  return metadata.image
+}
+
 export default async function Resultate() {
   
   const date:Date = new Date();
   const currentYear:number = date.getFullYear();  
+  const headerImage: Medium = await getHeaderImage("Resultate")
 
   return (
     <main className="main">
+       <div className={"page_title"} style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE}${headerImage.path})`}}><span className={"page_title_inner"}><h1>Resultate</h1></span></div>
       <section className="section">
-        <h1>Resultate</h1>
+       
         <div className="chapter">
           <div className="chapter_text" dangerouslySetInnerHTML={{__html: 
             `Hier sind alle Resultate der auswärtigen Schiessen für das aktuelle
