@@ -42,12 +42,8 @@ export default function Gallery({images}:Props){
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_STORAGE}${images[0].path}`}
                                 alt={images[0].description}
-                                width={images[0].width}
-                                height={images[0].height}
-                                style={images[0].width > images[0].height ? 
-                                    {height: "100%", width: "100%", background: gradientPlaceholder(images[0].colors.map(color => color)).background}
-                                    :
-                                    {width: "50%", height: "100%", background: gradientPlaceholder(images[0].colors.map(color => color)).background}}
+                                fill={true}
+                                objectFit="cover"
                                 className={s.image}
                                 onClick={()=>handleClick(0)}
                             />
