@@ -15,7 +15,7 @@ export async function generateMetadata(){
   return pageMetadata("Resultate")
 }
 
-export async function getHeaderImage(page:string){
+async function getHeaderImage(page:string){
   const getMetadata: Response = await fetch(
     `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${page}%22%7D&populate=1`,
     {
