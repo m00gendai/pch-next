@@ -70,11 +70,7 @@ export default async function Home() {
 
   return (
     <main className="main">
-     <section className="section">
       <div className={s.contentBox}>
-        <Link className={`${s.skes} ${s.top}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}>
-          <span className={s.skesText}>{`Schwabenkrieg-Erinnerungsschiessen ${currentYear}`}</span>
-          </Link>
           <div className={s.hero}>
             <Image
               src={`${process.env.NEXT_PUBLIC_STORAGE}${hero.image.path}`}
@@ -91,15 +87,8 @@ export default async function Home() {
             />
           </div>
         </div>
-       
-          
-          
-         
-
-        
-        <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}><span className={s.skesText}>{`Schwabenkrieg-Erinnerungsschiessen ${currentYear}`}</span></Link>
+ <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}><span className={s.skesText}>{`Schwabenkrieg-Erinnerungsschiessen ${currentYear}`}</span></Link>
         </div>
-      </section>
     </main>
   )
 }

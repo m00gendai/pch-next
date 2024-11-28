@@ -1,4 +1,4 @@
-import { PageContent, Table, skesTimes, Document, Medium } from "@/interfaces";
+import { PageContent, Table, skesTimes, Document, Medium, Metadata } from "@/interfaces";
 import PlanContainer from "@/components/PlanContainer";
 import ChapterTitle from "@/components/ChapterTitle";
 import { innerTextReplacer, pageMetadata } from "@/utils";
@@ -50,22 +50,34 @@ export async function generateMetadata(){
   return pageMetadata("Schwabenkrieg-Erinnerungsschiessen")
 }
 
+async function getHeaderImage(page:string){
+  const getMetadata: Response = await fetch(
+    `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${page}%22%7D&populate=1`,
+    {
+        headers: {
+            'api-key': `${process.env.CMS}`,
+        },
+    }
+  )
+  const metadata:Metadata = await getMetadata.json()
+  return metadata.image
+}
+
 export default async function SKES() {
 
 
   const skesTimes:skesTimes = await getSkesTimes()
   const pageContent:PageContent[] = await getPageContent()
+  const headerImage: Medium = await getHeaderImage("Schwabenkrieg-Erinnerungsschiessen")
 
   return (
     <main className="main">
-      <section className="section">
-        <h1>
-          Schwaben
+      <div className={"page_title"} style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE}${headerImage.path})`}}><span className={"page_title_inner"}><h1>Schwaben
           <wbr />
           krieg-Erinnerungs
           <wbr />
-          schiessen
-        </h1>
+          schiessen</h1></span></div>
+      <section className="section">
         <div className="chapter">
           <div className="chapter_text" dangerouslySetInnerHTML={{__html: 
             `Zur Erinnerung an den Kampf in Hallau am 04. April 1499 findet

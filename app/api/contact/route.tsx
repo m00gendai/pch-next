@@ -28,9 +28,8 @@ export async function POST(req: NextRequest){
       
       try{
         await transporter.sendMail(mailData)
-      } catch(err){
-        return NextResponse.json(data)
+      } catch(err:any){
+        return NextResponse.json({ success: false, error: err.message })
       }
-    
       return NextResponse.json(data)
 }

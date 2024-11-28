@@ -1,4 +1,4 @@
-import { PageContent, Table, Document, Medium, Board } from "@/interfaces"
+import { PageContent, Table, Document, Medium, Board, Metadata } from "@/interfaces"
 import ChapterTitle from "@/components/ChapterTitle"
 import TableContainer from "@/components/TableContainer"
 import DocumentContainer from "@/components/DocumentContainer"
@@ -47,15 +47,30 @@ export async function generateMetadata(){
     return pageMetadata("Informationen")
   }
 
+  async function getHeaderImage(page:string){
+    const getMetadata: Response = await fetch(
+      `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${page}%22%7D&populate=1`,
+      {
+          headers: {
+              'api-key': `${process.env.CMS}`,
+          },
+      }
+    )
+    const metadata:Metadata = await getMetadata.json()
+    return metadata.image
+  }
+
+
 export default async function Verein(){
 
     const pageContent:PageContent[] = await getPageContent()
     const board:Board[] = await getBoard()
+    const headerImage: Medium = await getHeaderImage("Informationen")
 
     return(
         <main className="main">
+             <div className={"page_title"} style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE}${headerImage.path})`}}><span className={"page_title_inner"}><h1>Informationen</h1></span></div>
             <section className="section">
-                <h1>Verein</h1>
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>

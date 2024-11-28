@@ -1,4 +1,4 @@
-import { PageContent, Table, Document, Medium, Board } from "@/interfaces"
+import { PageContent, Table, Document, Medium, Board, Metadata } from "@/interfaces"
 import ChapterTitle from "@/components/ChapterTitle"
 import Gallery from "@/components/Gallery"
 import TableContainer from "@/components/TableContainer"
@@ -28,14 +28,28 @@ export async function generateMetadata(){
     return pageMetadata("Datenschutz")
   }
 
+  async function getHeaderImage(page:string){
+    const getMetadata: Response = await fetch(
+      `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${page}%22%7D&populate=1`,
+      {
+          headers: {
+              'api-key': `${process.env.CMS}`,
+          },
+      }
+    )
+    const metadata:Metadata = await getMetadata.json()
+    return metadata.image
+  }
+
 export default async function DSGVO(){
 
     const pageContent:PageContent[] = await getPageContent()
+    const headerImage: Medium = await getHeaderImage("Datenschutz")
 
     return(
         <main className="main">
+            <div className={"page_title"} style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE}${headerImage.path})`}}><span className={"page_title_inner"}><h1>Datenschutz</h1></span></div>
             <section className="section">
-                <h1>Datenschutz</h1>
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>

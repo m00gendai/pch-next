@@ -4,13 +4,13 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(135deg, rgba(0, 128, 0, 1) 0%, rgba(12, 197, 73, 1) 100%);
+    background: transparent;
 }
 
 .footer p{
     position: relative;
     padding: 0.5rem;
-    color: white;
+    color: black;
     text-align: center;
 }
 
@@ -35,5 +35,5 @@
 }
 
 .link{
-    color: white;
+    color: black;
 }

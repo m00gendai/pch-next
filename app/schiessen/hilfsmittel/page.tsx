@@ -3,7 +3,7 @@ import DocumentContainer from "@/components/DocumentContainer"
 import Gallery from "@/components/Gallery"
 import Spacer from "@/components/Spacer"
 import TableContainer from "@/components/TableContainer"
-import { PageContent, Table, Document, Medium } from "@/interfaces"
+import { PageContent, Table, Document, Medium, Metadata } from "@/interfaces"
 import { innerTextReplacer, pageMetadata } from "@/utils"
 import React from "react"
 
@@ -28,14 +28,29 @@ export async function generateMetadata(){
     return pageMetadata("Hilfsmittel")
   }
 
+  async function getHeaderImage(page:string){
+    const getMetadata: Response = await fetch(
+      `https://cms.pistolenclub-hallau.ch/api/content/item/taglines?filter=%7Bpage%3A%22${page}%22%7D&populate=1`,
+      {
+          headers: {
+              'api-key': `${process.env.CMS}`,
+          },
+      }
+    )
+    const metadata:Metadata = await getMetadata.json()
+    return metadata.image
+  }
+
 export default async function Hilfsmittel(){
 
     const pageContent:PageContent[] = await getPageContent()
+    const headerImage: Medium = await getHeaderImage("Hilfsmittel")
 
     return (
         <main className="main">
+            <div className={"page_title"} style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE}${headerImage.path})`}}><span className={"page_title_inner"}><h1>Zugelassene Pistolen und Hilfsmittel</h1></span></div>
             <section className="section">
-                <h1>Zugelassene Pistolen und Hilfsmittel</h1>
+                
                 {pageContent.map(content=>{
                     return(
                         <React.Fragment key={content._id}>

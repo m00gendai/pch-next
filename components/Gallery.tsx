@@ -37,21 +37,17 @@ export default function Gallery({images}:Props){
             {
                 images.length === 1 ? 
                     <>
-                    <div className={s.flex}>
+                    <div className={s.flex} >
                         <figure className={s.single}>
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_STORAGE}${images[0].path}`}
                                 alt={images[0].description}
-                                width={images[0].width}
-                                height={images[0].height}
-                                style={images[0].width > images[0].height ? 
-                                    {height: "100%", width: "100%", background: gradientPlaceholder(images[0].colors.map(color => color)).background}
-                                    :
-                                    {width: "50%", height: "100%", background: gradientPlaceholder(images[0].colors.map(color => color)).background}}
+                                fill={true}
+                                objectFit="cover"
                                 className={s.image}
                                 onClick={()=>handleClick(0)}
                             />
-                            <figcaption className={s.caption} dangerouslySetInnerHTML={{__html: images[0].description}}></figcaption>
+                           
                         </figure>
                         
                     </div> 
