@@ -21,17 +21,10 @@ async function getDirs(){
     );
     
     const yearDirectoryList:DirectoryResponse = await getYearDirectoryList.json();
-    if(yearDirectoryList.data.length === 0){
-      return yearDirectoryList.data
-    }
-    // sorts the year folders by last_modified_at (latest first)
-    const sortedYearDirectoryList:Directory[] = yearDirectoryList.data.sort((a:Directory, b:Directory) => {
-        const x:number = a.added_at;
-        const y:number = b.added_at;
-        return x < y ? 1 : x > y ? -1 : 0;
-    })
 
-    return sortedYearDirectoryList
+    
+      return yearDirectoryList.data
+    
 }
 
 async function getFiles(sortedYearDirectoryList:Directory[]){
@@ -39,7 +32,7 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
     
     const fileList:FileResponse[] = await Promise.all(sortedYearDirectoryList.map(async directory =>{
         const getFiles:Response = await fetch(
-            `https://api.infomaniak.com/2/drive/${process.env.DRIVE}/files/${directory.id}/files`,
+            `https://api.infomaniak.com/3/drive/${process.env.DRIVE}/files/${directory.id}/files?limit=25&order_by[]=name`,
             {
                 method: "GET",
                 headers: {
@@ -51,6 +44,7 @@ async function getFiles(sortedYearDirectoryList:Directory[]){
             const files:FileResponse = await getFiles.json();
             return files
     }))
+
     return fileList
 }
 
@@ -67,7 +61,7 @@ export default async function ResultContainer(){
           ? 
           <ChapterTitle title={`${currentYear} war noch nichts los...`} />
           :
-          await Promise.all(sortedYearDirectoryList.map(async (years:Directory) => {
+          sortedYearDirectoryList.map(async (years:Directory) => {
             const title:string = years.path.split("/")[2]
             const fileList:FileResponse[] = await getFiles(sortedYearDirectoryList)
             return (
@@ -76,7 +70,7 @@ export default async function ResultContainer(){
                 <LinkContainer fileList={fileList} year={years.id}/>
               </React.Fragment>
             );
-          }))
+          })
         }
         </>
     )
