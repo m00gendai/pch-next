@@ -3,9 +3,8 @@ import Archive from "@/components/Archive";
 import Spacer from "@/components/Spacer";
 import { pageMetadata } from "@/utils";
 import LoadingSkeleton from "@/components/loadingSkeleton";
-import ResultContainer from "@/components/ResultContainer";
 import { Medium, Metadata } from "@/interfaces"
-import { url } from "inspector";
+import ResultContainer from "@/components/ResultContainer";
 
 
 export const dynamic = 'force-dynamic'
