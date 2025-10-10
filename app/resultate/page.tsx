@@ -5,6 +5,7 @@ import { pageMetadata } from "@/utils";
 import LoadingSkeleton from "@/components/loadingSkeleton";
 import { Medium, Metadata } from "@/interfaces"
 import ResultContainer from "@/components/ResultContainer";
+import ResultList from "@/components/ResultList";
 
 
 export const dynamic = 'force-dynamic'
@@ -47,7 +48,9 @@ export default async function Resultate() {
           </div>
         </div>
         <Suspense fallback={<LoadingSkeleton />}>
-          <ResultContainer />
+          <ResultList>
+            <ResultContainer />
+          </ResultList>
         </Suspense>
         <Archive />
         <Spacer />
