@@ -2,7 +2,6 @@ import { Directory, DirectoryResponse, FileResponse } from "@/interfaces";
 import ChapterTitle from "./ChapterTitle";
 import React, { Suspense } from "react";
 import LinkContainer from "./LinkContainer";
-import LoadingSkeleton from "./loadingSkeleton";
 
 async function getDirs(){
     const date:Date = new Date();
