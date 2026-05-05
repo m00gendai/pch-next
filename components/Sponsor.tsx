@@ -32,7 +32,7 @@ export default async function Sponsors(){
             <div className={s.logoContainer}>
                 {sponsors.map((sponsor, index) =>{
                     return (
-                        <Link className={s.logo} href={sponsor.link} target="_blank">
+                        <Link className={s.logo} href={sponsor.link} target="_blank" key={`sponsorLogo_${index}`}>
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_STORAGE}${sponsor.image.path}`}
                                 alt={sponsor.title}
