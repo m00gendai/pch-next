@@ -3,6 +3,7 @@ import s from '../styles/Home.module.css'
 import { Hero, Logo } from "@/interfaces"
 import Image from "next/image"
 import { pageMetadata } from "@/utils"
+import Sponsor from "@/components/Sponsor"
 
 async function getLogoClub(){
   const getLogo: Response = await fetch(
@@ -78,7 +79,7 @@ export default async function Home() {
               fill={true}
               style={{objectFit: "cover"}}
           />
-            <div className={s.logo}>
+          <div className={s.logo}>
             <Image
               src={`${process.env.NEXT_PUBLIC_STORAGE}${logoClub.logo.path}`}
               alt={"Pistolenclub Hallau"}
@@ -87,6 +88,7 @@ export default async function Home() {
             />
           </div>
         </div>
+                  <Sponsor />
  <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}><span className={s.skesText}>{`Schwabenkrieg-Erinnerungsschiessen ${currentYear}`}</span></Link>
         </div>
     </main>
