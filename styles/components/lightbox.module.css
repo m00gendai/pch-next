@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     background: rgba(0,0,0,0.8);
-    z-index: 999;
+    z-index: 9999;
 }
 
 .modal{
@@ -34,7 +34,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    z-index:99999;
+    z-index:999999;
     user-select: none;
     background: transparent;
     width: 3rem;
@@ -70,7 +70,7 @@
     display: flex;
     align-items: center;
     color: rgba(255,255,255,0.5);;
-    z-index:9999;
+    z-index:99999;
     height: 100%;
     font-size: 5rem;
     user-select: none;
