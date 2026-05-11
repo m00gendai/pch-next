@@ -72,12 +72,12 @@ export default async function Home() {
   return (
     <main className="main">
       <div className={s.contentBox}>
-          <div className={s.hero}>
-            <Image
-              src={`${process.env.NEXT_PUBLIC_STORAGE}${hero.image.path}`}
-              alt={"Pistolenclub Hallau Impression"}
-              fill={true}
-              style={{objectFit: "cover"}}
+        <div className={s.hero}>
+          <Image
+            src={`${process.env.NEXT_PUBLIC_STORAGE}${hero.image.path}`}
+            alt={"Pistolenclub Hallau Impression"}
+            fill={true}
+            style={{objectFit: "cover"}}
           />
           <div className={s.logo}>
             <Image
@@ -88,9 +88,9 @@ export default async function Home() {
             />
           </div>
         </div>
-                  <Sponsor />
- <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}><span className={s.skesText}>{`Schwabenkrieg-Erinnerungsschiessen ${currentYear}`}</span></Link>
-        </div>
+        <Sponsor />
+        <Link className={`${s.skes} ${s.bottom}`} href="/schiessen/schwabenkrieg-erinnerungsschiessen" style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE}${logoSkes.logo.path}")`}}><span className={s.skesText}>{`Schwabenkrieg-Erinnerungsschiessen ${currentYear}`}</span></Link>
+      </div>
     </main>
   )
 }
