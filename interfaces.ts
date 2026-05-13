@@ -205,6 +205,7 @@ export interface Sponsor{
   image: Medium
   title: string
   link: string
+  order: number;
 }
 
 export interface GetFileResponse{

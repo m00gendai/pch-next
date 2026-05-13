@@ -17,7 +17,12 @@ async function getSponsors(){
   )
 
   const sponsors:Sponsor[] = await getSponsors.json()
-  return sponsors
+  return sponsors.sort((a, b) =>{
+    const x = a.order
+    const y = b.order
+
+    return x > y ? 1 : x < y ? -1 : 0
+  })
 }
 
 export default async function Sponsors(){
@@ -27,7 +32,7 @@ export default async function Sponsors(){
     return(
         <div className={s.container}>
             <div className={s.title}>
-                Unsere Sponsoren
+                ☆ ☆ ☆ Unsere Sponsoren ☆ ☆ ☆
             </div>
             <div className={s.logoContainer}>
                 {sponsors.map((sponsor, index) =>{

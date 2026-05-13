@@ -51,6 +51,9 @@
   .logo{
     width: 75dvw;
     max-height: 40dvh;
+        top: auto;
+    bottom: 0;
+    transform: translate(-50%, 0%);
   }
   .skes{
     height: 50dvh;
