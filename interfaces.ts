@@ -201,6 +201,13 @@ export interface Hero{
   image: Medium
 }
 
+export interface Sponsor{
+  image: Medium
+  title: string
+  link: string
+  order: number;
+}
+
 export interface GetFileResponse{
   result: string
   data: {temporary_url: string}

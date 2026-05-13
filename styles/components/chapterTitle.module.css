@@ -13,6 +13,13 @@
     width: auto;
 }
 
+.link{
+    text-decoration: none;
+    border: none;
+    outline: none;
+    color: black;
+}
+
 .title{
     position: relative;
     width: 100%;
