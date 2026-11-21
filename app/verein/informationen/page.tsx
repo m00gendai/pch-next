@@ -94,7 +94,12 @@ export default async function Verein(){
                     )
                 })}
                 <ChapterTitle title={"Kontakt"} />
-                <ContactForm />
+                {/*<ContactForm />*/}
+                <div className="chapter">
+                    <div className="chapter_text">
+                        <a href="mailto:info@pistolenclub-hallau.ch">info@pistolenclub-hallau.ch</a>
+                    </div>
+                </div>
                 <ChapterTitle title={"Vorstand"} />
                 <BoardContainer board={board} />  
                 <Spacer />
